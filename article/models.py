@@ -9,6 +9,8 @@ from django.urls import reverse
 from django import forms
 from django.contrib.auth.models import User
 from datetime import datetime, timedelta
+from django.db import models
+import jsonfield
 
 
 class Article(models.Model):
@@ -90,3 +92,10 @@ class Comment(models.Model):
 
     def is_valid(self):
         pass
+
+class Shop(models.Model):
+    of_user = models.ForeignKey(User,on_delete=models.CASCADE)
+    of_movie = models.ForeignKey(Block,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return "buyer: " + self.of_user.username + " movie: " + self.of_movie.movie_name

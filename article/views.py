@@ -53,6 +53,15 @@ def cinema_view(request, cinema_name):
     return render(request, "article/cinema_view.html", {"cinema": cinema})
 
 
+def buyticket(request,movie_name):
+
+        movie = Block.objects.get(movie_name = movie_name)
+        user = User.objects.get(username = request.POST.get('username'))
+        shop = Shop(of_user = user, of_movie = movie)
+        shop.save()
+        return HttpResponseRedirect(reverse_lazy('movie_view', args=(movie.movie_name,)))
+
+
 # def category_view(request,category_name):
 #     if category_name =
 
@@ -182,9 +191,3 @@ def booking(request):
 def get_info_about_cinema(request, cinema_name):
     cinema = Cinema.objects.get(cinema_name = cinema_name)
     return render(request,'article/cinemaInfoPage.html', {"cinema":cinema})
-
-def movie_view(request,movie_name):
-    movie = Block.objects.get(movie_name = movie_name)
-    movie.movie_numberOfClicks +=1
-    movie.save()
-    return render(request, "article/movie_view.html", {"movie":movie})

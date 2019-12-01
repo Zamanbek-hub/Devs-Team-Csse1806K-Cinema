@@ -1,6 +1,6 @@
 {% extends "article/base.html" %}
 {% load crispy_forms_tags %}
-  % block content %
+{% block content %}
 <br><br>
 <h2>{{ movie.movie_name }}</h2>
 <div class="row">
@@ -28,9 +28,12 @@
             <strong>В ролях: </strong>Oyazbaev Temirlan, Kakibay Nurdan, Kurmanbeyeva Talshyn<br>
             </p>
 
-            <div class="container">
-              <button type="button" class="btn btn-outline-dark" style="width:200px; height=100px; margin-left:200px;">Buy</button>
-            </div>
+            <form  action="{% url 'buyticket' movie.movie_name %}" method="post">
+                {% csrf_token %}
+              <input type="hidden" name="username" value="{{user.username}}">
+
+              <button type="submit" class="btn btn-outline-dark" style="width:200px; height=100px; margin-left:200px;">{{movie.movie_price}} tg</button>
+            </form>
 </div>
 </div>
 <br><br><br><br>
@@ -101,4 +104,4 @@
 </script>
 
 
-{% endblock %}
+{% endblock jQuery %}
