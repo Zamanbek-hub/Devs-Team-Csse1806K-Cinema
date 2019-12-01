@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		 {% load staticfiles %}
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    <title>{% block title %} My site {% endblock %}</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+	   <link rel="stylesheet" href="{% static 'ticket.css' %}">
+	    <base target="_blank">
+	  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+      
+  </head>
+	<body>
+
+		<div class="container-fluit padding" >
+		  <div class="row alert text-center">
+		    <div class="col-12">
+		      <div class="card">
+		        <h3 class = "display">Hall № 1</h3>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+
+		<div>
+			<table>
+				<tbody>
+					<tr>
+						<td>1 ряд</td>
+						<td></td>
+						<td></td>
+						<td>П</td>
+						<td><button type="button" id="1-1" class="btn btn">1</button></td>
+						<td><button type="button" id="1-2" class="btn btn">2</button></td>
+						<td><button type="button" id="1-3" class="btn btn">3</button></td>
+						<td><button type="button" id="1-4" class="btn btn">4</button></td>
+						<td><button type="button" id="1-5" class="btn btn">5</button></td>
+						<td><button type="button" id="1-6" class="btn btn">6</button></td>
+						<td><button type="button" id="1-7" class="btn btn">7</button></td>
+						<td><button type="button" id="1-8" class="btn btn">8</button></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2 ряд</td>
+						<td></td>
+						<td></td>
+						<td>Р</td>
+						<td><button type="button" id="2-1" class="btn btn">1</button></td>
+						<td><button type="button" id="2-2" class="btn btn">2</button></td>
+						<td><button type="button" id="2-3" class="btn btn">3</button></td>
+						<td><button type="button" id="2-4" class="btn btn">4</button></td>
+						<td><button type="button" id="2-5" class="btn btn">5</button></td>
+						<td><button type="button" id="2-6" class="btn btn">6</button></td>
+						<td><button type="button" id="2-7" class="btn btn">7</button></td>
+						<td><button type="button" id="2-8" class="btn btn">8</button></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>3 ряд</td>
+						<td></td>
+						<td></td>
+						<td>О</td>
+						<td><button type="button" id="3-1" class="btn btn">1</button></td>
+						<td><button type="button" id="3-2" class="btn btn">2</button></td>
+						<td><button type="button" id="3-3" class="btn btn">3</button></td>
+						<td><button type="button" id="3-4" class="btn btn">4</button></td>
+						<td><button type="button" id="3-5" class="btn btn">5</button></td>
+						<td><button type="button" id="3-6" class="btn btn">6</button></td>
+						<td><button type="button" id="3-7" class="btn btn">7</button></td>
+						<td><button type="button" id="3-8" class="btn btn">8</button></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>4 ряд</td>
+						<td></td>
+						<td></td>
+						<td>Х</td>
+						<td><button type="button" id="4-1" class="btn btn">1</button></td>
+						<td><button type="button" id="4-2" class="btn btn">2</button></td>
+						<td><button type="button" id="4-3" class="btn btn">3</button></td>
+						<td><button type="button" id="4-4" class="btn btn">4</button></td>
+						<td><button type="button" id="4-5" class="btn btn">5</button></td>
+						<td><button type="button" id="4-6" class="btn btn">6</button></td>
+						<td><button type="button" id="4-7" class="btn btn">7</button></td>
+						<td><button type="button" id="4-8" class="btn btn">8</button></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>5 ряд</td>
+						<td></td>
+						<td></td>
+						<td>О</td>
+						<td><button type="button" id="5-1" class="btn btn">1</button></td>
+						<td><button type="button" id="5-2" class="btn btn">2</button></td>
+						<td><button type="button" id="5-3" class="btn btn">3</button></td>
+						<td><button type="button" id="5-4" class="btn btn">4</button></td>
+						<td><button type="button" id="5-5" class="btn btn">5</button></td>
+						<td><button type="button" id="5-6" class="btn btn">6</button></td>
+						<td><button type="button" id="5-7" class="btn btn">7</button></td>
+						<td><button type="button" id="5-8" class="btn btn">8</button></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>6 ряд</td>
+						<td></td>
+						<td></td>
+						<td>Д</td>
+						<td><button type="button"  id="6-1" class="btn btn">1</button></td>
+						<td><button type="button"  id="6-2" class="btn btn">2</button></td>
+						<td><button type="button" id="6-3" class="btn btn">3</button></td>
+						<td><button type="button" id="6-4" class="btn btn">4</button></td>
+						<td><button type="button" id="6-5" class="btn btn">5</button></td>
+						<td><button type="button" id="6-6" class="btn btn">6</button></td>
+						<td><button type="button" id="6-7" class="btn btn">7</button></td>
+						<td><button type="button" id="6-8" class="btn btn">8</button></td>
+						<td></td>
+						<td></td>
+					</tr>
+
+					<tr>
+						<td>7 ряд</td>
+						<td></td>
+						<td><button type="button" id="7-1" class="btn btn">1</button></td>
+						<td><button type="button" id="7-2" class="btn btn">2</button></td>
+						<td><button type="button" id="7-3" class="btn btn">3</button></td>
+						<td><button type="button" id="7-4" class="btn btn">4</button></td>
+						<td><button type="button" id="7-5" class="btn btn">5</button></td>
+						<td><button type="button" id="7-6" class="btn btn">6</button></td>
+						<td><button type="button" id="7-7" class="btn btn">7</button></td>
+						<td><button type="button" id="7-8" class="btn btn">8</button></td>
+						<td><button type="button" id="7-9" class="btn btn">9</button></td>
+						<td><button type="button" id="7-10" class="btn btn">10</button></td>
+						<td><button type="button" id="7-11" class="btn btn">11</button></td>
+						<td><button type="button" id="7-12" class="btn btn">12</button></td>
+					</tr>
+					<tr>
+						<td>8 ряд</td>
+						<td></td>
+						<td><button type="button" id="8-1"  class="btn btn">1</button></td>
+						<td><button type="button" id="8-2" class="btn btn">2</button></td>
+						<td><button type="button" id="8-3" class="btn btn">3</button></td>
+						<td><button type="button" id="8-4" class="btn btn">4</button></td>
+						<td><button type="button" id="8-5" class="btn btn">5</button></td>
+						<td><button type="button" id="8-6" class="btn btn">6</button></td>
+						<td><button type="button" id="8-7" class="btn btn">7</button></td>
+						<td><button type="button" id="8-8" class="btn btn">8</button></td>
+						<td><button type="button" id="8-9" class="btn btn">9</button></td>
+						<td><button type="button" id="8-10" class="btn btn">10</button></td>
+						<td><button type="button" id="8-11" class="btn btn">11</button></td>
+						<td><button type="button" id="8-12" class="btn btn">12</button></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<script type="text/javascript">
+			// $("button").click(function(){
+		 //    $("button").removeClass("active");
+		 //    $(this).addClass("active");
+			// });
+			$( "button#8-12" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#8-11" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#8-10" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#8-9" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#8-8" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#8-7" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#8-6" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#8-5" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#8-4" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#8-3" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#8-2" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#8-1" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#7-12" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#7-11" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#7-10" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#7-9" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#7-8" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#7-7" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#7-6" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#7-5" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#7-4" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#7-3" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#7-2" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#7-1" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#6-8" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#6-7" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#6-6" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#6-5" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#6-4" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#6-3" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#6-2" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#6-1" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#5-8" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#5-7" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#5-6" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#5-5" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#5-4" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#5-3" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#5-2" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#5-1" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#4-8" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#4-7" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#4-6" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#4-5" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#4-4" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#4-3" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#4-2" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#4-1" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#3-8" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#3-7" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#3-6" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#3-5" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#3-4" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#3-3" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#3-2" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#3-1" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#2-8" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#2-7" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#2-6" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#2-5" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#2-4" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#2-3" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#2-2" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#2-1" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#1-8" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#1-7" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#1-6" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#1-5" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#1-4" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#1-3" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#1-2" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#1-1" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+		</script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+ <head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <title>{% block title %} Flicks {% endblock %}</title>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+     {% load staticfiles %}
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+   <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+   <link rel="stylesheet" href="{% static 'aboutCinema.css' %}">
+   <base target="_blank">
+ </head>
+ <body>
+
+<div class="container-fluit padding" >
+ <div class="row alert text-center">
+   <div class="col-12">
+     <div class="card">
+       <h3 class = "display">Bekmambetov Cinema</h3>
+     </div>
+   </div>
+ </div>
+</div>
+
+<div class="img">
+ <img src="https://ticketon.kz/media/upload/9865u30239_screenshot_1.jpg" alt="" class="img-item">
+</div>
+ <div class="table-responsive">
+   <table class="table table-borderless table-hover">
+     <tbody>
+       <tr>
+         <th scope="row"></th>
+           <td>Address:   </td>
+           <td>Абая 109В, ТРЦ «Globus», 2-й этаж</td>
+       </tr>
+       <tr>
+         <th scope="row"></th>
+         <td>E-mail:  </td>
+         <td>info@bcinema.kz</td>
+       </tr>
+       <tr>
+         <th scope="row"></th>
+         <td>Count of halls:  </td>
+         <td>8</td>
+       </tr>
+        <tr>
+           <th scope="row"></th>
+           <td>Rating :  </td>
+           <td>
+            <form>
+               <fieldset class="rating">
+                 <!--  <input id="demo-1" type="radio" name="demo" value="1">
+                  <input id="demo-2" type="radio" name="demo" value="2">
+                  <input id="demo-3" type="radio" name="demo" value="3">
+                  <input id="demo-4" type="radio" name="demo" value="4">
+                  <input id="demo-5" type="radio" name="demo" value="5">    -->
+                  <div class="stars">
+                     <label for="demo-1" aria-label="1 star" title="1 star"><i class="far fa-star"></i> </label>
+                     <label for="demo-2" aria-label="2 stars" title="2 stars"><i class="far fa-star"></i> </label>
+                     <label for="demo-3" aria-label="3 stars" title="3 stars"><i class="far fa-star"></i> </label>
+                     <label for="demo-4" aria-label="4 stars" title="4 stars"><i class="far fa-star"></i> </label>
+                     <label for="demo-5" aria-label="5 stars" title="5 stars"><i class="far fa-star"></i> </label>
+                  </div>
+
+               </fieldset>
+
+               <script>
+                 (function(){
+                     var rating = document.querySelector('.rating');
+
+                     handle.onchange = function(event) {
+                         rating.classList.toggle('rating', handle.checked);
+                     };
+                 }());
+               </script>
+            </form>
+         </td>
+
+      </tr>
+       <tr>
+         <th scope="row"></th>
+         <td>Tel:  </td>
+         <td> +7 (727)-356-9878</td>
+      </tr>
+   </tbody>
+</table>
+ </div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+.button {
+    font-family: Calibri, sans-serif;
+    font-size:13px;
+    font-weight: bold;
+    width: 160px;
+    height: 25px;
+    background:grey;
+    color: white
+}
+.selected {
+    color: white;Q
+    background:green
+}
+button#cssColorChange:active{
+    color: white;
+    background:red
+}
+
+table {
+    width: 600px; /* Ширина таблицы */
+    border: 0px; /* Рамка вокруг таблицы */
+    margin: auto ; /* Выравниваем таблицу по центру окна  */
+    margin-top: 100px;
+}
+td {
+    text-align: center; Выравниваем текст по центру ячейки
+}

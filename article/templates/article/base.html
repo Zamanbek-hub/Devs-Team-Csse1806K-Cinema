@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %} My site {% endblock %}</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <!-- for crispy_forms_tags -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+  </head>
+  <body>
+    <br><br><br><br>
+
+    <nav class ="navbar navbar-expand-md navbar-inverse fixed-top navbar-light bg-light" id="header">
+      <div class="container-fluid">
+
+
+        <a href="#" class="navbar-brad"><img class = "navbar-brad-image" src ="{% static 'LOGO.JPG' %}" ></a>
+        {%if not request.user.is_authenticated %}
+        <span class = "font-weight-bolder text-danger">Hi Movie Fun</span>
+        {% else %}
+        <span class = "font-weight-bolder text-danger">Hi {{request.user.username}}</span>
+
+        {% endif %}
+
+
+
+        <button class ="navbar-toggler navbar-left" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+        <span class ="navbar-toggler-icon"></span>
+        <span class ="icon"></span>
+        <span class ="icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id ="navbarResponsive">
+          <ul class="navbar-nav ml-auto dropdown-menu-right ">
+            <li class ="nav-item active dropdown">
+              <a class="nav-link dropdown" href="#"   data-toggle="dropdown" >
+              See a movie
+          <div class="dropdown-menu " aria-labelledby="navbarDropdownMenuLink">
+              {% for movie in latest_movies %}
+            <a class="dropdown-item" href="{{movie.get_absolute_url}}" >{{movie.movie_name}} </a>
+          {% endfor %}
+          </div>
+          </a></li>
+            <li class ="nav-item active dropdown">
+            <a class="nav-link dropdown" href="#"   data-toggle="dropdown" >
+            Cinemas
+            <div class="dropdown-menu " aria-labelledby="navbarDropdownMenuLink">
+              {% for cinem in cinema%}
+              <a class="dropdown-item" href="{% url 'cinema_view' cinem.cinema_name %}" >{{cinem.cinema_name}} </a>
+              {% endfor %}
+            </div>
+            </a>
+          </li>
+            <li class ="nav-item active dropdown">
+                  <a class="nav-link dropdown" href="#"   data-toggle="dropdown" >
+                    Jenre
+                    <div class="dropdown-menu " aria-labelledby="navbarDropdownMenuLink">
+                      {% for jenr in jenres%}
+                      <a class="dropdown-item" href="{% url 'jenre_view' jenr.jenre %}">{{jenr.jenre}}</a>
+                      {% endfor %}
+                    </div>
+                  </a>
+            </li>
+            <li class ="nav-item active"><a href="{% url 'afisha' %}" class = "nav-link">On demand</a></li>
+            <li class ="nav-item active"><a href="{% url 'info' %}" class = "nav-link">Download app</a></li>
+
+            <form class="form-inline active-cyan-4"  action="{% url 'search' %}" id = "SearchForm" style="margin-right:230px" method="post">
+              <div class="form-group has-search">
+                <span class="fa fa-search form-control-feedback"></span>
+                {% csrf_token %}
+                <input type="text" class="form-control" placeholder="Search" name="searched_text" id="search" >
+              </div>
+            </form>
+
+            <!-- <form class="form-inline active-cyan-4" action="{% url 'search' %}" id="basic-text1">
+                <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search"
+                  aria-label="Search">
+                <i class="fas fa-search red lighten-3" aria-hidden="true" id="#basic-text1"></i>
+            </form> -->
+            <div class="" id="LogOut">
+
+                {%if not request.user.is_authenticated %}
+                <a  href="{% url 'auto'%}">
+                <button  type="submit" class="btn btn-success" id = "LogSign">Sign In</button>
+                </a>
+                {% else %}
+                <a  href="{% url 'logout'%}">
+                  <button  type="submit" class="btn btn-success" id = "LogSign">Log Out</button>
+                </a>
+                {% endif %}
+
+            </div>
+          </ul>
+
+        </div>
+    </div>
+    </nav>
+
+    <div class="container-fluid">
+    {% block content %}
+      <div class="row">
+        <div class="col-xs-12 col-sm-9 col-md-4 col-lg-5" style="background-color:  #ff9990">Left</div>
+        <div class="col-xs-12 col-sm-9 col-md-4 col-lg-5" style="background-color:  #99CCFF">Left</div>
+        <div class="col-xs-12 col-sm-9 col-md-4 col-lg-5" style="background-color:  #00CC99">Left</div>
+      </div>
+    {% endblock %}
+  </div>
+
+
+  <button class="btn btn-info" data-toggle="modal" data-target="#myModal">Help</button>
+  <div class="modal fade"  id="myModal">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Давай ты сможешь, давай, Даваааааааааааааай!</h5>
+          <button data-dismiss="modal" class="close">x</button>
+        </div>
+        <div class="modal-body">Если что непонятно звоните Заманбеку</div>
+          <div class="modal-footer">
+            <button class="btn btn-danger" data-dismiss="modal">Close</button>
+          </div>
+      </div>
+    </div>
+  </div>
+
+<footer class="container-fluid">
+  <div class="container">
+    <div class="row padding text-center">
+      <div class="col-12">
+        <h2>Our Contacts</h2>
+      </div>
+      <div class="col-12 social padding">
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-google-plus-g"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
+{% block jQuery%}
+<!-- <script>
+
+function showTrailer(){
+  $('#trailer').modal("show");
+}
+
+</script> -->
+
+	<!-- Dropdown-Menu-JavaScript -->
+			<script>
+          $(‘.dropdown-toggle’).click(function(e) {
+              if ($(document).width() > 768) {
+                e.preventDefault();
+                var url = $(this).attr(‘href’);
+                if (url !== ‘#’) {
+                window.location.href = url;
+                }
+              }
+            });
+			</script>
+
+      <script type="text/javascript">
+      $("#basic-text1").click(function(){
+
+          location.href=''
+        });
+
+      </script>
+
+      <script type="text/javascript">
+           document.getElementById('search').value = "";
+      </script>
+
+
+
+
+      {% endblock %}
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+crossorigin="anonymous"></script>
+
+
+  </body>
+</html>

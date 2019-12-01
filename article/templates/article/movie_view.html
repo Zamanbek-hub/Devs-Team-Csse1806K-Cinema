@@ -1,0 +1,104 @@
+{% extends "article/base.html" %}
+{% load crispy_forms_tags %}
+  % block content %
+<br><br>
+<h2>{{ movie.movie_name }}</h2>
+<div class="row">
+<div class="col-sm-6 col-lg-4">
+  <img src="{{movie.move_img.url}}" class="card-img-top">
+</div>
+<div class="col-sm-1 col-lg-1"></div>
+<div class="col-sm-5 col-lg-6" style="font-size:20px">
+      <h3>Story</h3>
+      <p> {{movie.movie_explain|safe|linebreaks}} </p>
+      <p>
+              <strong>Название: </strong>{{ movie.movie_name }}<br>
+              <strong>Год выпуска: </strong>{{movie.movie_article_date}}<br>
+              <br>
+              <strong>Жанр: </strong>
+
+            {% for genre in movie.movie_genre.all %}
+            {{genre}}
+            {% endfor %}
+              <br>
+              <strong>Продолжительность: </strong>{{movie.movie_duration}} мин.<br>
+          </p>
+          <p>
+            <strong>Режиссер: </strong>Turukabeyev Zamanbek<br>
+            <strong>В ролях: </strong>Oyazbaev Temirlan, Kakibay Nurdan, Kurmanbeyeva Talshyn<br>
+            </p>
+
+            <div class="container">
+              <button type="button" class="btn btn-outline-dark" style="width:200px; height=100px; margin-left:200px;">Buy</button>
+            </div>
+</div>
+</div>
+<br><br><br><br>
+<h3 class="container title-comments">Trailer</h3>
+<div class="container-fluid">
+    <iframe width="760" height="415" id="youtube" src="{{movie.movie_trailer_url}}"  style="margin-left:350px" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<hr align="center" width="1000" color="Red" />
+<div class="comments container">
+    <h3 class="title-comments">Комментарии ({{movie.comment_set.count}}) </h3>
+      {% for comment in movie.comment_set.all %}
+    <div class="media-body">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+              <div class="author">{{comment.of_user.username}}</div>
+              <div class="metadata">
+                  <time>={{comment.comment_date}}</time>
+              </div>
+          </div>
+          {% if comment.is_heiter == True%}
+<div class="panel-body" id = "CommentsBad" style="font-size:20px">
+    <div class="media-text text-justify">
+        {{comment.comment_text}}
+    </div>
+</div>
+          {% else %}
+
+<div class="panel-body" id = "CommentGood" style="font-size:20px">
+    <div class="media-text text-justify">
+        {{comment.comment_text}}
+    </div>
+</div>
+          {% endif %}
+</div>
+</div>
+      {% endfor %}
+</div>
+<div class="container">
+  {% if request.user.is_authenticated %}
+  <br>
+  <form  action="{% url 'set_comment' movie.movie_name %}" method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="idofComment">Leave your comment about movie</label>
+        <textarea class="form-control" name="comment_text" id="field" rows="8" cols="80"  id="idofComment"onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}"></textarea>
+        <input type="hidden" name="username" value="{{user.username}}">
+      </div>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="idofCheck" name="heiter" value="False">
+        <label class="form-check-label" for="idofCheck">Positive review?</label>
+      </div>
+      <br><button type="submit" class="btn btn-primary" style="align:center" id="submitt">Submit</button>
+  </form>
+  {% else %}
+  <h3>To leave a comment you need to register</h3>
+  {% endif %}
+</div>
+{% endblock %}
+{% block jQuery%}
+<script type="text/javascript">
+  if($("#submitt")).modal('show'){
+    if($("#field").val().trim().length < 10)
+    {
+        alert("Please Enter Text...");
+        return;
+    }
+}
+</script>
+
+
+{% endblock %}
