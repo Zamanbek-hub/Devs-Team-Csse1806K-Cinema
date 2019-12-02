@@ -80,15 +80,17 @@
   <div class="card-vody">
     <h4 class="card-title danger">
       <blockquote >
-        {{special_movie_jenre}}
-        <small><p>-{{recent}} </p></small>
+          {{special_movie_jenre}}
+
       </blockquote>
       <span class = "glyphicon glyphicon-star" style="color:yellow; font-size:50px" aria-hidden="true"></span></h4>
   </div>
 </div>
 {% endfor %}
-{% endif %}
 </div>
+<p style="text-align:center; font-size:150%; background-color:#E8E7E7;">
+Since you watched before - {{recent}} </p>
+{% endif %}
 </div>
 
 <div class="container-fluit padding">
