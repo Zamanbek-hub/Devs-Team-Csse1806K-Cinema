@@ -1,5 +1,7 @@
 {% extends "article/base.html" %}
+{% load staticfiles %}
 {% load crispy_forms_tags %}
+{% block style %}   <link rel="stylesheet" href="{% static 'buttons.css' %}">{% endblock style %}
 {% block content %}
 <br><br>
 <h2>{{ movie.movie_name }}</h2>
@@ -31,16 +33,48 @@
             <form  action="{% url 'buyticket' movie.movie_name %}" method="post">
                 {% csrf_token %}
               <input type="hidden" name="username" value="{{user.username}}">
-
-              <button type="submit" class="btn btn-outline-dark" style="width:200px; height=100px; margin-left:200px;">{{movie.movie_price}} tg</button>
+                {%if not request.user.is_authenticated %}
+              <button type="submit" class="btn btn-outline-dark"  data-toggle="modal"  onclick="myFunction()" data-target="#BUY" style="width:200px; height=100px; margin-left:200px;">{{movie.movie_price}} tg ahah</button>
+                {% else %}
+              <button type="submit" class="btn btn-outline-dark"   style="width:200px; height=100px; margin-left:200px;">{{movie.movie_price}} tg</button>
+                {% endif %}
             </form>
 </div>
+</div>
+<div class="modal fade"  id="BUY">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Сделайте регистрацию и мы можем вам предложить лучшие фильмы подходящее для вас</h5>
+      </div>
+        <div class="modal-footer">
+          <a href="{% url 'registration'%}"><button class="btn btn-danger" >Sign up</button></a>
+          <button class="btn btn" data-dismiss="modal">Later </button>
+        </div>
+    </div>
+  </div>
 </div>
 <br><br><br><br>
 <h3 class="container title-comments">Trailer</h3>
 <div class="container-fluid">
     <iframe width="760" height="415" id="youtube" src="{{movie.movie_trailer_url}}"  style="margin-left:350px" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
+<div class="container">
+			<form method="post" action="{% url 'set_rating' movie.id%}">
+				{% csrf_token %}
+        <inputx type="radio" name="new_rating" value="1">
+				<input  type="radio" name="new_rating" value="2">
+				<input  type="radio" name="new_rating" value="3">
+				<input  type="radio" name="new_rating" value="4">
+				<input type="radio" name="new_rating" value="5">
+				<input type="radio" name="new_rating" value="6">
+				<input type="radio" name="new_rating" value="7">
+				<input type="radio" name="new_rating" value="8">
+				<input type="radio" name="new_rating" value="9">
+				<input type="radio" name="new_rating" value="10">
+				<input type="submit" value="Оценить">
+			</form>
+		</div>
 <hr align="center" width="1000" color="Red" />
 <div class="comments container">
     <h3 class="title-comments">Комментарии ({{movie.comment_set.count}}) </h3>
@@ -56,7 +90,9 @@
           {% if comment.is_heiter == True%}
 <div class="panel-body" id = "CommentsBad" style="font-size:20px">
     <div class="media-text text-justify">
+
         {{comment.comment_text}}
+
     </div>
 </div>
           {% else %}
@@ -91,6 +127,13 @@
   <h3>To leave a comment you need to register</h3>
   {% endif %}
 </div>
+
+<script>
+function myFunction() {
+    $('#BUY').modal("show");
+}
+</script>
+
 {% endblock %}
 {% block jQuery%}
 <script type="text/javascript">
@@ -102,6 +145,7 @@
     }
 }
 </script>
+
 
 
 {% endblock jQuery %}

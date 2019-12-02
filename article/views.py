@@ -24,10 +24,33 @@ def test(request):
 
 
 def index(request):
-    latest_movies = Block.objects.order_by('-movie_numberOfClicks')[0:8:1]
-    jenres = Jenre.objects.order_by('-jenre')
-    cinema = Cinema.objects.order_by('-cinema_name')
-    return render(request, 'article/list.html', dict(latest_movies=latest_movies, jenres=jenres, cinema=cinema))
+    try:
+        latest_movies = Block.objects.order_by('-movie_numberOfClicks')[0:8:1]
+        jenres = Jenre.objects.order_by('-jenre')
+        cinema = Cinema.objects.order_by('-cinema_name')
+
+        list = []
+        currernt_user = User.objects.get(username=request.user.username)
+        shops = currernt_user.shop_set.all()
+        for shop in shops:
+            for genre in shop.of_movie.movie_genre.all():
+                list.append(genre.jenre)
+
+        count = 0
+        count_of_max_genre = 0
+        max_genre = ""
+
+        for qwerty in list:
+            count = list.count(qwerty)
+            if count > count_of_max_genre:
+                count_of_max_genre = count
+                max_genre = qwerty
+        jenre = Jenre.objects.get(jenre=max_genre)
+
+        movie = Block.objects.filter(movie_genre = jenre)
+        return render(request, 'article/list.html', dict(latest_movies=latest_movies, jenres=jenres, cinema=cinema, special_movies=movie, special_movie_jenre = jenre))
+    except:
+        return render(request, 'article/list.html', dict(latest_movies=latest_movies, jenres=jenres, cinema=cinema))
 
 
 def table(request):
@@ -54,13 +77,14 @@ def cinema_view(request, cinema_name):
 
 
 def buyticket(request,movie_name):
-
+    try:
         movie = Block.objects.get(movie_name = movie_name)
         user = User.objects.get(username = request.POST.get('username'))
         shop = Shop(of_user = user, of_movie = movie)
         shop.save()
         return HttpResponseRedirect(reverse_lazy('movie_view', args=(movie.movie_name,)))
-
+    except:
+        return HttpResponseRedirect(reverse_lazy('movie_view', args=(movie.movie_name,)))
 
 # def category_view(request,category_name):
 #     if category_name =
@@ -191,3 +215,26 @@ def booking(request):
 def get_info_about_cinema(request, cinema_name):
     cinema = Cinema.objects.get(cinema_name = cinema_name)
     return render(request,'article/cinemaInfoPage.html', {"cinema":cinema})
+
+
+def Check(request):
+    user = User.objects.get(username = request.user.username)
+    return render(request, 'article/scheduleoffilms.html', dict(user=user))
+
+def set_rating(request, movie_id):
+    movie = get_object_or_404(Movie, pk=movie_id)
+    try:
+        ratings = Rating.objects.filter(of_movie=movie)
+        user = User.objects.get(user=request.user)
+        for i in ratings:
+            if i.of_user == user:
+                return HttpResponseRedirect(reverse('mainapp:movie', args=(movie_id, )))
+        rating_num = int(request.POST['new_rating'])
+        new_rating = Rating(rating_user=userx, rating_movie=moviex, rating=rating_num)
+        new_rating.save()
+        sum_of_rating = movie.movie_rating * len(ratings) + rating_num
+        movie.movie_user_rating = sum_of_rating / (len(ratings) + 1)
+        movie.save()
+    except:
+        pass
+    return HttpResponseRedirect(reverse('mainapp:movie', args=(movie_id, )))

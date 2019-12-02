@@ -92,10 +92,10 @@ footer{
   text-shadow: 1px 1px 10px #000;
 }
 
-.modal-title{
+/* .modal-title{
   color:yellow;
   background-color: grey;
-}
+} */
 
 .card {
   position: relative;
@@ -198,8 +198,8 @@ html {
 
 
 
-$hoverBgColor : #503bff;
-$hoverBgColor2: #8293ff;
+/* $hoverBgColor : #503bff;
+$hoverBgColor2: #8293ff; */
 
 /* Mixins */
 /* .quotes .box.box1:hover,

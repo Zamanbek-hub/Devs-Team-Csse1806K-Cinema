@@ -60,6 +60,28 @@
 
 <br>
 <br>
+{%if request.user.is_authenticated %}
+<div class="container-fluit padding">
+  <div class="row alert text-center">
+    <div class="col-12">
+      <div class="card">
+        <h2 class = "display">Recomendation for you</h2>
+      </div>
+    </div>
+  </div>
+</div>
+{% for movie in special_movies %}
+<div class="col-lg-3 col-sm-6 col-md-4 portfolio-item" id="card">
+  <div class="card">
+    <a href="{{movie.get_absolute_url}}"><img src="{{movie.move_img.url}}" class="card-img-top"></a>
+  </div>
+  <div class="card-vody">
+    <h4 class="card-title danger"><mark>{{special_movie_jenre}} </mark><span class = "glyphicon glyphicon-star" style="color:yellow; font-size:50px" aria-hidden="true"></span></h4>
+  </div>
+</div>
+{% endfor %}
+{% endif %}
+
 <div class="container-fluit padding">
   <div class="row alert text-center">
     <div class="col-12">

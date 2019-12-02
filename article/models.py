@@ -66,7 +66,6 @@ class Block(models.Model):
     movie_trailer_url = models.CharField("movie_trailer",max_length = 100,default="https://www.youtube.com/embed/L0ttxMz-tyo")
     movie_available = models.BooleanField(default=True)
     movie_genre = models.ManyToManyField(Jenre)
-
     # ?new
     movie_cinema = models.ManyToManyField(Cinema)
     movie_price = models.PositiveIntegerField()
@@ -98,4 +97,9 @@ class Shop(models.Model):
     of_movie = models.ForeignKey(Block,on_delete=models.CASCADE)
 
     def __str__(self):
-        return "buyer: " + self.of_user.username + " movie: " + self.of_movie.movie_name
+        return "buyer: " + self.of_user.username + " movie" + self.of_movie.movie_name
+
+class Rating(models.Model):
+    of_user = models.ForeignKey(User,on_delete=models.CASCADE)
+    of_movie = models.ForeignKey(Block,on_delete=models.CASCADE)
+    rating = models.PositiveIntegerField()
