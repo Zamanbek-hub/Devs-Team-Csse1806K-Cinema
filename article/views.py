@@ -260,25 +260,36 @@ def search(request):
     except:
         return HttpResponse("Have not")
 
-def buy_place(request):
+def buy_place(request,cinema_name):
+    cinema = Cinema.objects.get(cinema_name = cinema_name)
     rooom = Room.objects.get(id=4)
-    status = request.POST.get('buy_place')
-    info = list(status)
-    info = info.split()
-    cor_x = int(info[0])
-    cor_y = int(info[1])
-    status = bool(info[2])
-    new_place = Place(of_room = rooom, cor_x = cor_x, cor_y = cor_y, status = status)
-    new_place.save()
-    return render(request,'article/booking.html')
+    status = request.POST.getlist('buy_place')
+
+    for info in status:
+
+        if info != "False":
+            info = str(info).split(' ')
+            cor_x = int(info[0])
+            cor_y = int(info[1])
+            status = bool(info[2])
+            new_place = Place(of_room = rooom, cor_x = cor_x, cor_y = cor_y, status = status)
+            new_place.save()
+
+    return HttpResponseRedirect(reverse_lazy('booking', args=(cinema.cinema_name,)))
 
 def afisha(request):
     # return HttpResponse("HELLO WORLD")
     return render(request, 'article/kino1.html')
 
 def booking(request,cinema_name):
+    rooom = Room.objects.get(id=4)
+    places = Place.objects.filter(of_room = rooom, cor_x = int(1))
     cinema = Cinema.objects.get(cinema_name = cinema_name)
-    return render(request,'article/booking.html', {"cinema":cinema})
+    numbers = [1,2,3,4,5,6,7,8]
+    have = {}
+    for num in numbers:
+        have[num] = "False"
+    return render(request,'article/booking.html', {"cinema":cinema, 'places':places, 'numbers':numbers, 'have':have})
 
 def get_info_about_cinema(request, cinema_name):
     cinema = Cinema.objects.get(cinema_name = cinema_name)

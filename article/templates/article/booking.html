@@ -16,26 +16,59 @@
 	  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 	</head>
 	<body>
+		<!-- <div class="">
+			<a  href="{% url 'index'%}">auto</a>
+		</div>
+		<div class="container">
+			<form method="post" action="{% url 'buy_place'}">
+				{% csrf_token %}
+				<input type="radio" id="1-1" class="btn btn" name="buy_place" value="1 1 True">1</input>
+				<input type="submit" value="Оценить">
+			</form> -->
+		</div>
 	<h4 class = "display">Hall ¹ 1</h4>
 		<div>
-			<form method="post" action="{% url 'buy_place'}">
+			<form method="post" action="{% url 'buy_place' cinema.cinema_name %}">
 				{% csrf_token %}
 			<table>
 				<tbody>
+
 					<tr>
 						<td>1 ðÿä</td>
 						<td></td>
 						<td></td>
 						<td>Ï</td>
-						<td><input type="radio" id="1-1" class="btn btn" name="buy_place" value="1 1 True">1</input></td>
-						<td><button type="radio" id="1-2" class="btn btn" name="buy_place" value="1 2 True">2</button></td>
-						<td><button type="radio" id="1-3" class="btn btn" name="buy_place" value="1 3 True">3</button></td>
-						<td><button type="radio" id="1-4" class="btn btn" name="buy_place" value="1 4 True">4</button></td>
-						<td><button type="radio" id="1-5" class="btn btn" name="buy_place" value="1 5 True">5</button></td>
-						<td><button type="radio" id="1-6" class="btn btn" name="buy_place" value="1 6 True">6</button></td>
-						<td><button type="radio" id="1-7" class="btn btn" name="buy_place" value="1 7 True">7</button></td>
-						<td><button type="radio" id="1-8" class="btn btn" name="buy_place" value="1 8 True">8</button></td>
+						{% if places %}
+						{% for num in numbers %}
+						<!-- number = [1,2,3,4,5,6,7,8] -->
+						<!-- for num in number:
+								for place in places:
+										if place.cor_y == 8:
+												places_dict[num] = place -->
+					    {% for place in places %}
+					    {% if place.cor_y == num %}
+						<td><button type="reset" id="{{place.cor_x}}-{{place.cor_y}}" class="btn btn-danger" onclick="display('{{place.cor_x}} {place.cor_y} True')"><input type="hidden" id="{{place.cor_x}} {{place.cor_y}} True" name="buy_place" value="False">{{num}}</input></button></td>
+						<!-- <td><button type="reset" id="1-2" class="btn btn" onclick="display('1 2 True')"><input type="hidden"  id="1 2 True" name="buy_place" value="False">2</input></button></td>
+						<td><button type="reset" id="1-3" class="btn btn" onclick="display('1 3 True')"><input type="hidden" id="1 3 True" name="buy_place" value="False">3</input></button></td>
+						<td><button type="reset" id="1-4" class="btn btn" onclick="display('1 4 True')"><input type="hidden" id="1 4 True" name="buy_place" value="False">4</input></button></td>
+						<td><button type="reset" id="1-5" class="btn btn" onclick="display('1 5 True')"><input type="hidden" id="1 5 True" name="buy_place" value="False">5</input></button></td>
+						<td><button type="reset" id="1-6" class="btn btn" onclick="display('1 6 True')"><input type="hidden" id="1 6 True" name="buy_place" value="False">6</input></button></td>
+						<td><button type="reset" id="1-7" class="btn btn" onclick="display('1 7 True')"><input type="hidden" id="1 7 True" name="buy_place" value="False">7</input></button></td>
+						<td><button type="reset" id="1-8" class="btn btn" onclick="display('1 8 True')"><input type="hidden" id="1 8 True" name="buy_place" value="False">8</input></button></td> -->
+
+							{% else %}
+
+								<td><button type="reset" id="1-{{num}}" class="btn btn" onclick="display('1 {{num}} True')"><input type="hidden" id="1 {{num}} True" name="buy_place" value="False">{{num}}</input></button></td>
+								{{have}}
+							
+							{% endif %}
+							{% endfor %}
+						{% endfor %}
+
+						<!-- <td><button type="reset" id="1-1" class="btn btn" onclick="display('1 1 True')"><input type="hidden" id="1 1 True" name="buy_place" value="False">1</input></button></td -->
+
 						<td><input type="submit" value="Оценить"><td>
+							{% endif %}
 						<td></td>
 						<td></td>
 					</tr>
@@ -263,7 +296,7 @@
 			//     $(this).prop('checked', true);
 			// });
 			$( "button#8-12" ).click(function() {
-			  $(this).toggleClass( "selected" );
+			  $(this).toggleClass( "danger" );
 			});
 			$( "button#8-11" ).click(function() {
 			  $(this).toggleClass( "selected" );
@@ -474,12 +507,18 @@
 			});
 			$( "button#1-2" ).click(function() {
 			  $(this).toggleClass( "selected" );
+				document.getElementById("1-2-in").value="Chert";
 			});
 			$( "button#1-1" ).click(function() {
 			  $(this).toggleClass( "selected" );
+				 document.getElementById("1-1-in").value="Chert";
 			});
 		</script>
-
+		<script>
+			function display(name) {
+				document.getElementById(name).value=name;
+			}
+		</script>
 		<style type="text/css">
 			h6 {
     font-family: Verdana, Arial, Helvetica, serif; /* Øðèôò ñ çàñå÷êàìè */
