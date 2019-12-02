@@ -13,6 +13,7 @@ import datetime
 from django.utils import timezone
 from django.contrib.auth.models import User
 import datetime
+from decimal import Decimal
 
 
 # def index(request):
@@ -23,34 +24,78 @@ def test(request):
     return HttpResponse("<h3>Programm working<h3>")
 
 
-def index(request):
-    try:
-        latest_movies = Block.objects.order_by('-movie_numberOfClicks')[0:8:1]
-        jenres = Jenre.objects.order_by('-jenre')
-        cinema = Cinema.objects.order_by('-cinema_name')
+def watched_films(shops_list, jenre):
+    watched_films = []
+    for w in shops_list:
+        for w2 in w.movie_genre.all():
+            if jenre == w2:
+                watched_films.append(w)
+    watched_films = set(watched_films)
+    return watched_films
 
-        list = []
+
+def find_recomendation(list_genre, block_list, jenre):
+    try:
+        new_movie = []
+        for m in block_list:
+            for g in m.movie_genre.all():
+                if len(new_movie) == 2:
+                    return new_movie
+                if jenre == g:
+                    print(m.movie_genre)
+                    new_movie.append(m)
+        return new_movie
+    except:
+        return None
+
+
+def index(request):
+    latest_movies = Block.objects.order_by('-movie_numberOfClicks')[0:8:1]
+    jenres = Jenre.objects.order_by('-jenre')
+    cinema = Cinema.objects.order_by('-cinema_name')
+
+    shop_list = []
+    list_genre = []
+    count_of_max_genre = 0
+    max_genre = ""
+    try:
         currernt_user = User.objects.get(username=request.user.username)
         shops = currernt_user.shop_set.all()
         for shop in shops:
-            for genre in shop.of_movie.movie_genre.all():
-                list.append(genre.jenre)
+            for new_movie in shop.of_movie.movie_genre.all():
+                list_genre.append(new_movie.jenre)
 
-        count = 0
-        count_of_max_genre = 0
-        max_genre = ""
-
-        for qwerty in list:
-            count = list.count(qwerty)
+        for qwerty in list_genre:
+            count = list_genre.count(qwerty)
             if count > count_of_max_genre:
                 count_of_max_genre = count
                 max_genre = qwerty
+
         jenre = Jenre.objects.get(jenre=max_genre)
 
-        movie = Block.objects.filter(movie_genre = jenre)
-        return render(request, 'article/list.html', dict(latest_movies=latest_movies, jenres=jenres, cinema=cinema, special_movies=movie, special_movie_jenre = jenre))
+        shops_list = []
+        for movie_shop in shops:
+            shops_list.append(movie_shop.of_movie)
+        block_list = list(Block.objects.all())
+        for movie in shops_list:
+            for movie_block in block_list:
+                if movie_block.movie_name == movie.movie_name:
+                    block_list.remove(movie)
+
+        x = find_recomendation(list_genre, block_list, jenre)
+        y = watched_films(shops_list, jenre)
+        recent = ""
+        for l in y:
+            recent += l.movie_name + " "
+
+        if x is not None:
+            return render(request, 'article/list.html', dict(latest_movies=latest_movies, jenres=jenres, cinema=cinema, special_movies=x, special_movie_jenre=jenre, recent = recent))
+        else:
+            return render(request, 'article/list.html', dict(latest_movies=latest_movies, jenres=jenres, cinema=cinema))
     except:
         return render(request, 'article/list.html', dict(latest_movies=latest_movies, jenres=jenres, cinema=cinema))
+
+
 
 
 def table(request):
@@ -60,10 +105,15 @@ def table(request):
 # Create your views here.
 
 def movie_view(request,movie_name):
-    movie = Block.objects.get(movie_name = movie_name)
-    movie.movie_numberOfClicks +=1
-    movie.save()
-    return render(request, "article/movie_view.html", {"movie":movie})
+    try:
+        movie = Block.objects.get(movie_name = movie_name)
+        movie.movie_numberOfClicks +=1
+        movie.save()
+        user = User.objects.get(id = request.user.id)
+        rating = Rating.objects.get(of_movie = movie, of_user = user)
+        return render(request, "article/movie_view.html", {"movie":movie, "rating" : rating})
+    except:
+        return render(request, "article/movie_view.html", {"movie":movie})
 
 
 def jenre_view(request, jenre):
@@ -85,6 +135,9 @@ def buyticket(request,movie_name):
         return HttpResponseRedirect(reverse_lazy('movie_view', args=(movie.movie_name,)))
     except:
         return HttpResponseRedirect(reverse_lazy('movie_view', args=(movie.movie_name,)))
+
+
+
 
 # def category_view(request,category_name):
 #     if category_name =
@@ -203,14 +256,25 @@ def search(request):
     except:
         return HttpResponse("Have not")
 
-
+def buy_place(request):
+    rooom = Room.objects.get(id=4)
+    status = request.POST.get('buy_place')
+    info = list(status)
+    info = info.split()
+    cor_x = int(info[0])
+    cor_y = int(info[1])
+    status = bool(info[2])
+    new_place = Place(of_room = rooom, cor_x = cor_x, cor_y = cor_y, status = status)
+    new_place.save()
+    return render(request,'article/booking.html')
 
 def afisha(request):
     # return HttpResponse("HELLO WORLD")
     return render(request, 'article/kino1.html')
 
-def booking(request):
-    return render(request,'article/booking.html')
+def booking(request,cinema_name):
+    cinema = Cinema.objects.get(cinema_name = cinema_name)
+    return render(request,'article/booking.html', {"cinema":cinema})
 
 def get_info_about_cinema(request, cinema_name):
     cinema = Cinema.objects.get(cinema_name = cinema_name)
@@ -235,8 +299,12 @@ def set_rating(request, movie_id):
     new_rating.save()
 
     sum_of_rating = movie.movie_rating * len(ratings) + rating_num
-    movie.movie_rating = sum_of_rating / (len(ratings) + 1)
+    if len(ratings) == 0:
+        movie.movie_rating = sum_of_rating / (len(ratings) + 1)
+    else:
+        movie.movie_rating = sum_of_rating / (len(ratings))
+    movie.movie_rating = round(movie.movie_rating,2)
     movie.save()
-    
+
 
     return HttpResponseRedirect(reverse_lazy('movie_view', args=(movie.movie_name, )))

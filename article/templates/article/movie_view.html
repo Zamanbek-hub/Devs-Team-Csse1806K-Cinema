@@ -63,6 +63,10 @@
   <p> Rating: {{movie.movie_rating}} </p>
 </div>
 
+{%if request.user.is_authenticated %}
+{% if rating %}
+  <p class="container">Your Mark: {{rating.rating}}</p>
+{% else %}
 <div class="container">
 			<form method="post" action="{% url 'set_rating' movie.id%}">
 				{% csrf_token %}
@@ -78,7 +82,9 @@
 				<input type="radio" name="new_rating" value="10">
 				<input type="submit" value="Оценить">
 			</form>
-		</div>
+</div>
+{% endif %}
+{% endif %}
 <hr align="center" width="1000" color="Red" />
 <div class="comments container">
     <h3 class="title-comments">Комментарии ({{movie.comment_set.count}}) </h3>

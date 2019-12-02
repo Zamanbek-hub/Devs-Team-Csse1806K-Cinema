@@ -1,56 +1,49 @@
+
+
 <!DOCTYPE html>
 <html>
 	<head>
 		 {% load staticfiles %}
 	    <meta charset="utf-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	    <title>{% block title %} My site {% endblock %}</title>
+	    <title>{% block title %} Flicks {% endblock %}</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-	   <link rel="stylesheet" href="{% static 'ticket.css' %}">
-	    <base target="_blank">
-	  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	    <link rel="stylesheet" href="{% static 'ticket.css' %}">
+	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-      
-  </head>
+	  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+	</head>
 	<body>
-
-		<div class="container-fluit padding" >
-		  <div class="row alert text-center">
-		    <div class="col-12">
-		      <div class="card">
-		        <h3 class = "display">Hall № 1</h3>
-		      </div>
-		    </div>
-		  </div>
-		</div>
-
-
+	<h4 class = "display">Hall ¹ 1</h4>
 		<div>
+			<form method="post" action="{% url 'buy_place'}">
+				{% csrf_token %}
 			<table>
 				<tbody>
 					<tr>
-						<td>1 ряд</td>
+						<td>1 ðÿä</td>
 						<td></td>
 						<td></td>
-						<td>П</td>
-						<td><button type="button" id="1-1" class="btn btn">1</button></td>
-						<td><button type="button" id="1-2" class="btn btn">2</button></td>
-						<td><button type="button" id="1-3" class="btn btn">3</button></td>
-						<td><button type="button" id="1-4" class="btn btn">4</button></td>
-						<td><button type="button" id="1-5" class="btn btn">5</button></td>
-						<td><button type="button" id="1-6" class="btn btn">6</button></td>
-						<td><button type="button" id="1-7" class="btn btn">7</button></td>
-						<td><button type="button" id="1-8" class="btn btn">8</button></td>
+						<td>Ï</td>
+						<td><input type="radio" id="1-1" class="btn btn" name="buy_place" value="1 1 True">1</input></td>
+						<td><button type="radio" id="1-2" class="btn btn" name="buy_place" value="1 2 True">2</button></td>
+						<td><button type="radio" id="1-3" class="btn btn" name="buy_place" value="1 3 True">3</button></td>
+						<td><button type="radio" id="1-4" class="btn btn" name="buy_place" value="1 4 True">4</button></td>
+						<td><button type="radio" id="1-5" class="btn btn" name="buy_place" value="1 5 True">5</button></td>
+						<td><button type="radio" id="1-6" class="btn btn" name="buy_place" value="1 6 True">6</button></td>
+						<td><button type="radio" id="1-7" class="btn btn" name="buy_place" value="1 7 True">7</button></td>
+						<td><button type="radio" id="1-8" class="btn btn" name="buy_place" value="1 8 True">8</button></td>
+						<td><input type="submit" value="Оценить"><td>
 						<td></td>
 						<td></td>
 					</tr>
 					<tr>
-						<td>2 ряд</td>
+						<td>2 ðÿä</td>
 						<td></td>
 						<td></td>
-						<td>Р</td>
+						<td>Ð</td>
 						<td><button type="button" id="2-1" class="btn btn">1</button></td>
 						<td><button type="button" id="2-2" class="btn btn">2</button></td>
 						<td><button type="button" id="2-3" class="btn btn">3</button></td>
@@ -63,10 +56,10 @@
 						<td></td>
 					</tr>
 					<tr>
-						<td>3 ряд</td>
+						<td>3 ðÿä</td>
 						<td></td>
 						<td></td>
-						<td>О</td>
+						<td>Î</td>
 						<td><button type="button" id="3-1" class="btn btn">1</button></td>
 						<td><button type="button" id="3-2" class="btn btn">2</button></td>
 						<td><button type="button" id="3-3" class="btn btn">3</button></td>
@@ -79,10 +72,10 @@
 						<td></td>
 					</tr>
 					<tr>
-						<td>4 ряд</td>
+						<td>4 ðÿä</td>
 						<td></td>
 						<td></td>
-						<td>Х</td>
+						<td>Õ</td>
 						<td><button type="button" id="4-1" class="btn btn">1</button></td>
 						<td><button type="button" id="4-2" class="btn btn">2</button></td>
 						<td><button type="button" id="4-3" class="btn btn">3</button></td>
@@ -95,10 +88,10 @@
 						<td></td>
 					</tr>
 					<tr>
-						<td>5 ряд</td>
+						<td>5 ðÿä</td>
 						<td></td>
 						<td></td>
-						<td>О</td>
+						<td>Î</td>
 						<td><button type="button" id="5-1" class="btn btn">1</button></td>
 						<td><button type="button" id="5-2" class="btn btn">2</button></td>
 						<td><button type="button" id="5-3" class="btn btn">3</button></td>
@@ -111,10 +104,10 @@
 						<td></td>
 					</tr>
 					<tr>
-						<td>6 ряд</td>
+						<td>6 ðÿä</td>
 						<td></td>
 						<td></td>
-						<td>Д</td>
+						<td>Ä</td>
 						<td><button type="button"  id="6-1" class="btn btn">1</button></td>
 						<td><button type="button"  id="6-2" class="btn btn">2</button></td>
 						<td><button type="button" id="6-3" class="btn btn">3</button></td>
@@ -128,7 +121,7 @@
 					</tr>
 
 					<tr>
-						<td>7 ряд</td>
+						<td>7 ðÿä</td>
 						<td></td>
 						<td><button type="button" id="7-1" class="btn btn">1</button></td>
 						<td><button type="button" id="7-2" class="btn btn">2</button></td>
@@ -144,7 +137,7 @@
 						<td><button type="button" id="7-12" class="btn btn">12</button></td>
 					</tr>
 					<tr>
-						<td>8 ряд</td>
+						<td>8 ðÿä</td>
 						<td></td>
 						<td><button type="button" id="8-1"  class="btn btn">1</button></td>
 						<td><button type="button" id="8-2" class="btn btn">2</button></td>
@@ -161,11 +154,113 @@
 					</tr>
 				</tbody>
 			</table>
-		</div>
-		<script type="text/javascript">
+		</form>
+		</div><div class="container" >
+
+	 <div class="row" >
+	 	<div class="col-md-offset-4 col-md-5">
+			 		<div class="tab" role="tabpanel">
+			 <!-- Nav tabs -->
+		 			<ul class="nav nav-tabs" role="tablist">
+		 				<li href="#demo3" data-toggle="collapse">Buy</li>
+		 			</ul>
+
+
+		           </div>
+		 <div id="demo3" class="collapse" class="btn-group" >
+		 						<div class="form-group">
+		 							<label>Email address (Your ticket and instruction will be sent to it )
+		 							</label>
+		 							<input type="email" class="form-control" >
+		 						</div>
+		 						<div class="form-group">
+		 							<label>Phone number(An electronic ticket will send to it)</label>
+		 							<input type="text" class="form-control" >
+		 						</div>
+		 						<div class="form-group">
+		 							<label>Choose a form of payment: </label>
+		 							<div class="main-checkbox">
+		 								<input value="None" id="checkbox1" name="check" type="radio">
+		 									<label for="checkbox1"><span class="text">Kaspi Gold </span></label>
+		 							</div>
+
+		 							<div class="main-checkbox">
+		 								<input value="None" id="checkbox2" name="check" type="radio">
+		 									<label for="checkbox1"><span class="text">Visa</span></label>
+		 							</div>
+
+		 							<div class="main-checkbox">
+		 								<input value="None" id="checkbox3" name="check" type="radio">
+		 									<label for="checkbox1"> <span class="text">Halyk Bank </span></label>
+		 							</div>
+								</div>
+								<div class="form-group">
+		 							<label>Choose a type of ticket: </label>
+		 							<div class="main-checkbox">
+		 								<input value="None" id="ticket1" name="check" type="checkbox">
+		 									<label for="ticket1"><span class="text">Adult </span></label>
+		 							</div>
+
+		 							<div class="main-checkbox">
+		 								<input value="None" id="ticket2" name="check" type="checkbox">
+		 									<label for="ticket1"><span class="text">Student</span></label>
+		 							</div>
+
+		 							<div class="main-checkbox">
+		 								<input value="None" id="ticket3" name="check" type="checkbox">
+		 									<label for="ticket1"> <span class="text">Child </span></label>
+		 							</div>
+								</div>
+
+		 						<div class="form-group">
+			 							<button type="submit" class="btn btn-warning" data-toggle="modal" data-target="#pay">Pay </button>
+		 						</div>
+
+		 					</form>
+		 				</div>
+
+		 		</div>
+		 </div>
+		</div><!-- /.col-md-offset-3 col-md-6 -->
+	</div><!-- /.row -->
+</div><!-- /.container -->
+
+<!-- <div class="modal fade" id="pay" tabindex="-1" role="dialog" aria-labelledby="Title" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="Title"><i class="fas fa-exclamation-triangle"> </i>    Attention</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+	       <h6>The administration of the cinema can change the beginning of the movie show, ticket prices and discounts. Please , check the information by phone. </h6>
+			 <br> <br>
+	         <p >200 tg was withdrawn from you</p>
+	         <p >We wish you a pleasant viewing !  </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Close </button>
+      </div>
+    </div>
+  </div>
+</div> -->
+<script type="text/javascript">
+			// $('.btn').click(function(){
+ 		// 		 $(".block_with_text").fadeToggle(100);
+			// 	});
+
+           // function viewDiv(){
+           //     document.getElementById("div1").style.display = "block";
+           // };
 			// $("button").click(function(){
 		 //    $("button").removeClass("active");
 		 //    $(this).addClass("active");
+			// });
+   //          $('.checkbox').change(function(){
+			//     $('input[name="' + $(this).attr('name') +'"]').removeAttr('checked');
+			//     $(this).prop('checked', true);
 			// });
 			$( "button#8-12" ).click(function() {
 			  $(this).toggleClass( "selected" );
@@ -384,5 +479,71 @@
 			  $(this).toggleClass( "selected" );
 			});
 		</script>
+
+		<style type="text/css">
+			h6 {
+    font-family: Verdana, Arial, Helvetica, serif; /* Øðèôò ñ çàñå÷êàìè */
+    font-style: oblique ; /* Êóðñèâíîå íà÷åðòàíèå */
+    color: #92210B;
+    text-align: center;
+}
+
+p {
+   font-family: 'Times New Roman', Times, serif; /* Øðèôò ñ çàñå÷êàìè */
+   font-style: italic; /* Êóðñèâíîå íà÷åðòàíèå */
+   color: #0D4429;
+   text-align: center;
+}
+ h4 {
+     font-family: Verdana, Arial, Helvetica, serif; /* Øðèôò ñ çàñå÷êàìè */
+     font-style: oblique ; /* Êóðñèâíîå íà÷åðòàíèå */
+     text-align: center;
+     margin-top: 40px;
+}
+.button {
+    font-family: Calibri, sans-serif;
+    font-size:13px;
+    font-weight: bold;
+    width: 160px;
+    height: 25px;
+    background:grey;
+    color: white
+}
+.selected {
+    color: white;
+    background:green
+}
+button#cssColorChange:active{
+    color: white;
+    background:red
+}
+
+table {
+    width: 600px; /* Øèðèíà òàáëèöû */
+    border: 0px; /* Ðàìêà âîêðóã òàáëèöû */
+    margin: auto ; /* Âûðàâíèâàåì òàáëèöó ïî öåíòðó îêíà  */
+    margin-top: 40px;
+}
+td {
+    text-align: center;
+}
+
+#div1{
+  display: none;
+}
+
+body {
+    margin: 10; /* Óáèðàåì îòñòóïû */
+    height: 100%; /* Âûñîòà ñòðàíèöû */
+    width: 100%;
+    /*background: linear-gradient(#1A070B,#3E3638);*/
+}
+
+
+
+
+
+
+		</style>
 </body>
 </html>

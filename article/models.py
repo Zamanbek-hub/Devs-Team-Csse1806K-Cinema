@@ -10,8 +10,9 @@ from django import forms
 from django.contrib.auth.models import User
 from datetime import datetime, timedelta
 from django.db import models
-import jsonfield
-
+# import jsonfield
+# from django.db import models
+# from django.contrib.postgres.fields import JSONField
 
 class Article(models.Model):
     article_title = models.CharField('Name of article', max_length = 200)
@@ -48,12 +49,21 @@ class Cinema(models.Model):
 
     def get_absolute_url(self):
         return reverse('cinema_view', kwargs={'cinema_name':self.cinema_name})
+        
+    def get_absolute_url_to_book(self):
+        return reverse('booking', kwargs={'cinema_name':self.cinema_name})
 
 
 class Room(models.Model):
      of_cinema = models.ForeignKey(Cinema, on_delete=models.CASCADE)
      name = models.PositiveIntegerField()
+     # places = JSONField(default=dict())
 
+class Place(models.Model):
+     of_room = models.ForeignKey(Room, on_delete=models.CASCADE)
+     cor_x = models.PositiveIntegerField()
+     cor_y = models.PositiveIntegerField()
+     status = models.BooleanField()
 
 class Block(models.Model):
 

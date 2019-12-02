@@ -22,9 +22,10 @@ urlpatterns = [
     path('set_comment/<movie_name>', views.set_Comment, name='set_comment'),
     path('buyticket/<movie_name>', views.buyticket, name='buyticket'),
     path('set_rating/<movie_id>', views.set_rating, name='set_rating'),
+    path('buy_place/', views.buy_place, name='buy_place'),
     # path('list/', views.listmovies, name='listmovies'),
     path('afisha/', views.afisha, name='afisha'),
-    path('booking/', views.booking, name='booking'),
+    path('booking/<cinema_name>', views.booking, name='booking'),
     path('info/', views.get_info_about_cinema, name='info'),
     path('check/', views.Check, name='check'),
 ]

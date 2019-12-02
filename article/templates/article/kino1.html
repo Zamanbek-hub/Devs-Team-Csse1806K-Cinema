@@ -16,7 +16,7 @@
 	    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 	     <link rel="stylesheet" href="{% static 'kinoq.css' %}">
 	      <link rel="stylesheet" href="{% static 'style.css' %}">
-	    <base target="_blank">
+	   <!--  <base target="_blank"> -->
 	  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
@@ -126,10 +126,10 @@
 				 				<div class="table-responsive">
 				 				   <table class="table table-borderless table-hover">
 				 					 <tbody>
-										 <tr>
+										 <tr href="#demo" data-toggle="collapse" >
 										    <th scope="row"></th>
 										    <td>9.0 <i class="far fa-star"></i> </td>
-										    <td><a href="#demo" data-toggle="collapse" class="text-dark">Bekmakhanov</a></td>
+										    <td>Bekmambetov</td>
 										    <td>5 films</td>
 										    <td>5 seansov</td>
 										    <td><i class="fas fa-phone"></i>  +7 700 693 15 33</td>
@@ -139,16 +139,16 @@
 								</div>
 								<div id="demo" class="collapse" class="btn-group" >
 									<table class="table table-borderless table-hover">
-										<p><i class="fab fa-linux"></i><a href="C:/Users/Талшын/Desktop/cinemaInfoPage.html" class="text-dark"> More info  about this cinema</a></p>
+										<p><i class="fab fa-linux"></i><a href="{% url 'info'%}" class="text-dark"> More info  about this cinema</a></p>
 					 				<tbody><tr>
 									<th scope="row"></th>
 									<td>Аббатство Даунтон</td>
 									<td>
-									   <button type="button" class="btn btn-light btn-sm"><a href="{% url 'booking' %}" class="text-dark" >11:55 </a> </button>
-									   <button type="button" class="btn btn-light btn-sm"> <a href="{% url 'booking' %}" class="text-dark" >14:10 </a></button>
-							           <button type="button" class="btn btn-light btn-sm"> <a href="{% url 'booking' %}" class="text-dark" >16:30 </a></button>
-							           <button type="button" class="btn btn-light btn-sm"> <a href="{% url 'booking' %}" class="text-dark" >18:50 </a></button>
-							           <button type="button" class="btn btn-light btn-sm"> <a href="{% url 'booking' %}" class="text-dark" >21:20 </a></button>
+									   <button type="button" class="btn btn-light btn-sm"><a href="#" class="text-dark" >11:55 </a> </button>
+									   <button type="button" class="btn btn-light btn-sm"> <a href="#" class="text-dark" >14:10 </a></button>
+							           <button type="button" class="btn btn-light btn-sm"> <a href="#" class="text-dark" >16:30 </a></button>
+							           <button type="button" class="btn btn-light btn-sm"> <a href="#" class="text-dark" >18:50 </a></button>
+							           <button type="button" class="btn btn-light btn-sm"> <a href="#" class="text-dark" >21:20 </a></button>
 									</td>
 									</tr>
 									<tr>
@@ -162,27 +162,17 @@
 							             <button type="button" class="btn btn-light btn-sm"> <a href="#" class="text-dark" >20:20 </a></button>
 									 </td>
 									</tr>
-									<tr>
-									 <th scope="row"></th>
-				   			         <td>Ангелы Чарли </td>
-									 <td>
-							            <button type="button" class="btn btn-light btn-sm"><a href="#" class="text-dark" >11:55 </a> </button>
-							            <button type="button" class="btn btn-light btn-sm"> <a href="#" class="text-dark" >14:10 </a></button>
-							            <button type="button" class="btn btn-light btn-sm"> <a href="#" class="text-dark" >16:30 </a></button>
-							            <button type="button" class="btn btn-light btn-sm"> <a href="#" class="text-dark" >18:50 </a></button>
-							            <button type="button" class="btn btn-light btn-sm"> <a href="#" class="text-dark" >21:20 </a></button>
-									 </td>
-									</tr>
+
 								    </tbody>
 								    </table>
 								</div>
 								<div class="table-responsive">
 				 				   <table class="table table-borderless table-hover">
 				 					 <tbody>
-										 <tr>
+										 <tr href="#demo2" data-toggle="collapse">
 										    <th scope="row"></th>
-										    <td>9.0 <i class="far fa-star"></i> </td>
-										    <td><a href="#demo2" data-toggle="collapse" class="text-dark">Atrium</a></td>
+										    <td>8.0 <i class="far fa-star"></i> </td>
+										    <td>Atrium</td>
 										    <td>5 films</td>
 										    <td>5 seansov</td>
 										    <td><i class="fas fa-phone"></i>  +7 700 693 15 33</td>
@@ -192,22 +182,24 @@
 								</div>
 								<div id="demo2" class="collapse" class="btn-group" >
 									<table class="table table-borderless table-hover">
-										<p><i class="fab fa-linux"></i><a href="C:/Users/Талшын/Desktop/cinemaInfoPage.html" class="text-dark"> More info  about this cinema</a></p>
+
+										<p><i class="fab fa-linux"></i><a href="{% url 'info'%}" class="text-dark"> More info  about this cinema</a></p>
 						 				<tbody>
 						 					<tr>
 												<th scope="row"></th>
 												<td>Аббатство Даунтон</td>
 												<td>
-												   <button type="button" class="btn btn-sm btn-light" data-toggle="popover" data-placement="top" title="<table style='color:#2F523E'  tr><th></th> <td>  Adult: 1400 tg</td><td>   Student: 1000 tg</td><td>  Child: 800 tg </td> <td> VIP   no </td></tr></table>" data-content="  <button type='button' class='btn  btn-warning btn-sm'> <a href='{ url 'booking' %}' class='text-dark' >buy tickets </a></button>"
-		  											 data-html="true">11:55 </a> </button>
-												   <button type="button" class="btn btn-sm btn-light" data-toggle="popover" data-placement="top" title="<table style='color:#2F523E'  tr><th></th> <td>  Adult: 1400 tg</td><td>   Student: 1000 tg</td><td>  Child: 800 tg </td> <td> VIP   no </td></tr></table>" data-content="  <button type='button' class='btn  btn-warning btn-sm'> <a href='{ url 'booking' %}' class='text-dark' >buy tickets </a></button>"
-		  											 data-html="true">14:10 </a></button>
-										           <button type="button" class="btn btn-sm btn-light" data-toggle="popover" data-placement="top" title="<table style='color:#2F523E'  tr><th></th> <td>  Adult: 1400 tg</td><td>   Student: 1000 tg</td><td>  Child: 800 tg </td> <td> VIP   no </td></tr></table>" data-content="  <button type='button' class='btn  btn-warning btn-sm'> <a href='{ url 'booking' %}' class='text-dark' >buy tickets </a></button>"
-		  											 data-html="true">16:30 </a></button>
-										           <button type="button" class="btn btn-sm btn-light" data-toggle="popover" data-placement="top" title="<table style='color:#2F523E'  tr><th></th> <td>  Adult: 1400 tg</td><td>   Student: 1000 tg</td><td>  Child: 800 tg </td> <td> VIP   no </td></tr></table>" data-content="  <button type='button' class='btn  btn-warning btn-sm'> <a href='{ url 'booking' %}' class='text-dark' >buy tickets </a></button>"
-		  											 data-html="true">18:50 </a></button>
-										           <button type="button" class="btn btn-sm btn-light" data-toggle="popover" data-placement="top" title="<table style='color:#2F523E'  tr><th></th> <td>  Adult: 1400 tg</td><td>   Student: 1000 tg</td><td>  Child: 800 tg </td> <td> VIP   no </td></tr></table>" data-content="  <button type='button' class='btn  btn-warning btn-sm'> <a href='{ url 'booking' %}' class='text-dark' >buy tickets </a></button>"
-		  											 data-html="true">21:20 </a></button>
+												   <button type="button" class="btn btn-sm btn-light" data-toggle="popover" data-placement="top" title="<table style='color:#2F523E'  tr><th></th> <td>  Adult: 1400 tg</td><td>   Student: 1000 tg</td><td>  Child: 800 tg </td> <td> VIP   no </td></tr></table>" data-content="  <button type='button' class='btn  btn-warning btn-sm'> <a href='{% url 'booking' %}' class='text-dark' >buy tickets </a></button>"
+		  											 data-html="true">11:55 </button>
+												   <button type="button" class="btn btn-sm btn-light" data-toggle="popover" data-placement="top" title="<table style='color:#2F523E'  tr><th></th> <td>  Adult: 1400 tg</td><td>   Student: 1000 tg</td><td>  Child: 800 tg </td> <td> VIP   no </td></tr></table>" data-content="  <button type='button' class='btn  btn-warning btn-sm'> <a href='{% url 'booking' %}' class='text-dark' >buy tickets </a></button>"
+		  											 data-html="true">14:10</button>
+										           <button type="button" class="btn btn-sm btn-light" data-toggle="popover" data-placement="top" title="<table style='color:#2F523E'  tr><th></th> <td>  Adult: 1400 tg</td><td>   Student: 1000 tg</td><td>  Child: 800 tg </td> <td> VIP   no </td></tr></table>" data-content="  <button type='button' class='btn  btn-warning btn-sm'> <a href='{% url 'booking' %}' class='text-dark' >buy tickets </a></button>"
+		  											 data-html="true">16:30 </button>
+										           <button type="button" class="btn btn-sm btn-light" data-toggle="popover" data-placement="top" title="<table style='color:#2F523E'  tr><th></th> <td>  Adult: 1400 tg</td><td>   Student: 1000 tg</td><td>  Child: 800 tg </td> <td> VIP   no </td></tr></table>" data-content="  <button type='button' class='btn  btn-warning btn-sm'> <a href='{% url 'booking' %}' class='text-dark' >buy tickets </a></button>"
+		  											 data-html="true">18:50 </button>
+
+										           <button type="button" class="btn btn-sm btn-light" data-toggle="popover" data-placement="top" title="<table style='color:#2F523E'  tr><th></th> <td>  Adult: 1400 tg</td><td>   Student: 1000 tg</td><td>  Child: 800 tg </td> <td> VIP   no </td></tr></table>" data-content="  <button type='button' class='btn  btn-warning btn-sm'> <a href='{% url 'booking' %}' class='text-dark' >buy tickets </a></button>"
+		  											 data-html="true">21:20</button>
 												</td>
 											</tr>
 											<tr>
@@ -216,15 +208,16 @@
 											    <td>
 										             <button type="button" class="btn btn-light btn-sm" data-toggle="tooltip" data-placement="top" title="Tooltip on top" data-content="And here's some amazing content. It's very engaging. Right?">10:30</button>
 
-										             <button type="button" class="btn btn-sm btn-light" data-toggle="popover" data-placement="top" title="<table style='color:#2F523E'  tr><th></th> <td>  Adult: 1400 tg</td><td>   Student: 1000 tg</td><td>  Child: 800 tg </td> <td> VIP   no </td></tr></table>" data-content="  <button type='button' class='btn  btn-warning btn-sm'> <a href='{ url 'booking' %}' class='text-dark' >buy tickets </a></button>"
+										             <button type="button" class="btn btn-sm btn-light" data-toggle="popover" data-placement="top" title="<table style='color:#2F523E'  tr><th></th> <td>  Adult: 1400 tg</td><td>   Student: 1000 tg</td><td>  Child: 800 tg </td> <td> VIP   no </td></tr></table>" data-content="  <button type='button' class='btn  btn-warning btn-sm'> <a href='{% url 'booking' %}' class='text-dark' >buy tickets </a></button>"
 		  											 data-html="true">15:10</button>
 
 
-										             <button type="button" class="btn btn-sm btn-light" data-toggle="popover" data-placement="top" title="<table style='color:#2F523E'  tr><th></th> <td>  Adult: 1400 tg</td><td>   Student: 1000 tg</td><td>  Child: 800 tg </td> <td> VIP   no </td></tr></table>" data-content="  <button type='button' class='btn  btn-warning btn-sm'> <a href='{ url 'booking' %}' class='text-dark' >buy tickets </a></button>"
+										             <button type="button" class="btn btn-sm btn-light" data-toggle="popover" data-placement="top" title="<table style='color:#2F523E'  tr><th></th> <td>  Adult: 1400 tg</td><td>   Student: 1000 tg</td><td>  Child: 800 tg </td> <td> VIP   no </td></tr></table>" data-content="  <button type='button' class='btn  btn-warning btn-sm'> <a href='{% url 'booking' %}' class='text-dark' >buy tickets </a></button>"
 		  											 data-html="true">17:40 </a></button>
-										             <button type="button" class="btn btn-sm btn-light" data-toggle="popover" data-placement="top" title="<table style='color:#2F523E'  tr><th></th> <td>  Adult: 1400 tg</td><td>   Student: 1000 tg</td><td>  Child: 800 tg </td> <td> VIP   no </td></tr></table>" data-content="  <button type='button' class='btn  btn-warning btn-sm'> <a href='{ url 'booking' %}' class='text-dark' >buy tickets </a></button>"
+										             <button type="button" class="btn btn-sm btn-light" data-toggle="popover" data-placement="top" title="<table style='color:#2F523E'  tr><th></th> <td>  Adult: 1400 tg</td><td>   Student: 1000 tg</td><td>  Child: 800 tg </td> <td> VIP   no </td></tr></table>" data-content="  <button type='button' class='btn  btn-warning btn-sm'> <a href='{% url 'booking' %}' class='text-dark' >buy tickets </a></button>"
 		  											 data-html="true">19:10 </a></button>
-										             <button type="button" class="btn btn-sm btn-light" data-toggle="popover" data-placement="top" title="<table style='color:#2F523E'  tr><th></th> <td>  Adult: 1400 tg</td><td>   Student: 1000 tg</td><td>  Child: 800 tg </td> <td> VIP   no </td></tr></table>" data-content="  <button type='button' class='btn  btn-warning btn-sm' onclick=#22> <a href='{ url 'booking' %}' class='text-dark' >buy tickets </a></button>"
+										             <button type="button"    data-html="true"
+class="btn btn-sm btn-light" data-toggle="popover" data-placement="top" title="<table style='color:#2F523E'  tr><th></th> <td>  Adult: 1400 tg</td><td>   Student: 1000 tg</td><td>  Child: 800 tg </td> <td> VIP   no </td></tr></table>" data-content="  <button type='button' class='btn  btn-warning btn-sm' onclick=#22> <a href='{% url 'booking' %}' class='text-dark' >buy tickets </a></button>"
 		  											 data-html="true">20:20 </a></button>
 											    </td>
 											</tr>
@@ -263,30 +256,24 @@
 		  </div>
 		</footer>
 
-	<!-- <div data-target="#myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-	  <div class="modal-dialog modal-sm">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button class="close" data-dismiss="modal">X </button>
-	        <h4 class="modal-title">Please, take it attention</h4>
-	      </div>
-	      <div class="modal-body">The administration of the cinema can change the beginning of the movie show, ticket prices and discounts. Please check the information by phone.</div>
-	      <div class="modal-footer">
-	        <button class="btn btn-danger" data-dismiss="modal">Close</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> -->
 	<script>
-		$(document).ready(function(){
-		    $('[data-toggle="popover"]').popover();
 
-		});
-		$(function () {
-		    $('[data-toggle="tooltip"]').tooltip();
-		});
 
+$('[data-toggle="popover"]').popover({html: true, container: 'body'});
+
+    $('[data-toggle="popover"]').click(function (e) {
+        e.preventDefault();
+        $('[data-toggle="popover"]').not(this).popover('hide');
+        $(this).popover('toggle');
+    });
+
+   $('body').on('click', function (e) {
+    //did not click a popover toggle or popover
+    if ($(e.target).data('toggle') !== 'popover'
+        && $(e.target).parents('.popover.in').length === 0) {
+        $('[data-toggle="popover"]').popover('hide');
+    }
+});
 	</script>
 
 	</body>
