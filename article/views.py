@@ -283,13 +283,24 @@ def afisha(request):
 
 def booking(request,cinema_name):
     rooom = Room.objects.get(id=4)
-    places = Place.objects.filter(of_room = rooom, cor_x = int(1))
     cinema = Cinema.objects.get(cinema_name = cinema_name)
+    places_1 = Place.objects.filter(of_room = rooom, cor_x = int(1))
+    places_2 = Place.objects.filter(of_room = rooom, cor_x = int(2))
+    places_3 = Place.objects.filter(of_room = rooom, cor_x = int(3))
     numbers = [1,2,3,4,5,6,7,8]
-    have = {}
+    have ={}
+    check = False
     for num in numbers:
-        have[num] = "False"
-    return render(request,'article/booking.html', {"cinema":cinema, 'places':places, 'numbers':numbers, 'have':have})
+        for place in places_1:
+            if place.cor_y == num :
+                have[num] = 1
+            else:
+                if check == False:
+                    have[num] = 0
+                    check = True
+        check = False
+
+    return render(request,'article/booking.html', {"cinema":cinema, 'places_1':places_1, 'places_2':places_2,'places_3':places_3,'numbers':numbers, 'have':have})
 
 def get_info_about_cinema(request, cinema_name):
     cinema = Cinema.objects.get(cinema_name = cinema_name)

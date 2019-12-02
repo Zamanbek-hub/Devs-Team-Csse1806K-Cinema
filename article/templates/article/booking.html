@@ -38,14 +38,14 @@
 						<td></td>
 						<td></td>
 						<td>Ï</td>
-						{% if places %}
+						{% if places_1 %}
 						{% for num in numbers %}
 						<!-- number = [1,2,3,4,5,6,7,8] -->
 						<!-- for num in number:
 								for place in places:
 										if place.cor_y == 8:
 												places_dict[num] = place -->
-					    {% for place in places %}
+					    {% for place in places_1 %}
 					    {% if place.cor_y == num %}
 						<td><button type="reset" id="{{place.cor_x}}-{{place.cor_y}}" class="btn btn-danger" onclick="display('{{place.cor_x}} {place.cor_y} True')"><input type="hidden" id="{{place.cor_x}} {{place.cor_y}} True" name="buy_place" value="False">{{num}}</input></button></td>
 						<!-- <td><button type="reset" id="1-2" class="btn btn" onclick="display('1 2 True')"><input type="hidden"  id="1 2 True" name="buy_place" value="False">2</input></button></td>
@@ -59,15 +59,20 @@
 							{% else %}
 
 								<td><button type="reset" id="1-{{num}}" class="btn btn" onclick="display('1 {{num}} True')"><input type="hidden" id="1 {{num}} True" name="buy_place" value="False">{{num}}</input></button></td>
-								{{have}}
-							
+
+
 							{% endif %}
 							{% endfor %}
 						{% endfor %}
 
+						{% else %}
+							{% for num in numbers %}
+								<td><button type="reset" id="1-{{num}}" class="btn btn" onclick="display('1 {{num}} True')"><input type="hidden" id="1 {{num}} True" name="buy_place" value="False">{{num}}</input></button></td>
+							{% endfor %}
+
 						<!-- <td><button type="reset" id="1-1" class="btn btn" onclick="display('1 1 True')"><input type="hidden" id="1 1 True" name="buy_place" value="False">1</input></button></td -->
 
-						<td><input type="submit" value="Оценить"><td>
+
 							{% endif %}
 						<td></td>
 						<td></td>
@@ -77,14 +82,21 @@
 						<td></td>
 						<td></td>
 						<td>Ð</td>
-						<td><button type="button" id="2-1" class="btn btn">1</button></td>
-						<td><button type="button" id="2-2" class="btn btn">2</button></td>
-						<td><button type="button" id="2-3" class="btn btn">3</button></td>
-						<td><button type="button" id="2-4" class="btn btn">4</button></td>
-						<td><button type="button" id="2-5" class="btn btn">5</button></td>
-						<td><button type="button" id="2-6" class="btn btn">6</button></td>
-						<td><button type="button" id="2-7" class="btn btn">7</button></td>
-						<td><button type="button" id="2-8" class="btn btn">8</button></td>
+						{% if places_2%}
+							{% for num in numbers %}
+								{% for place in places_2 %}
+					    		{% if place.cor_y == num %}
+										<td><button type="reset" id="{{place.cor_x}}-{{place.cor_y}}" class="btn btn-danger" onclick="display('{{place.cor_x}} {place.cor_y} True')"><input type="hidden" id="{{place.cor_x}} {{place.cor_y}} True" name="buy_place" value="False">{{num}}</input></button></td>
+									{% else %}
+										<td><button type="reset" id="2-{{num}}" class="btn btn" onclick="display('2 {{num}} True')"><input type="hidden" id="2 {{num}} True" name="buy_place" value="False">{{num}}</input></button></td>
+									{% endif %}
+								{% endfor %}
+							{% endfor %}
+						{% else %}
+							{% for num in numbers %}
+								<td><button type="reset" id="2-{{num}}" class="btn btn" onclick="display('2 {{num}} True')"><input type="hidden" id="2 {{num}} True" name="buy_place" value="False">{{num}}</input></button></td>
+							{% endfor %}
+						{% endif %}
 						<td></td>
 						<td></td>
 					</tr>
@@ -93,14 +105,21 @@
 						<td></td>
 						<td></td>
 						<td>Î</td>
-						<td><button type="button" id="3-1" class="btn btn">1</button></td>
-						<td><button type="button" id="3-2" class="btn btn">2</button></td>
-						<td><button type="button" id="3-3" class="btn btn">3</button></td>
-						<td><button type="button" id="3-4" class="btn btn">4</button></td>
-						<td><button type="button" id="3-5" class="btn btn">5</button></td>
-						<td><button type="button" id="3-6" class="btn btn">6</button></td>
-						<td><button type="button" id="3-7" class="btn btn">7</button></td>
-						<td><button type="button" id="3-8" class="btn btn">8</button></td>
+						{% if places_3 %}
+							{% for num in numbers %}
+								{% for place in places_3%}
+					    		{% if place.cor_y == num %}
+										<td><button type="reset" id="{{place.cor_x}}-{{place.cor_y}}" class="btn btn-danger" onclick="display('{{place.cor_x}} {place.cor_y} True')"><input type="hidden" id="{{place.cor_x}} {{place.cor_y}} True" name="buy_place" value="False">{{num}}</input></button></td>
+									{% else %}
+										<td><button type="reset" id="3-{{num}}" class="btn btn" onclick="display('3 {{num}} True')"><input type="hidden" id="3 {{num}} True" name="buy_place" value="False">{{num}}</input></button></td>
+									{% endif %}
+								{% endfor %}
+							{% endfor %}
+						{% else %}
+							{% for num in numbers %}
+								<td><button type="reset" id="3-{{num}}" class="btn btn" onclick="display('3 {{num}} True')"><input type="hidden" id="3 {{num}} True" name="buy_place" value="False">{{num}}</input></button></td>
+							{% endfor %}
+						{% endif %}
 						<td></td>
 						<td></td>
 					</tr>
@@ -185,8 +204,12 @@
 						<td><button type="button" id="8-11" class="btn btn">11</button></td>
 						<td><button type="button" id="8-12" class="btn btn">12</button></td>
 					</tr>
+					<td>
 				</tbody>
 			</table>
+			<div class="container" style = "margin-left:500px; margin-top:50px;">
+				<input type="submit" class="btn btn-danger"  value="Buy"><td>
+			</div>
 		</form>
 		</div><div class="container" >
 
