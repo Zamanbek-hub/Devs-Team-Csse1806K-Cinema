@@ -49,7 +49,7 @@ class Cinema(models.Model):
 
     def get_absolute_url(self):
         return reverse('cinema_view', kwargs={'cinema_name':self.cinema_name})
-        
+
     def get_absolute_url_to_book(self):
         return reverse('booking', kwargs={'cinema_name':self.cinema_name})
 
@@ -105,7 +105,7 @@ class Comment(models.Model):
 class Shop(models.Model):
     of_user = models.ForeignKey(User,on_delete=models.CASCADE)
     of_movie = models.ForeignKey(Block,on_delete=models.CASCADE)
-
+    date =  models.DateTimeField('Date of shop')
     def __str__(self):
         return "buyer: " + self.of_user.username + " movie" + self.of_movie.movie_name
 

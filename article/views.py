@@ -20,6 +20,10 @@ from decimal import Decimal
 #     return HttpResponse("<h3>Hello world<h3>")
 
 
+# fuction for history
+def history(request):
+    return render(request, 'article/history_of_user.html')
+
 def test(request):
     return HttpResponse("<h3>Programm working<h3>")
 
@@ -130,7 +134,7 @@ def buyticket(request,movie_name):
     try:
         movie = Block.objects.get(movie_name = movie_name)
         user = User.objects.get(username = request.POST.get('username'))
-        shop = Shop(of_user = user, of_movie = movie)
+        shop = Shop(of_user = user, of_movie = movie, date = timezone.now() )
         shop.save()
         return HttpResponseRedirect(reverse_lazy('movie_view', args=(movie.movie_name,)))
     except:
@@ -302,7 +306,7 @@ def set_rating(request, movie_id):
     if len(ratings) == 0:
         movie.movie_rating = sum_of_rating / (len(ratings) + 1)
     else:
-        movie.movie_rating = sum_of_rating / (len(ratings))
+        movie.movie_rating = sum_of_rating / (len(ratings) + 1)
     movie.movie_rating = round(movie.movie_rating,2)
     movie.save()
 

@@ -61,6 +61,7 @@
 <br>
 <br>
 {%if request.user.is_authenticated %}
+{% if special_movies %}
 <div class="container-fluit padding">
   <div class="row alert text-center">
     <div class="col-12">
@@ -90,6 +91,7 @@
 </div>
 <p style="text-align:center; font-size:150%; background-color:#E8E7E7;">
 Since you watched before - {{recent}} </p>
+{% endif%}
 {% endif %}
 </div>
 

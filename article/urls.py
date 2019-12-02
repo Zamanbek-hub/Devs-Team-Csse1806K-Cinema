@@ -28,4 +28,5 @@ urlpatterns = [
     path('booking/<cinema_name>', views.booking, name='booking'),
     path('info/', views.get_info_about_cinema, name='info'),
     path('check/', views.Check, name='check'),
+    path('history/', views.history, name='history'),
 ]

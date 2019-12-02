@@ -27,7 +27,7 @@
         {%if not request.user.is_authenticated %}
         <span class = "font-weight-bolder text-danger">Hi Movie Fun</span>
         {% else %}
-        <span class = "font-weight-bolder text-danger">Hi {{request.user.username}}</span>
+        <span class = "font-weight-bolder text-danger"><a href="{% url 'history' %}" style="color:red">History of {{request.user.username}}</a></span>
 
         {% endif %}
 
