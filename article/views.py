@@ -222,19 +222,21 @@ def Check(request):
     return render(request, 'article/scheduleoffilms.html', dict(user=user))
 
 def set_rating(request, movie_id):
-    movie = get_object_or_404(Movie, pk=movie_id)
-    try:
-        ratings = Rating.objects.filter(of_movie=movie)
-        user = User.objects.get(user=request.user)
-        for i in ratings:
-            if i.of_user == user:
-                return HttpResponseRedirect(reverse('mainapp:movie', args=(movie_id, )))
-        rating_num = int(request.POST['new_rating'])
-        new_rating = Rating(rating_user=userx, rating_movie=moviex, rating=rating_num)
-        new_rating.save()
-        sum_of_rating = movie.movie_rating * len(ratings) + rating_num
-        movie.movie_user_rating = sum_of_rating / (len(ratings) + 1)
-        movie.save()
-    except:
-        pass
-    return HttpResponseRedirect(reverse('mainapp:movie', args=(movie_id, )))
+    movie = get_object_or_404(Block, pk=movie_id)
+    ratings = Rating.objects.filter(of_movie=movie)
+    user = User.objects.get(id=request.user.id)
+
+    # for i in ratings:
+    #     if i.of_user == user:
+    #         return HttpResponseRedirect(reverse('movie_view', args=(movie.movie_name, )))
+
+    rating_num = int(request.POST['new_rating'])
+    new_rating = Rating(of_user=user, of_movie=movie, rating=rating_num)
+    new_rating.save()
+
+    sum_of_rating = movie.movie_rating * len(ratings) + rating_num
+    movie.movie_rating = sum_of_rating / (len(ratings) + 1)
+    movie.save()
+    
+
+    return HttpResponseRedirect(reverse_lazy('movie_view', args=(movie.movie_name, )))
