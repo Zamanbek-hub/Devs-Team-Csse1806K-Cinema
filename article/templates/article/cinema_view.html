@@ -106,6 +106,7 @@
    </div>
  </div>
 
+
  <div class="container">
 			<div class="row">
 			   <div class="col-md-12">
@@ -117,13 +118,14 @@
 				 	    </ul>
 					 	<div class="tab-content tabs">
 					 		<div role="tabpanel" class="tab-pane fade in active" id="Section1">
+              {% for movie in cinema.block_set.all %}
 				 				<div class="table-responsive">
 				 				   <table class="table table-borderless table-hover">
 				 					 <tbody>
-										 <tr href="#demo" data-toggle="collapse" >
+										 <tr href="#demo{{movie.id}}" data-toggle="collapse" >
 										    <th scope="row"></th>
 										    <td>9.0 <i class="far fa-star"></i> </td>
-										    <td>Bekmambetov</td>
+										    <td>{{movie.movie_name}}</td>
 										    <td>5 films</td>
 										    <td>5 seansov</td>
 										    <td><i class="fas fa-phone"></i>  +7 700 693 15 33</td>
@@ -131,35 +133,31 @@
 									 </tbody>
 								   </table>
 								</div>
-								<div id="demo" class="collapse" class="btn-group" >
+								<div id="demo{{movie.id}}" class="collapse" class="btn-group" >
 									<table class="table table-borderless table-hover">
 										<p><i class="fab fa-linux"></i><a href="{% url 'info'%}" class="text-dark"> More info  about this cinema</a></p>
 					 				<tbody><tr>
 									<th scope="row"></th>
 									<td>Аббатство Даунтон</td>
+                  {% for room in movie.room_set.all %}
+                  <form  action="{% url 'booking' cinema.cinema_name %}"  style = "width:50px; heigth:50px;"method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="username" value="{{user.username}}">
+                    <input type="hidden" name="movie_name" value="{{movie.movie_name}}">
+                    {% if room.of_cinema == cinema %}
+                    <input type="hidden" name="room" value="{{room.id}}">
 									<td>
-									   <button type="button" class="btn btn-light btn-sm"><a href="{{cinema.get_absolute_url_to_book}}" class="text-dark" >11:55 </a> </button>
-									   <button type="button" class="btn btn-light btn-sm"> <a href="#" class="text-dark" >14:10 </a></button>
-							           <button type="button" class="btn btn-light btn-sm"> <a href="#" class="text-dark" >16:30 </a></button>
-							           <button type="button" class="btn btn-light btn-sm"> <a href="#" class="text-dark" >18:50 </a></button>
-							           <button type="button" class="btn btn-light btn-sm"> <a href="#" class="text-dark" >21:20 </a></button>
+									   <button type="submit" class="btn btn-light btn-sm" style="color:black">{{room.name}}</button>
 									</td>
+                    {% endif %}
+                  </form>
+                  {% endfor %}
 									</tr>
 									<tr>
-									  <th scope="row"></th>
-									  <td>Эверест </td>
-									  <td>
-							             <button type="button" class="btn btn-light btn-sm"><a href="#" class="text-dark" >10:30 </a> </button>
-							             <button type="button" class="btn btn-light btn-sm"> <a href="#" class="text-dark" >15:10 </a></button>
-							             <button type="button" class="btn btn-light btn-sm"> <a href="#" class="text-dark" >17:40 </a></button>
-							             <button type="button" class="btn btn-light btn-sm"> <a href="#" class="text-dark" >19:10 </a></button>
-							             <button type="button" class="btn btn-light btn-sm"> <a href="#" class="text-dark" >20:20 </a></button>
-									 </td>
-									</tr>
-
 								    </tbody>
 								    </table>
 								</div>
+                {% endfor %}
 								<div class="table-responsive">
 				 				   <table class="table table-borderless table-hover">
 				 					 <tbody>

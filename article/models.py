@@ -55,16 +55,10 @@ class Cinema(models.Model):
         return reverse('booking', kwargs={'cinema_name':self.cinema_name})
 
 
-class Room(models.Model):
-     of_cinema = models.ForeignKey(Cinema, on_delete=models.CASCADE)
-     name = models.PositiveIntegerField()
+
      # places = JSONField(default=dict())
 
-class Place(models.Model):
-     of_room = models.ForeignKey(Room, on_delete=models.CASCADE)
-     cor_x = models.PositiveIntegerField()
-     cor_y = models.PositiveIntegerField()
-     status = models.BooleanField()
+
 
 class Block(models.Model):
 
@@ -89,6 +83,17 @@ class Block(models.Model):
 
     def get_absolute_url(self):
         return reverse('movie_view', kwargs={'movie_name':self.movie_name})
+
+class Room(models.Model):
+     of_cinema = models.ForeignKey(Cinema, on_delete=models.CASCADE)
+     of_movie = models.ForeignKey(Block, on_delete=models.CASCADE)
+     name = models.PositiveIntegerField()
+
+class Place(models.Model):
+     of_room = models.ForeignKey(Room, on_delete=models.CASCADE)
+     cor_x = models.PositiveIntegerField()
+     cor_y = models.PositiveIntegerField()
+     status = models.BooleanField()
 
 class Comment(models.Model):
     comment_date = models.DateTimeField('Date of set')

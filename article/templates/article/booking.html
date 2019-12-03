@@ -16,7 +16,10 @@
 	  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 	</head>
 	<body>
-
+	<div class="container">
+		{{user.username}}
+		{{movie.movie_name}}
+	</div>
 		</div>
 
 	<h4 class = "display">Hall ¹ 1</h4>
@@ -192,6 +195,8 @@
 			</table>
 			<div class="container" style = "margin-left:500px; margin-top:50px;">
 				<input type="submit" class="btn btn-danger"  value="Buy"><td>
+				<input type="hidden" name="room.id" value="{{room_id}}">
+				<input type="hidden" name="movie_name" value="{{movie.movie_name}}">
 			</div>
 		</form>
 		</div><div class="container" >
@@ -264,7 +269,7 @@
 	</div><!-- /.row -->
 </div><!-- /.container -->
 
-<!-- <div class="modal fade" id="pay" tabindex="-1" role="dialog" aria-labelledby="Title" aria-hidden="true">
+<div class="modal fade" id="pay" tabindex="-1" role="dialog" aria-labelledby="Title" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -284,7 +289,7 @@
       </div>
     </div>
   </div>
-</div> -->
+</div>
 <script type="text/javascript">
 			// $('.btn').click(function(){
  		// 		 $(".block_with_text").fadeToggle(100);

@@ -29,20 +29,54 @@
             <strong>Режиссер: </strong>Turukabeyev Zamanbek<br>
             <strong>В ролях: </strong>Oyazbaev Temirlan, Kakibay Nurdan, Kurmanbeyeva Talshyn<br>
             </p>
-
-            <form  action="{% url 'buyticket' movie.movie_name %}" method="post">
-                {% csrf_token %}
-              <input type="hidden" name="username" value="{{user.username}}">
+              <!-- {% url 'buyticket' movie.movie_name %} -->
                 {%if not request.user.is_authenticated %}
-              <button type="submit" class="btn btn-outline-dark"  data-toggle="modal"  onclick="myFunction()" data-target="#BUY" style="width:200px; height=100px; margin-left:200px;">{{movie.movie_price}} tg ahah</button>
+              <button type="button" class="btn btn-outline-dark"  data-toggle="modal"  onclick="myFunction()" data-target="#BUY" style="width:200px; height=100px; margin-left:200px;">{{movie.movie_price}} tg ahah</button>
                 {% else %}
-              <button type="submit" class="btn btn-outline-dark"   style="width:200px; height=100px; margin-left:200px;">{{movie.movie_price}} tg</button>
+              <button type="button" class="btn btn-outline-dark"   style="width:200px; height=100px; margin-left:200px;" data-toggle="collapse" data-target="#collapseExample">{{movie.movie_price}} tg</button>
+              <div class="collapse" id="collapseExample" style="margin-top:30px;">
+                <div class="card card-body">
+                  <ul class="list-group" style="margin-bottom: 50px;"> Cinemas
+                    {% for cinema in movie.movie_cinema.all %}
+
+                      <li class="list-group-item" data-toggle="collapse" data-target="#collapse{{cinema.cinema_name}}">{{cinema.cinema_name}} </li>
+                      <div class="collapse" id="collapse{{cinema.cinema_name}}" style="margin-top:30px;">
+                        <h5>Rooms:</h5>
+                    <div class="row">
+                    {% for room in movie.room_set.all %}
+                      <form  action="{% url 'booking' cinema.cinema_name %}"  style = "width:50px; heigth:50px;"method="post">
+                      {% csrf_token %}
+                      <input type="hidden" name="username" value="{{user.username}}">
+                      <input type="hidden" name="movie_name" value="{{movie.movie_name}}">
+                      {% if room.of_cinema == cinema %}
+                      <input type="hidden" name="room" value="{{room.id}}">
+                      <button type="submit" name="button" style="border-radius:3px; width:40px; heigth:10px; margin-bottom:10px; background-color:red;">{{room.name}}</button>
+                      {% endif %}
+                    </form>
+                    {% endfor %}
+                      </div>
+                      </div>
+                    {% endfor %}
+                  </ul>
+                </div>
+              </div>
                 {% endif %}
-            </form>
+
 </div>
 </div>
-<div class="modal fade"  id="BUY">
-  <div class="modal-dialog modal-sm">
+
+<!-- <p>
+  <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Link with href
+  </a>
+  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Button with data-target
+  </button>
+</p> -->
+
+
+<div class="modal fade"  id="BUY" tabindex="-1" role="dialog" aria-labelledby="Title" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Сделайте регистрацию и мы можем вам предложить лучшие фильмы подходящее для вас</h5>
@@ -138,11 +172,11 @@
   {% endif %}
 </div>
 
-<script>
+<!-- <script>
 function myFunction() {
     $('#BUY').modal("show");
 }
-</script>
+</script> -->
 
 {% endblock %}
 {% block jQuery%}

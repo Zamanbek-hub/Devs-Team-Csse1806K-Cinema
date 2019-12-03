@@ -102,6 +102,7 @@ def index(request):
     list_genre = []
     count_of_max_genre = 0
     max_genre = ""
+
     try:
         currernt_user = User.objects.get(username=request.user.username)
         shops = currernt_user.shop_set.all()                          # all purchases of  current user
@@ -189,14 +190,14 @@ def cinema_view(request, cinema_name):
 
 
 def buyticket(request,movie_name):
-    try:
-        movie = Block.objects.get(movie_name = movie_name)
-        user = User.objects.get(username = request.POST.get('username'))
-        shop = Shop(of_user = user, of_movie = movie, date = timezone.now() )
-        shop.save()
-        return HttpResponseRedirect(reverse_lazy('movie_view', args=(movie.movie_name,)))
-    except:
-        return HttpResponseRedirect(reverse_lazy('movie_view', args=(movie.movie_name,)))
+
+    movie = Block.objects.get(movie_name = movie_name)
+    user = User.objects.get(username = request.user.username)
+    shop = Shop(of_user = user, of_movie = movie, date = timezone.now() )
+    shop.save()
+    return HttpResponseRedirect(reverse_lazy('movie_view', args=(movie.movie_name,)))
+    # except:
+    #     return HttpResponseRedirect(reverse_lazy('movie_view', args=(movie.movie_name,)))
 
 
 
@@ -320,7 +321,9 @@ def search(request):
 
 def buy_place(request,cinema_name):
     cinema = Cinema.objects.get(cinema_name = cinema_name)
-    rooom = Room.objects.get(id=4)
+    rooom = Room.objects.get(id=request.POST.get('room.id'))
+    movie = Block.objects.get(movie_name=request.POST.get('movie_name'))
+    # return HttpResponse(request.POST.get('room.id'))
     status = request.POST.getlist('buy_place')
     for info in status:
 
@@ -332,7 +335,7 @@ def buy_place(request,cinema_name):
             new_place = Place(of_room = rooom, cor_x = cor_x, cor_y = cor_y, status = status)
             new_place.save()
 
-    return HttpResponseRedirect(reverse_lazy('booking', args=(cinema.cinema_name,)))
+    return HttpResponseRedirect(reverse_lazy('buyticket', args=(movie.movie_name,)))
 
 def afisha(request):
     # return HttpResponse("HELLO WORLD")
@@ -363,45 +366,46 @@ def set_places(places, x, room,limit):
 
 def booking(request,cinema_name):
     numbers = [1,2,3,4,5,6,7,8]
-    rooom = Room.objects.get(id=4)
+    rooom = Room.objects.get(id=request.POST.get('room'))
+    # return HttpResponse(request.POST.get('movie_name'))
+    movie = Block.objects.get(movie_name=request.POST.get('movie_name'))
+    user = User.objects.get(username=request.user.username)
+    status = request.POST.getlist('buy_place')
+
     cinema = Cinema.objects.get(cinema_name = cinema_name)
     places_1 = Place.objects.filter(of_room = rooom, cor_x = int(1))
     places_1=list(places_1)
+
     places_1 = set_places(places_1,int(1),rooom,int(8))
     places_2 = Place.objects.filter(of_room = rooom, cor_x = int(2))
     places_2=list(places_2)
+
     places_2 = set_places(places_2,int(2),rooom,int(8))
     places_3 = Place.objects.filter(of_room = rooom, cor_x = int(3))
     places_3=list(places_3)
+
     places_3 = set_places(places_3,int(3),rooom,int(8))
     places_4 = Place.objects.filter(of_room = rooom, cor_x = int(4))
     places_4=list(places_4)
+
     places_4 = set_places(places_4,int(4),rooom,int(8))
     places_5 = Place.objects.filter(of_room = rooom, cor_x = int(5))
     places_5=list(places_5)
+
     places_5 = set_places(places_5,int(5),rooom,int(8))
     places_6 = Place.objects.filter(of_room = rooom, cor_x = int(6))
     places_6=list(places_6)
+
     places_6 = set_places(places_6,int(6),rooom,int(8))
     places_7 = Place.objects.filter(of_room = rooom, cor_x = int(7))
     places_7=list(places_7)
+
     places_7 = set_places(places_7,int(7),rooom,int(12))
     places_8 = Place.objects.filter(of_room = rooom, cor_x = int(8))
     places_8=list(places_8)
+
     places_8 = set_places(places_8,int(8),rooom,int(12))
-
-    # check = False
-    # for num in numbers:
-    #     for place in places_1:
-    #         if place.cor_y == num :
-    #             have[num] = 1
-    #         else:
-    #             if check == False:
-    #                 have[num] = 0
-    #                 check = True
-    #     check = False
-
-    return render(request,'article/booking.html', {"cinema":cinema, "places_1":places_1, "places_2":places_2,"places_3":places_3, "places_4":places_4,"places_5":places_5,"places_6":places_6,"places_7":places_7,"places_8":places_8,"numbers":numbers})
+    return render(request,'article/booking.html', {"cinema":cinema, "user":user,"movie":movie,"room_id":rooom.id, "places_1":places_1, "places_2":places_2,"places_3":places_3, "places_4":places_4,"places_5":places_5,"places_6":places_6,"places_7":places_7,"places_8":places_8,"numbers":numbers})
 
 def get_info_about_cinema(request, cinema_name):
     cinema = Cinema.objects.get(cinema_name = cinema_name)
@@ -416,10 +420,6 @@ def set_rating(request, movie_id):
     movie = get_object_or_404(Block, pk=movie_id)
     ratings = Rating.objects.filter(of_movie=movie)
     user = User.objects.get(id=request.user.id)
-
-    # for i in ratings:
-    #     if i.of_user == user:
-    #         return HttpResponseRedirect(reverse('movie_view', args=(movie.movie_name, )))
 
     rating_num = int(request.POST['new_rating'])
     new_rating = Rating(of_user=user, of_movie=movie, rating=rating_num)
