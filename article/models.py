@@ -40,6 +40,7 @@ class Cinema(models.Model):
     area = models.PositiveIntegerField()
     cinema_address = models.CharField('cinema_address', max_length = 30,default='71')
     # cinema_address = models.CharField('Name_of_cinema', max_length = 30)
+    cinema_poster = models.CharField(max_length=100,default="http://thumbs.dfs.ivi.ru/storage4/contents/8/5/25df26b4ff265c284df18453f62ac7.jpg")
 
     # new
     cinema_movie_discouns = models.PositiveIntegerField()

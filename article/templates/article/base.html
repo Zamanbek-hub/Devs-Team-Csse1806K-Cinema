@@ -23,7 +23,7 @@
       <div class="container-fluid">
 
 
-        <a href="#" class="navbar-brad"><img class = "navbar-brad-image" src ="{% static 'LOGO.JPG' %}" ></a>
+        <a href="{% url 'index' %}" class="navbar-brad"><img class = "navbar-brad-image" src ="{% static 'LOGO.JPG' %}" ></a>
         {%if not request.user.is_authenticated %}
         <span class = "font-weight-bolder text-danger">Hi Movie Fun</span>
         {% else %}

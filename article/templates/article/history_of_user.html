@@ -10,97 +10,41 @@
     <link rel="stylesheet" href="{% static 'history_of_user.css' %}">
   </head>
   <body>
-<!------ Include the above in your HEAD tag ---------->
+
 
       <section class="section-spacing text-center" id="features">
          <div class="container">
             <header class="section-header">
-               <h2>History of Temirlan</h2>
+               <h2>History of <strong>{{user.username}}</strong></h2>
                <h3>Надо заполнить так по дате будет кретаивно на окошках будет фотка и название фильма и ссылка к ним</h3>
                <h4></h4>
             </header>
             <div class="container-fluid">
                <div class="row">
+                  {% for sh in shops %}
                   <div class="col-md-12">
                      <ul class="timeline">
                         <li class="timeline wow bounceInUp">
                            <div class="timeline-badge warning"><i class="fa fa-bullseye"></i></div>
-                           <div class="date-info">
-                              <span class="day">29</span><span class="month"> Jan</span><span class="year"> 2017</span>
+                           <div class="date-info" style="font-size:120%; width:130px;">
+                              <strong>{{sh.date}}</strong>
                            </div>
-                           <div class="timeline-panel">
-                              <div class="timeline-heading">
-                                 <h6 class="timeline-title">Version 1.0.2 Released with user identified fixes/enhancements</h6>
-                              </div>
+                           <div class="timeline-panel" style="width:150px; height:150px; margin-right:400px; background-color:#FBF4FC;">
                               <div class="timeline-body">
                                  <p>
-                                    Release highlights :
-                                    Layout changed inline with other Cartwheel applications. (Menu based and full-screen).
-                                    Introduced filters and sorting of Actions items.
-                                    Print facility to support printing of any saved reports (including previous reports)
+                                    <a href="{{sh.of_movie.get_absolute_url}}"><img src="{{sh.of_movie.move_img.url}}" class="card-img-top" style="width:130px;height:130px;"></a>
+                                    {{sh.shop}}
                                  </p>
+                              </div>
+                              <div class="timeline-heading">
+                                 <h6 class="timeline-title">{{sh.movie_name}}</h6>
                               </div>
                            </div>
                         </li>
-                        <li class="timeline-inverted wow bounceInUp">
-                           <div class="timeline-badge danger"><i class="fa fa-crosshairs"></i></div>
-                           <div class="date-info">
-                              <span class="day">04</span><span class="month"> Feb</span><span class="year"> 2017</span>
-                           </div>
-                           <div class="timeline-panel">
-                              <div class="timeline-heading">
-                                 <h6 class="timeline-title">Version 1.0.2 Released with user identified fixes/enhancements</h6>
-                              </div>
-                              <div class="timeline-body">
-                                 <p>
-                                    Release highlights :
-                                    Layout changed inline with other Cartwheel applications. (Menu based and full-screen).
-                                    Introduced filters and sorting of Actions items.
-                                    Print facility to support printing of any saved reports (including previous reports)
-                                 </p>
-                              </div>
-                           </div>
-                        </li>
-                        <li class="timeline-inverted wow bounceInUp">
-                           <div class="timeline-badge danger"><i class="fa fa-crosshairs"></i></div>
-                           <div class="date-info">
-                              <span class="day">31</span><span class="month"> Jan</span><span class="year"> 2016</span>
-                           </div>
-                           <div class="timeline-panel">
-                              <div class="timeline-heading">
-                                 <h6 class="timeline-title">Version 1.0.2 Released with user identified fixes/enhancements</h6>
-                              </div>
-                              <div class="timeline-body">
-                                 <p>
-                                    Release highlights :
-                                    Layout changed inline with other Cartwheel applications. (Menu based and full-screen).
-                                    Introduced filters and sorting of Actions items.
-                                    Print facility to support printing of any saved reports (including previous reports)
-                                 </p>
-                              </div>
-                           </div>
-                        </li>
-                        <li class="timeline-inverted wow bounceInUp">
-                           <div class="timeline-badge danger"><i class="fa fa-crosshairs"></i></div>
-                           <div class="date-info">
-                              <span class="day">25</span><span class="month"> Jan</span><span class="year"> 2016</span>
-                           </div>
-                           <div class="timeline-panel">
-                              <div class="timeline-heading">
-                                 <h6 class="timeline-title">Version 1.0.2 Released with user identified fixes/enhancements</h6>
-                              </div>
-                              <div class="timeline-body">
-                                 <p>
-                                    Release highlights :
-                                    Layout changed inline with other Cartwheel applications. (Menu based and full-screen).
-                                    Introduced filters and sorting of Actions items.
-                                    Print facility to support printing of any saved reports (including previous reports)
-                                 </p>
-                              </div>
-                           </div>
-                        </li>
+                        <!--'''''''''''''-->
                      </ul>
                   </div>
+                  {% endfor %}
                </div>
             </div>
          </div>

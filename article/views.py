@@ -22,7 +22,9 @@ from decimal import Decimal
 
 # fuction for history
 def history(request):
-    return render(request, 'article/history_of_user.html')
+    user = User.objects.get(username=request.user.username)
+    shops = user.shop_set.order_by('-date')
+    return render(request, 'article/history_of_user.html', {"shops":shops})
 
 def test(request):
     return HttpResponse("<h3>Programm working<h3>")
@@ -53,18 +55,57 @@ def find_recomendation(list_genre, block_list, jenre):
         return None
 
 
+def watched_films(shops_list, jenre):
+    watched_films = []
+    for w in shops_list:
+        for w2 in w.movie_genre.all():
+            if jenre == w2:
+                watched_films.append(w)
+    watched_films = set(watched_films)
+    return watched_films
+
+
+def find_recomendation( block_list, jenre):
+    try:
+        new_movie = []
+        for m in block_list:
+            for g in m.movie_genre.all():
+                if len(new_movie) == 2:
+                    return new_movie
+                if jenre == g:
+                    print(m.movie_genre)
+                    new_movie.append(m)
+        return new_movie
+    except:
+        return None
+
+def add_3_recomend_film(block_list, shops_list, jenre):
+    list_3_recomend = []
+    print(block_list)
+    try:
+        for movie_1 in block_list:
+            for genre_1 in movie_1.movie_genre.all():
+                for genre_last_movie in shops_list[0].movie_genre.all():
+                    if genre_1.jenre == genre_last_movie.jenre and genre_last_movie.jenre != jenre:
+                        list_3_recomend.append(movie_1)
+                        list_3_recomend.append(genre_last_movie)
+                        return list_3_recomend
+    except:
+        return None
+
+
 def index(request):
     latest_movies = Block.objects.order_by('-movie_numberOfClicks')[0:8:1]
     jenres = Jenre.objects.order_by('-jenre')
     cinema = Cinema.objects.order_by('-cinema_name')
 
-    shop_list = []
     list_genre = []
     count_of_max_genre = 0
     max_genre = ""
     try:
         currernt_user = User.objects.get(username=request.user.username)
-        shops = currernt_user.shop_set.all()
+        shops = currernt_user.shop_set.all()                          # all purchases of  current user
+
         for shop in shops:
             for new_movie in shop.of_movie.movie_genre.all():
                 list_genre.append(new_movie.jenre)
@@ -86,16 +127,33 @@ def index(request):
                 if movie_block.movie_name == movie.movie_name:
                     block_list.remove(movie)
 
-        x = find_recomendation(list_genre, block_list, jenre)
+        x = find_recomendation(block_list, jenre)
         y = watched_films(shops_list, jenre)
+
+        for movie in x:
+            for movie_block in block_list:
+                if movie_block.movie_name == movie.movie_name:
+                    block_list.remove(movie)
+
+        for f1 in shops_list:
+            for f2 in block_list:
+                if f1 == f2:
+                    block_list.remove(f1)
+
+        list_3_recomend = (add_3_recomend_film(block_list, shops_list, jenre)) #List_3_recomend дегеннын ышынде быр кино бар поптом жанр бар. Кино 3 шы рекомендацияланган кино. Жанр кай жанр бойынша рекомендоватся етылды сол
+        x.append(list_3_recomend[0]) # X деген рекомендация жасайтын киного сол киногаларга  добавить етемыз 3 рекомендация кып алган фильмды
+
+        #print("Recomend Movie: ", list_3_recomend[0])           Мына екы строка прост проверка ушын ыслеген
+        #print("Recomend Movie by genre: ", list_3_recomend[1])
+
         recent = ""
         for l in y:
             recent += l.movie_name + " "
-
         if x is not None:
             return render(request, 'article/list.html', dict(latest_movies=latest_movies, jenres=jenres, cinema=cinema, special_movies=x, special_movie_jenre=jenre, recent = recent))
         else:
             return render(request, 'article/list.html', dict(latest_movies=latest_movies, jenres=jenres, cinema=cinema))
+
     except:
         return render(request, 'article/list.html', dict(latest_movies=latest_movies, jenres=jenres, cinema=cinema))
 
@@ -264,7 +322,6 @@ def buy_place(request,cinema_name):
     cinema = Cinema.objects.get(cinema_name = cinema_name)
     rooom = Room.objects.get(id=4)
     status = request.POST.getlist('buy_place')
-
     for info in status:
 
         if info != "False":
@@ -281,26 +338,70 @@ def afisha(request):
     # return HttpResponse("HELLO WORLD")
     return render(request, 'article/kino1.html')
 
+def set_places(places, x, room,limit):
+    check = False
+    # i = int(0)
+    for y in range(1, limit+1):
+        for place in places:
+            if place.cor_y == y:
+                check = True
+                break
+        if check == False:
+            # i += 1
+            new_place = Place(of_room = room, cor_x = x, cor_y=y, status=False)
+            places.insert(y-1,new_place)
+        check = False
+
+    # sorting list
+    for i in range(limit-1):
+        for j in range(limit-i-1):
+            if places[j].cor_y > places[j+1].cor_y:
+                places[j], places[j+1] = places[j+1], places[j]
+    # places = set(places)
+    return places
+
+
 def booking(request,cinema_name):
+    numbers = [1,2,3,4,5,6,7,8]
     rooom = Room.objects.get(id=4)
     cinema = Cinema.objects.get(cinema_name = cinema_name)
     places_1 = Place.objects.filter(of_room = rooom, cor_x = int(1))
+    places_1=list(places_1)
+    places_1 = set_places(places_1,int(1),rooom,int(8))
     places_2 = Place.objects.filter(of_room = rooom, cor_x = int(2))
+    places_2=list(places_2)
+    places_2 = set_places(places_2,int(2),rooom,int(8))
     places_3 = Place.objects.filter(of_room = rooom, cor_x = int(3))
-    numbers = [1,2,3,4,5,6,7,8]
-    have ={}
-    check = False
-    for num in numbers:
-        for place in places_1:
-            if place.cor_y == num :
-                have[num] = 1
-            else:
-                if check == False:
-                    have[num] = 0
-                    check = True
-        check = False
+    places_3=list(places_3)
+    places_3 = set_places(places_3,int(3),rooom,int(8))
+    places_4 = Place.objects.filter(of_room = rooom, cor_x = int(4))
+    places_4=list(places_4)
+    places_4 = set_places(places_4,int(4),rooom,int(8))
+    places_5 = Place.objects.filter(of_room = rooom, cor_x = int(5))
+    places_5=list(places_5)
+    places_5 = set_places(places_5,int(5),rooom,int(8))
+    places_6 = Place.objects.filter(of_room = rooom, cor_x = int(6))
+    places_6=list(places_6)
+    places_6 = set_places(places_6,int(6),rooom,int(8))
+    places_7 = Place.objects.filter(of_room = rooom, cor_x = int(7))
+    places_7=list(places_7)
+    places_7 = set_places(places_7,int(7),rooom,int(12))
+    places_8 = Place.objects.filter(of_room = rooom, cor_x = int(8))
+    places_8=list(places_8)
+    places_8 = set_places(places_8,int(8),rooom,int(12))
 
-    return render(request,'article/booking.html', {"cinema":cinema, 'places_1':places_1, 'places_2':places_2,'places_3':places_3,'numbers':numbers, 'have':have})
+    # check = False
+    # for num in numbers:
+    #     for place in places_1:
+    #         if place.cor_y == num :
+    #             have[num] = 1
+    #         else:
+    #             if check == False:
+    #                 have[num] = 0
+    #                 check = True
+    #     check = False
+
+    return render(request,'article/booking.html', {"cinema":cinema, "places_1":places_1, "places_2":places_2,"places_3":places_3, "places_4":places_4,"places_5":places_5,"places_6":places_6,"places_7":places_7,"places_8":places_8,"numbers":numbers})
 
 def get_info_about_cinema(request, cinema_name):
     cinema = Cinema.objects.get(cinema_name = cinema_name)
