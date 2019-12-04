@@ -194,74 +194,70 @@
 				</tbody>
 			</table>
 			<div class="container" style = "margin-left:500px; margin-top:50px;">
-				<input type="submit" class="btn btn-danger"  value="Buy"><td>
+				<input type="button" class="btn btn-danger"  value="Buy" href="#demo3" data-toggle="collapse"><td>
 				<input type="hidden" name="room.id" value="{{room_id}}">
 				<input type="hidden" name="movie_name" value="{{movie.movie_name}}">
 			</div>
+			<div id="demo3" class="collapse container" class="btn-group" >
+ 		 						<div class="form-group">
+ 		 							<label>Email address (Your ticket and instruction will be sent to it )
+ 		 							</label>
+ 		 							<input type="text" class="form-control" name="email" >
+ 		 						</div>
+ 		 						<div class="form-group">
+ 		 							<label>Choose a form of payment: </label>
+ 		 							<div class="main-checkbox">
+ 		 								<input id="checkbox1" name="check" type="radio" value="Kaspi Gold">
+ 		 									<label for="checkbox1"><span class="text">Kaspi Gold </span></label>
+ 		 							</div>
+
+ 		 							<div class="main-checkbox">
+ 		 								<input id="checkbox2" name="check" type="radio" value="Visa">
+ 		 									<label for="checkbox1"><span class="text">Visa</span></label>
+ 		 							</div>
+
+ 		 							<div class="main-checkbox">
+ 		 								<input  id="checkbox3" name="check" type="radio" value="Halyk Bank">
+ 		 									<label for="checkbox1"> <span class="text">Halyk Bank </span></label>
+ 		 							</div>
+ 								</div>
+ 								<div class="form-group">
+ 		 							<label>Choose a type of ticket: </label>
+ 		 							<div class="main-checkbox">
+ 		 								<input value="Adult" id="ticket1" name="type" type="radio" >
+ 		 									<label for="ticket1"><span class="text">Adult </span></label>
+ 		 							</div>
+
+ 		 							<div class="main-checkbox">
+ 		 								<input value="Student" id="ticket2" name="type" type="radio">
+ 		 									<label for="ticket1"><span class="text">Student</span></label>
+ 		 							</div>
+
+ 		 							<div class="main-checkbox">
+ 		 								<input value="Child" id="ticket3" name="type" type="radio">
+ 		 									<label for="ticket1"> <span class="text">Child </span></label>
+ 		 							</div>
+ 								</div>
+
+ 		 						<div class="form-group">
+ 			 							<button type="submit" class="btn btn-warning" data-toggle="modal" data-target="#pay">Pay </button>
+ 		 						</div>
+
+ 		 				+
+ 		 				</div>
 		</form>
 		</div><div class="container" >
 
-	 <div class="row" >
+	 <!-- <div class="row" >
 	 	<div class="col-md-offset-4 col-md-5">
-			 		<div class="tab" role="tabpanel">
+			 		<div class="tab" role="tabpanel"> -->
 			 <!-- Nav tabs -->
-		 			<ul class="nav nav-tabs" role="tablist">
+		 			<!-- <ul class="nav nav-tabs" role="tablist">
 		 				<li href="#demo3" data-toggle="collapse">Buy</li>
-		 			</ul>
+		 			</ul> -->
 
 
-		           </div>
-		 <div id="demo3" class="collapse" class="btn-group" >
-		 						<div class="form-group">
-		 							<label>Email address (Your ticket and instruction will be sent to it )
-		 							</label>
-		 							<input type="email" class="form-control" >
-		 						</div>
-		 						<div class="form-group">
-		 							<label>Phone number(An electronic ticket will send to it)</label>
-		 							<input type="text" class="form-control" >
-		 						</div>
-		 						<div class="form-group">
-		 							<label>Choose a form of payment: </label>
-		 							<div class="main-checkbox">
-		 								<input value="None" id="checkbox1" name="check" type="radio">
-		 									<label for="checkbox1"><span class="text">Kaspi Gold </span></label>
-		 							</div>
-
-		 							<div class="main-checkbox">
-		 								<input value="None" id="checkbox2" name="check" type="radio">
-		 									<label for="checkbox1"><span class="text">Visa</span></label>
-		 							</div>
-
-		 							<div class="main-checkbox">
-		 								<input value="None" id="checkbox3" name="check" type="radio">
-		 									<label for="checkbox1"> <span class="text">Halyk Bank </span></label>
-		 							</div>
-								</div>
-								<div class="form-group">
-		 							<label>Choose a type of ticket: </label>
-		 							<div class="main-checkbox">
-		 								<input value="None" id="ticket1" name="check" type="checkbox">
-		 									<label for="ticket1"><span class="text">Adult </span></label>
-		 							</div>
-
-		 							<div class="main-checkbox">
-		 								<input value="None" id="ticket2" name="check" type="checkbox">
-		 									<label for="ticket1"><span class="text">Student</span></label>
-		 							</div>
-
-		 							<div class="main-checkbox">
-		 								<input value="None" id="ticket3" name="check" type="checkbox">
-		 									<label for="ticket1"> <span class="text">Child </span></label>
-		 							</div>
-								</div>
-
-		 						<div class="form-group">
-			 							<button type="submit" class="btn btn-warning" data-toggle="modal" data-target="#pay">Pay </button>
-		 						</div>
-
-		 					</form>
-		 				</div>
+		           <!-- </div> -->
 
 		 		</div>
 		 </div>
