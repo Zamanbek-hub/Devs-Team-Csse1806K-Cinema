@@ -4,17 +4,17 @@
 {% block style %}   <link rel="stylesheet" href="{% static 'buttons.css' %}">{% endblock style %}
 {% block content %}
 <br><br>
-<h2>{{ movie.movie_name }}</h2>
+<h2 class="font-weight-bold" style="font-family:Comic Sans MS; margin-bottom:30px; margin-left:30px; color:#26344D; border-radius:5px; width:450px;">{{ movie.movie_name }}</h2>
 <div class="row">
 <div class="col-sm-6 col-lg-4">
   <img src="{{movie.move_img.url}}" class="card-img-top">
 </div>
 <div class="col-sm-1 col-lg-1"></div>
-<div class="col-sm-5 col-lg-6" style="font-size:20px">
-      <h3>Story</h3>
+<div class="col-sm-5 col-lg-6" style="font-size:20px; font-family:Candara;font-weight:bold;">
+      <h3 style="font-weight:bolder;">Story</h3>
       <p> {{movie.movie_explain|safe|linebreaks}} </p>
       <p>
-              <strong>Название: </strong>{{ movie.movie_name }}<br>
+              <strong id = "text">Название: </strong>{{ movie.movie_name }}<br>
               <strong>Год выпуска: </strong>{{movie.movie_article_date}}<br>
               <br>
               <strong>Жанр: </strong>
@@ -31,9 +31,9 @@
             </p>
               <!-- {% url 'buyticket' movie.movie_name %} -->
                 {%if not request.user.is_authenticated %}
-              <button type="button" class="btn btn-outline-dark"  data-toggle="modal"  onclick="myFunction()" data-target="#BUY" style="width:200px; height=100px; margin-left:200px;">{{movie.movie_price}} tg ahah</button>
+              <button type="button" class="btn btn-outline-dark"  data-toggle="modal"  onclick="myFunction()" data-target="#BUY" style="width:200px; height=100px; margin-left:200px;">Buy</button>
                 {% else %}
-              <button type="button" class="btn btn-outline-dark"   style="width:200px; height=100px; margin-left:200px;" data-toggle="collapse" data-target="#collapseExample">{{movie.movie_price}} tg</button>
+              <button type="button" class="btn btn-outline-dark"   style="width:200px; height=100px; margin-left:200px;" data-toggle="collapse" data-target="#collapseExample">Buy</button>
               <div class="collapse" id="collapseExample" style="margin-top:30px;">
                 <div class="card card-body">
                   <ul class="list-group" style="margin-bottom: 50px;"> Cinemas
@@ -44,13 +44,14 @@
                         <h5>Rooms:</h5>
                     <div class="row">
                     {% for room in movie.room_set.all %}
+                    {% if room.of_cinema == cinema %}
                       <form  action="{% url 'booking' cinema.cinema_name %}"  style = "width:50px; heigth:50px;"method="post">
                       {% csrf_token %}
-                      <input type="hidden" name="username" value="{{user.username}}">
+
+                      <input type="hidden" name="username" value="{{  user.username}}">
                       <input type="hidden" name="movie_name" value="{{movie.movie_name}}">
-                      {% if room.of_cinema == cinema %}
                       <input type="hidden" name="room" value="{{room.id}}">
-                      <button type="submit" name="button" style="border-radius:3px; width:40px; heigth:10px; margin-bottom:10px; background-color:red;">{{room.name}}</button>
+                      <button type="submit" name="button" style="border-radius:3px; width:40px; heigth:10px; margin-bottom:10px;background: linear-gradient(to bottom, #4eb5e5 0%,#389ed5 100%);">{{room.name}}</button>
                       {% endif %}
                     </form>
                     {% endfor %}
@@ -162,8 +163,8 @@
         <input type="hidden" name="username" value="{{user.username}}">
       </div>
       <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="idofCheck" name="heiter" value="False">
-        <label class="form-check-label" for="idofCheck">Positive review?</label>
+        <input type="checkbox" class="form-check-input" id="idofCheck" name="heiter" value="True">
+        <label class="form-check-label" for="idofCheck">Unpositive review?</label>
       </div>
       <br><button type="submit" class="btn btn-primary" style="align:center" id="submitt">Submit</button>
   </form>
