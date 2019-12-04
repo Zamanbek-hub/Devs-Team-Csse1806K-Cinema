@@ -272,14 +272,13 @@ def buy_place(request,cinema_name):
 
 def set_places(places, x, room,limit):
     check = False
-    # i = int(0)
+
     for y in range(1, limit+1):
         for place in places:
             if place.cor_y == y:
                 check = True
                 break
         if check == False:
-            # i += 1
             new_place = Place(of_room = room, cor_x = x, cor_y=y, status=False)
             places.insert(y-1,new_place)
         check = False
@@ -289,7 +288,7 @@ def set_places(places, x, room,limit):
         for j in range(limit-i-1):
             if places[j].cor_y > places[j+1].cor_y:
                 places[j], places[j+1] = places[j+1], places[j]
-    # places = set(places)
+
     return places
 
 

@@ -89,11 +89,17 @@ class Room(models.Model):
      of_movie = models.ForeignKey(Block, on_delete=models.CASCADE)
      name = models.PositiveIntegerField()
 
+     def __str__(self):
+         return "Room: " + str(self.name) + '\n' +"Cinema: " + str(self.of_cinema.cinema_name)
+
 class Place(models.Model):
      of_room = models.ForeignKey(Room, on_delete=models.CASCADE)
      cor_x = models.PositiveIntegerField()
      cor_y = models.PositiveIntegerField()
      status = models.BooleanField()
+
+     def __str__(self):
+         return "Room: " + str(self.of_room.name) + " row: " + str(self.cor_x) + " column: " + str(self.cor_y)
 
 class Comment(models.Model):
     comment_date = models.DateTimeField('Date of set')
