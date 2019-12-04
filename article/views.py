@@ -176,45 +176,50 @@ def authorization(request):
 
 
 def registration(request):
-    form = RegistrationForm(request.POST or None)
-    if form.is_valid():
-        new_user = form.save(commit=False)
-        username = form.cleaned_data['username']
-        password = form.cleaned_data['password']
-        email = form.cleaned_data['email']
-        first_name = form.cleaned_data['first_name']
-        last_name = form.cleaned_data['last_name']
-        new_user.username = username
-        new_user.set_password(password)
-        new_user.first_name = first_name
-        new_user.last_name = last_name
-        new_user.email = email
-        new_user.save()
-        login_user = authenticate(username=username, password=password)
+    try:
+        form = RegistrationForm(request.POST or None)
+        if form.is_valid():
+            new_user = form.save(commit=False)
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            email = form.cleaned_data['email']
+            first_name = form.cleaned_data['first_name']
+            last_name = form.cleaned_data['last_name']
+            new_user.username = username
+            new_user.set_password(password)
+            new_user.first_name = first_name
+            new_user.last_name = last_name
+            new_user.email = email
+            new_user.save()
+            login_user = authenticate(username=username, password=password)
 
-        if login_user:
-            login(request, login_user)
-            return HttpResponseRedirect(reverse_lazy('index'))
-    context = {
-        'form': form
-    }
-    return render(request, 'article/registration.html', context)
-
+            if login_user:
+                login(request, login_user)
+                return HttpResponseRedirect(reverse_lazy('index'))
+        context = {
+            'form': form
+        }
+        return render(request, 'article/registration.html', context)
+    except:
+        raise Http404('Something maybe you entered the data incorrectly')
 
 def auto(request):
-    form = LoginForm(request.POST or None)
-    if form.is_valid():
-        username = form.cleaned_data['username']
-        password = form.cleaned_data['password']
-        login_user = authenticate(username=username, password=password)
+    try:
+        form = LoginForm(request.POST or None)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            login_user = authenticate(username=username, password=password)
 
-        if login_user:
-            login(request, login_user)
-            return HttpResponseRedirect(reverse('index'))
-    context = {
-        'form': form
-    }
-    return render(request, 'article/auto.html', context)
+            if login_user:
+                login(request, login_user)
+                return HttpResponseRedirect(reverse('index'))
+        context = {
+            'form': form
+        }
+        return render(request, 'article/auto.html', context)
+    except:
+        raise Http404('Something maybe you entered the data incorrectly')
 
 def set_Comment(request, movie_name):
     try:
@@ -230,7 +235,7 @@ def set_Comment(request, movie_name):
         comment.save()
         return HttpResponseRedirect(reverse_lazy('movie_view', args=(Block.objects.get(movie_name=movie_name).movie_name,)))
     except:
-        return HttpResponse('Unsuccess')
+        raise Http404('Something maybe you entered the data incorrectly')
 
 
 def search(request):
@@ -241,34 +246,33 @@ def search(request):
                 movie = Block.objects.get(movie_name__contains=searched_text )
         return HttpResponseRedirect(reverse_lazy('movie_view', args=(movie.movie_name,)))
     except:
-        return HttpResponse("Have not")
+        raise Http404('Something maybe you entered the data incorrectly')
 
 def buy_place(request,cinema_name):
-    cinema = Cinema.objects.get(cinema_name = cinema_name)
-    rooom = Room.objects.get(id=request.POST.get('room.id'))
-    movie = Block.objects.get(movie_name=request.POST.get('movie_name'))
-    message = ""
-    email = request.POST.get('email')
-    cinema = "*******" + cinema.cinema_name +  "*******"
-    card = "Payed by card: " +  request.POST.get('check')
-    type = "Type of ticket: " +  request.POST.get('type')
-    room = "Room: " + str(rooom.name) + '\n' + "Places: " + '\n'
-    message = cinema + '\n' + card + '\n' + type + '\n' + room
-    status = request.POST.getlist('buy_place')
-    for info in status:
+    try:
+        cinema = Cinema.objects.get(cinema_name = cinema_name)
+        rooom = Room.objects.get(id=request.POST.get('room.id'))
+        movie = Block.objects.get(movie_name=request.POST.get('movie_name'))
+        message = ""
+        email = request.POST.get('email')
+        cinema = "*******" + cinema.cinema_name +  "*******"
+        card = "Payed by card: " +  request.POST.get('check')
+        type = "Type of ticket: " +  request.POST.get('type')
+        room = "Room: " + str(rooom.name) + '\n' + "Places: " + '\n'
+        message = cinema + '\n' + card + '\n' + type + '\n' + room
+        status = request.POST.getlist('buy_place')
+        for info in status:
 
-        if info != "False":
-            info = str(info).split(' ')
-            cor_x = int(info[0])
-            cor_y = int(info[1])
-            message += "    " +  info[0] + " row " + info[1] + " place" + '\n'
-            status = bool(info[2])
-            new_place = Place(of_room = rooom, cor_x = cor_x, cor_y = cor_y, status = status)
-            new_place.save()
-
-    # return HttpResponse(message)
-    return HttpResponseRedirect(reverse_lazy('check', args=(message, email)))
-    return HttpResponseRedirect(reverse_lazy('buyticket', args=(movie.movie_name,)))
+            if info != "False":
+                info = str(info).split(' ')
+                cor_x = int(info[0])
+                cor_y = int(info[1])
+                message += "    " +  info[0] + " row " + info[1] + " place" + '\n'
+                status = bool(info[2])
+                new_place = Place(of_room = rooom, cor_x = cor_x, cor_y = cor_y, status = status)
+                new_place.save()
+    except:
+        raise Http404('Something maybe you entered the data incorrectly')
 
 def set_places(places, x, room,limit):
     check = False
@@ -293,57 +297,59 @@ def set_places(places, x, room,limit):
 
 
 def booking(request,cinema_name):
-    numbers = [1,2,3,4,5,6,7,8]
-    rooom = Room.objects.get(id=request.POST.get('room'))
-    # return HttpResponse(request.POST.get('movie_name'))
-    movie = Block.objects.get(movie_name=request.POST.get('movie_name'))
-    user = User.objects.get(username=request.user.username)
-    status = request.POST.getlist('buy_place')
-
-    cinema = Cinema.objects.get(cinema_name = cinema_name)
-    places_1 = Place.objects.filter(of_room = rooom, cor_x = int(1))
-    places_1=list(places_1)
-
-    places_1 = set_places(places_1,int(1),rooom,int(8))
-    places_2 = Place.objects.filter(of_room = rooom, cor_x = int(2))
-    places_2=list(places_2)
-
-    places_2 = set_places(places_2,int(2),rooom,int(8))
-    places_3 = Place.objects.filter(of_room = rooom, cor_x = int(3))
-    places_3=list(places_3)
-
-    places_3 = set_places(places_3,int(3),rooom,int(8))
-    places_4 = Place.objects.filter(of_room = rooom, cor_x = int(4))
-    places_4=list(places_4)
-
-    places_4 = set_places(places_4,int(4),rooom,int(8))
-    places_5 = Place.objects.filter(of_room = rooom, cor_x = int(5))
-    places_5=list(places_5)
-
-    places_5 = set_places(places_5,int(5),rooom,int(8))
-    places_6 = Place.objects.filter(of_room = rooom, cor_x = int(6))
-    places_6=list(places_6)
-
-    places_6 = set_places(places_6,int(6),rooom,int(8))
-    places_7 = Place.objects.filter(of_room = rooom, cor_x = int(7))
-    places_7=list(places_7)
-
-    places_7 = set_places(places_7,int(7),rooom,int(12))
-    places_8 = Place.objects.filter(of_room = rooom, cor_x = int(8))
-    places_8=list(places_8)
-
-    places_8 = set_places(places_8,int(8),rooom,int(12))
-    return render(request,'article/booking.html', {"cinema":cinema, "user":user,"movie":movie,"room_id":rooom.id, "places_1":places_1, "places_2":places_2,"places_3":places_3, "places_4":places_4,"places_5":places_5,"places_6":places_6,"places_7":places_7,"places_8":places_8,"numbers":numbers})
-
-
-
-def check(request ,message,email):
     try:
-        subject = 'Thank you for registering to our site'
+        numbers = [1,2,3,4,5,6,7,8]
+        rooom = Room.objects.get(id=request.POST.get('room'))
+        # return HttpResponse(request.POST.get('movie_name'))
+        movie = Block.objects.get(movie_name=request.POST.get('movie_name'))
+        user = User.objects.get(username=request.user.username)
+        status = request.POST.getlist('buy_place')
+
+        cinema = Cinema.objects.get(cinema_name = cinema_name)
+        places_1 = Place.objects.filter(of_room = rooom, cor_x = int(1))
+        places_1=list(places_1)
+
+        places_1 = set_places(places_1,int(1),rooom,int(8))
+        places_2 = Place.objects.filter(of_room = rooom, cor_x = int(2))
+        places_2=list(places_2)
+
+        places_2 = set_places(places_2,int(2),rooom,int(8))
+        places_3 = Place.objects.filter(of_room = rooom, cor_x = int(3))
+        places_3=list(places_3)
+
+        places_3 = set_places(places_3,int(3),rooom,int(8))
+        places_4 = Place.objects.filter(of_room = rooom, cor_x = int(4))
+        places_4=list(places_4)
+
+        places_4 = set_places(places_4,int(4),rooom,int(8))
+        places_5 = Place.objects.filter(of_room = rooom, cor_x = int(5))
+        places_5=list(places_5)
+
+        places_5 = set_places(places_5,int(5),rooom,int(8))
+        places_6 = Place.objects.filter(of_room = rooom, cor_x = int(6))
+        places_6=list(places_6)
+
+        places_6 = set_places(places_6,int(6),rooom,int(8))
+        places_7 = Place.objects.filter(of_room = rooom, cor_x = int(7))
+        places_7=list(places_7)
+
+        places_7 = set_places(places_7,int(7),rooom,int(12))
+        places_8 = Place.objects.filter(of_room = rooom, cor_x = int(8))
+        places_8=list(places_8)
+
+        places_8 = set_places(places_8,int(8),rooom,int(12))
+        return render(request,'article/booking.html', {"cinema":cinema, "user":user,"movie":movie,"room":rooom, "places_1":places_1, "places_2":places_2,"places_3":places_3, "places_4":places_4,"places_5":places_5,"places_6":places_6,"places_7":places_7,"places_8":places_8,"numbers":numbers})
+    except:
+        return HttpResponse("Something maybe you entered the data incorrectly", status=404)
+
+
+def check(request ,message,email,movie_name):
+    try:
+        subject = 'We wish you a pleasant viewing !  '
         email_from = settings.EMAIL_HOST_USER
         recipient_list = [email,]
         send_mail( subject, message, email_from, recipient_list )
-        return render(request, 'article/checklist.html')
+        return HttpResponseRedirect(reverse_lazy('movie_view', args=(movie_name,)))
     except:
         return HttpResponse('Something Wrong')
 

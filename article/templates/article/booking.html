@@ -17,16 +17,16 @@
 	</head>
 	<body>
 	<div class="container">
-		{{user.username}}
-		{{movie.movie_name}}
 	</div>
 		</div>
 
-	<h4 class = "display">Hall ¹ 1</h4>
+	<h4 class = "display">Hall {{room.name}}</h4>
+
 		<div>
-			<form method="post" action="{% url 'buy_place' cinema.cinema_name %}">
+			<form method="post" id="ismForm" action="{% url 'buy_place' cinema.cinema_name %}">
 				{% csrf_token %}
 			<table>
+				<hr class="style18"  data-toggle="tooltip" data-placement="top" title="Screen">
 				<tbody>
 
 					<tr>
@@ -37,7 +37,7 @@
 						{% if places_1 %}
 							{% for place in places_1 %}
 					    	{% if place.status == True %}
-							<td><button type="reset" id="{{place.cor_x}}-{{place.cor_y}}" class="btn btn-danger" onclick="display('{{place.cor_x}} {{place.cor_y}} True')"><input type="hidden" id="{{place.cor_x}} {{place.cor_y}} True" name="buy_place" value="False">{{place.cor_y}}</input></button></td>
+							<td><button type="reset"  class="btn btn-danger" ><input type="hidden"  name="buy_place" value="False">{{place.cor_y}}</input></button></td>
 								{% else %}
 								<td><button type="reset" id="{{place.cor_x}}-{{place.cor_y}}" class="btn btn" onclick="display('{{place.cor_x}} {{place.cor_y}} True')"><input type="hidden" id="{{place.cor_x}} {{place.cor_y}} True" name="buy_place" value="False">{{place.cor_y}}</input></button></td>
 								{% endif %}
@@ -58,7 +58,7 @@
 						{% if places_2 %}
 							{% for place in places_2 %}
 					    	{% if place.status == True %}
-							<td><button type="reset" id="{{place.cor_x}}-{{place.cor_y}}" class="btn btn-danger" onclick="display('{{place.cor_x}} {{place.cor_y}} True')"><input type="hidden" id="{{place.cor_x}} {{place.cor_y}} True" name="buy_place" value="False">{{place.cor_y}}</input></button></td>
+							<td><button type="reset" class="btn btn-danger" ><input type="hidden" name="buy_place" value="False">{{place.cor_y}}</input></button></td>
 								{% else %}
 								<td><button type="reset" id="{{place.cor_x}}-{{place.cor_y}}" class="btn btn" onclick="display('{{place.cor_x}} {{place.cor_y}} True')"><input type="hidden" id="{{place.cor_x}} {{place.cor_y}} True" name="buy_place" value="False">{{place.cor_y}}</input></button></td>
 								{% endif %}
@@ -79,7 +79,7 @@
 						{% if places_3 %}
 							{% for place in places_3 %}
 					    	{% if place.status == True %}
-							<td><button type="reset" id="{{place.cor_x}}-{{place.cor_y}}" class="btn btn-danger" onclick="display('{{place.cor_x}} {{place.cor_y}} True')"><input type="hidden" id="{{place.cor_x}} {{place.cor_y}} True" name="buy_place" value="False">{{place.cor_y}}</input></button></td>
+							<td><button type="reset" class="btn btn-danger" ><input type="hidden"  name="buy_place" value="False">{{place.cor_y}}</input></button></td>
 								{% else %}
 								<td><button type="reset" id="{{place.cor_x}}-{{place.cor_y}}" class="btn btn" onclick="display('{{place.cor_x}} {{place.cor_y}} True')"><input type="hidden" id="{{place.cor_x}} {{place.cor_y}} True" name="buy_place" value="False">{{place.cor_y}}</input></button></td>
 								{% endif %}
@@ -100,7 +100,7 @@
 						{% if places_4 %}
 							{% for place in places_4 %}
 								{% if place.status == True %}
-							<td><button type="reset" id="{{place.cor_x}}-{{place.cor_y}}" class="btn btn-danger" onclick="display('{{place.cor_x}} {{place.cor_y}} True')"><input type="hidden" id="{{place.cor_x}} {{place.cor_y}} True" name="buy_place" value="False">{{place.cor_y}}</input></button></td>
+							<td><button type="reset" class="btn btn-danger"><input type="hidden"  name="buy_place" value="False">{{place.cor_y}}</input></button></td>
 								{% else %}
 								<td><button type="reset" id="{{place.cor_x}}-{{place.cor_y}}" class="btn btn" onclick="display('{{place.cor_x}} {{place.cor_y}} True')"><input type="hidden" id="{{place.cor_x}} {{place.cor_y}} True" name="buy_place" value="False">{{place.cor_y}}</input></button></td>
 								{% endif %}
@@ -121,8 +121,7 @@
 						{% if places_5 %}
 							{% for place in places_5 %}
 								{% if place.status == True %}
-							<td><button type="reset" id="{{place.cor_x}}-{{place.cor_y}}" class="btn btn-danger" onclick="display('{{place.cor_x}} {{place.cor_y}} True')"><input type="hidden" id="{{place.cor_x}} {{place.cor_y}} True" name="buy_place" value="False">{{place.cor_y}}</input></button></td>
-								{% else %}
+								<td><button type="reset" class="btn btn-danger"><input type="hidden"  name="buy_place" value="False">{{place.cor_y}}</input></button></td>								{% else %}
 								<td><button type="reset" id="{{place.cor_x}}-{{place.cor_y}}" class="btn btn" onclick="display('{{place.cor_x}} {{place.cor_y}} True')"><input type="hidden" id="{{place.cor_x}} {{place.cor_y}} True" name="buy_place" value="False">{{place.cor_y}}</input></button></td>
 								{% endif %}
 							{% endfor %}
@@ -142,8 +141,8 @@
 						{% if places_6 %}
 							{% for place in places_6 %}
 								{% if place.status == True %}
-							<td><button type="reset" id="{{place.cor_x}}-{{place.cor_y}}" class="btn btn-danger" onclick="display('{{place.cor_x}} {{place.cor_y}} True')"><input type="hidden" id="{{place.cor_x}} {{place.cor_y}} True" name="buy_place" value="False">{{place.cor_y}}</input></button></td>
-								{% else %}
+								<td><button type="reset" class="btn btn-danger"><input type="hidden"  name="buy_place" value="False">{{place.cor_y}}</input></button></td>
+									{% else %}
 								<td><button type="reset" id="{{place.cor_x}}-{{place.cor_y}}" class="btn btn" onclick="display('{{place.cor_x}} {{place.cor_y}} True')"><input type="hidden" id="{{place.cor_x}} {{place.cor_y}} True" name="buy_place" value="False">{{place.cor_y}}</input></button></td>
 								{% endif %}
 							{% endfor %}
@@ -162,8 +161,8 @@
 						{% if places_7 %}
 							{% for place in places_7 %}
 								{% if place.status == True %}
-							<td><button type="reset" id="{{place.cor_x}}-{{place.cor_y}}" class="btn btn-danger" onclick="display('{{place.cor_x}} {{place.cor_y}} True')"><input type="hidden" id="{{place.cor_x}} {{place.cor_y}} True" name="buy_place" value="False">{{place.cor_y}}</input></button></td>
-								{% else %}
+								<td><button type="reset" class="btn btn-danger"><input type="hidden"  name="buy_place" value="False">{{place.cor_y}}</input></button></td>
+									{% else %}
 								<td><button type="reset" id="{{place.cor_x}}-{{place.cor_y}}" class="btn btn" onclick="display('{{place.cor_x}} {{place.cor_y}} True')"><input type="hidden" id="{{place.cor_x}} {{place.cor_y}} True" name="buy_place" value="False">{{place.cor_y}}</input></button></td>
 								{% endif %}
 							{% endfor %}
@@ -179,7 +178,7 @@
 						{% if places_8 %}
 							{% for place in places_8 %}
 								{% if place.status == True %}
-							<td><button type="reset" id="{{place.cor_x}}-{{place.cor_y}}" class="btn btn-danger" onclick="display('{{place.cor_x}} {{place.cor_y}} True')"><input type="hidden" id="{{place.cor_x}} {{place.cor_y}} True" name="buy_place" value="False">{{place.cor_y}}</input></button></td>
+							<td><button type="reset" class="btn btn-danger"	><input type="hidden"  name="buy_place" value="False">{{place.cor_y}}</input></button></td>
 								{% else %}
 								<td><button type="reset" id="{{place.cor_x}}-{{place.cor_y}}" class="btn btn" onclick="display('{{place.cor_x}} {{place.cor_y}} True')"><input type="hidden" id="{{place.cor_x}} {{place.cor_y}} True" name="buy_place" value="False">{{place.cor_y}}</input></button></td>
 								{% endif %}
@@ -195,7 +194,7 @@
 			</table>
 			<div class="container" style = "margin-left:500px; margin-top:50px;">
 				<input type="button" class="btn btn-danger"  value="Buy" href="#demo3" data-toggle="collapse"><td>
-				<input type="hidden" name="room.id" value="{{room_id}}">
+				<input type="hidden" name="room.id" value="{{room.id}}">
 				<input type="hidden" name="movie_name" value="{{movie.movie_name}}">
 			</div>
 			<div id="demo3" class="collapse container" class="btn-group" >
@@ -240,10 +239,9 @@
  								</div>
 
  		 						<div class="form-group">
- 			 							<button type="submit" class="btn btn-warning" data-toggle="modal" data-target="#pay">Pay </button>
+ 			 							<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#pay" autocomplete="off">Pay </button>
  		 						</div>
 
- 		 				+
  		 				</div>
 		</form>
 		</div><div class="container" >
@@ -269,19 +267,21 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="Title"><i class="fas fa-exclamation-triangle"> </i>    Attention</h5>
+        <h5 class="modal-title" id="Title"><i class="fas fa-exclamation-triangle"> </i>Attention</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-	       <h6>The administration of the cinema can change the beginning of the movie show, ticket prices and discounts. Please , check the information by phone. </h6>
+				<h4><small>Сheck sheet will come to the specified mail</small></h4>
+	       <h6> Please , check the information by phone. </h6>
 			 <br> <br>
 	         <p >200 tg was withdrawn from you</p>
 	         <p >We wish you a pleasant viewing !  </p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-warning" data-dismiss="modal">Close </button>
+        <button type="submit"  id="submit" class="btn btn-warning" data-dismiss="modal">Close </button>
+
       </div>
     </div>
   </div>
@@ -524,6 +524,16 @@
 		<script>
 			function display(name) {
 				document.getElementById(name).value=name;
+			}
+		</script>
+
+		<script>
+		function submitForm() {
+					document.getElementById("ismForm").submit()
+			}
+
+			document.getElementById('submit').onclick = function() {
+					setTimeout(submitForm);
 			}
 		</script>
 		<style type="text/css">

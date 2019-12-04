@@ -20,6 +20,6 @@ urlpatterns = [
     path('set_rating/<movie_id>', views.set_rating, name='set_rating'),
     path('buy_place/<cinema_name>', views.buy_place, name='buy_place'),
     path('booking/<cinema_name>', views.booking, name='booking'),
-    path('check/<message>/<email>', views.check, name='check'),
+    path('check/<message>/<email>/<movie_name>', views.check, name='check'),
     path('history/', views.history, name='history'),
 ]

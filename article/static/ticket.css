@@ -8,8 +8,8 @@
     color: white
 }
 .selected {
-    color: white;Q
-    background:green
+    color: white;
+    background:green;
 }
 button#cssColorChange:active{
     color: white;
@@ -25,3 +25,21 @@ table {
 td {
     text-align: center; Выравниваем текст по центру ячейки
 }
+hr.style18 {
+  width:500px;
+  height: 30px;
+  border-style: solid;
+  border-color: #8c8b8b;
+  border-width: 5px 2px 0 3px;
+  border-radius: 20px;
+}
+/* hr.style18:before {
+  display: block;
+  content: "";
+  height: 30px;
+  margin-top: 35px;
+  border-style: solid;
+  border-color: #8c8b8b;
+  border-width: 0 0 5px 3px;
+  border-radius: 60px;
+} */
