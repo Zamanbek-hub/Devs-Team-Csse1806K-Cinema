@@ -1,17 +1,13 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.views.generic.edit import CreateView
 from article.models import *
-from django.utils import timezone
 from django.shortcuts import render, get_object_or_404
 from article.forms import RegistrationForm, LoginForm
 from django.http import Http404, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth import login, authenticate
-import datetime
 from django.utils import timezone
 from django.contrib.auth.models import User
-import datetime
 from decimal import Decimal
 from django.core.mail import send_mail
 from django.conf import settings
@@ -26,7 +22,7 @@ def history(request):
 
 
 
-
+# functions for index
 def watched_films(shops_list, jenre):
     watched_films = []
     for w in shops_list:
@@ -165,23 +161,11 @@ def cinema_view(request, cinema_name):
     return render(request, "article/cinema_view.html", {"cinema": cinema})
 
 
-def buyticket(request,movie_name):
-
-    movie = Block.objects.get(movie_name = movie_name)
-    user = User.objects.get(username = request.user.username)
-    shop = Shop(of_user = user, of_movie = movie, date = timezone.now() )
-    shop.save()
-    return HttpResponseRedirect(reverse_lazy('movie_view', args=(movie.movie_name,)))
-    # except:
-    #     return HttpResponseRedirect(reverse_lazy('movie_view', args=(movie.movie_name,)))
-
-def authorization(request):
-    return render(request, 'article/authorizationP.html')
-
 
 def registration(request):
     try:
         form = RegistrationForm(request.POST or None)
+
         if form.is_valid():
             new_user = form.save(commit=False)
             username = form.cleaned_data['username']
@@ -200,16 +184,16 @@ def registration(request):
             if login_user:
                 login(request, login_user)
                 return HttpResponseRedirect(reverse_lazy('index'))
-        context = {
-            'form': form
-        }
-        return render(request, 'article/registration.html', context)
+
+        return render(request, 'article/registration.html', {'form': form})
+
     except:
         raise Http404('Something maybe you entered the data incorrectly')
 
 def auto(request):
     try:
         form = LoginForm(request.POST or None)
+
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
@@ -218,12 +202,12 @@ def auto(request):
             if login_user:
                 login(request, login_user)
                 return HttpResponseRedirect(reverse('index'))
-        context = {
-            'form': form
-        }
-        return render(request, 'article/auto.html', context)
+
+        return render(request, 'article/auto.html', {'form': form})
+
     except:
         raise Http404('Something maybe you entered the data incorrectly')
+
 
 def set_Comment(request, movie_name):
     try:
@@ -237,22 +221,53 @@ def set_Comment(request, movie_name):
         comment_text = request.POST.get("comment_text")
         comment = Comment(of_user = User.objects.get(username= request.POST.get('username')), comment_text = comment_text,is_heiter = is_heiter, of_movie = Block.objects.get(movie_name=movie_name),comment_date=timezone.now())
         comment.save()
+
         return HttpResponseRedirect(reverse_lazy('movie_view', args=(Block.objects.get(movie_name=movie_name).movie_name,)))
+
     except:
         raise Http404('Something maybe you entered the data incorrectly')
 
 
-def search(request):
+
+def set_rating(request, movie_id):
     try:
+        movie = get_object_or_404(Block, pk=movie_id)
+        ratings = Rating.objects.filter(of_movie=movie)
+        user = User.objects.get(id=request.user.id)
+
+        rating_num = int(request.POST['new_rating'])
+        new_rating = Rating(of_user=user, of_movie=movie, rating=rating_num)
+        new_rating.save()
+
+        sum_of_rating = movie.movie_rating * len(ratings) + rating_num
+        if len(ratings) == 0:
+            movie.movie_rating = sum_of_rating / (len(ratings) + 1)
+        else:
+            movie.movie_rating = sum_of_rating / (len(ratings) + 1)
+        movie.movie_rating = round(movie.movie_rating,2)
+        movie.save()
+
+        return HttpResponseRedirect(reverse_lazy('movie_view', args=(movie.movie_name, )))
+
+    except:
+        return HttpResponseRedirect(reverse_lazy('movie_view', args=(movie.movie_name, )))
+
+
+def search(request):
+
+    try:
+
         searched_text = request.POST.get('searched_text')
         movie = None
         if len(searched_text)>0:
                 movie = Block.objects.get(movie_name__contains=searched_text )
         return HttpResponseRedirect(reverse_lazy('movie_view', args=(movie.movie_name,)))
+
     except:
         raise Http404('Something maybe you entered the data incorrectly')
 
 def buy_place(request,cinema_name):
+
     try:
         cinema = Cinema.objects.get(cinema_name = cinema_name)
         rooom = Room.objects.get(id=request.POST.get('room.id'))
@@ -261,7 +276,7 @@ def buy_place(request,cinema_name):
         email = request.POST.get('email')
         cinema = "*******" + cinema.cinema_name +  "*******"
         card = "Payed by card: " +  request.POST.get('check')
-        type = "Type of ticket: " +  request.POST.get('type')
+        type = "Type of tickets: " +  request.POST.get('type')
         room = "Room: " + str(rooom.name) + '\n' + "Places: " + '\n'
         message = cinema + '\n' + card + '\n' + type + '\n' + room
         status = request.POST.getlist('buy_place')
@@ -275,6 +290,9 @@ def buy_place(request,cinema_name):
                 status = bool(info[2])
                 new_place = Place(of_room = rooom, cor_x = cor_x, cor_y = cor_y, status = status)
                 new_place.save()
+
+        return HttpResponseRedirect(reverse_lazy('check', args=(message, email,movie.movie_name)))
+                # return HttpResponseRedirect(reverse_lazy('buyticket', args=(movie.movie_name,)))
     except:
         raise Http404('Something maybe you entered the data incorrectly')
 
@@ -299,6 +317,15 @@ def set_places(places, x, room,limit):
 
     return places
 
+def buyticket(request,movie_name):
+    try:
+        movie = Block.objects.get(movie_name = movie_name)
+        user = User.objects.get(username = request.user.username)
+        shop = Shop(of_user = user, of_movie = movie, date = timezone.now() )
+        shop.save()
+        return HttpResponseRedirect(reverse_lazy('movie_view', args=(movie.movie_name,)))
+    except:
+        raise Http404('Something maybe you entered the data incorrectly')
 
 def booking(request,cinema_name):
     try:
@@ -356,23 +383,3 @@ def check(request ,message,email,movie_name):
         return HttpResponseRedirect(reverse_lazy('movie_view', args=(movie_name,)))
     except:
         return HttpResponse('Something Wrong')
-
-def set_rating(request, movie_id):
-    movie = get_object_or_404(Block, pk=movie_id)
-    ratings = Rating.objects.filter(of_movie=movie)
-    user = User.objects.get(id=request.user.id)
-
-    rating_num = int(request.POST['new_rating'])
-    new_rating = Rating(of_user=user, of_movie=movie, rating=rating_num)
-    new_rating.save()
-
-    sum_of_rating = movie.movie_rating * len(ratings) + rating_num
-    if len(ratings) == 0:
-        movie.movie_rating = sum_of_rating / (len(ratings) + 1)
-    else:
-        movie.movie_rating = sum_of_rating / (len(ratings) + 1)
-    movie.movie_rating = round(movie.movie_rating,2)
-    movie.save()
-
-
-    return HttpResponseRedirect(reverse_lazy('movie_view', args=(movie.movie_name, )))

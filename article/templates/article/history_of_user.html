@@ -1,53 +1,53 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    {% load staticfiles %}
-    <meta charset="utf-8">
-    <title></title>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <link rel="stylesheet" href="{% static 'history_of_user.css' %}">
-  </head>
-  <body>
+<head>
+	{% load staticfiles %}
+	<meta charset="utf-8">
+	<title></title>
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	<link rel="stylesheet" href="{% static 'history_of_user.css' %}">
+</head>
+<body>
 
 
-      <section class="section-spacing text-center" id="features">
-         <div class="container">
-            <header class="section-header">
-               <h2>History of <strong>{{user.username}}</strong></h2>
-               <h3>Надо заполнить так по дате будет кретаивно на окошках будет фотка и название фильма и ссылка к ним</h3>
-               <h4></h4>
-            </header>
-            <div class="container-fluid">
-               <div class="row">
-                  {% for sh in shops %}
-                  <div class="col-md-12">
-                     <ul class="timeline">
-                        <li class="timeline wow bounceInUp">
-                           <div class="timeline-badge warning"><i class="fa fa-bullseye"></i></div>
-                           <div class="date-info" style="font-size:120%; width:130px;">
-                              <strong>{{sh.date}}</strong>
-                           </div>
-                           <div class="timeline-panel" style="width:150px; height:150px; margin-right:400px; background-color:#FBF4FC;">
-                              <div class="timeline-body">
-                                 <p>
-                                    <a href="{{sh.of_movie.get_absolute_url}}"><img src="{{sh.of_movie.move_img.url}}" class="card-img-top" style="width:130px;height:130px;"></a>
-                                    {{sh.shop}}
-                                 </p>
-                              </div>
-                              <div class="timeline-heading">
-                                 <h6 class="timeline-title">{{sh.movie_name}}</h6>
-                              </div>
-                           </div>
-                        </li>
-                        <!--'''''''''''''-->
-                     </ul>
-                  </div>
-                  {% endfor %}
-               </div>
-            </div>
-         </div>
-      </section>
-  </body>
+	<section class="section-spacing text-center" id="features">
+	 <div class="container">
+		<header class="section-header">
+		 <h2>History of <strong>{{user.username}}</strong></h2>
+		 <h3>Надо заполнить так по дате будет кретаивно на окошках будет фотка и название фильма и ссылка к ним</h3>
+		 <h4></h4>
+	 </header>
+	 <div class="container-fluid">
+		 <div class="row">
+			{% for sh in shops %}
+			<div class="col-md-12">
+			 <ul class="timeline">
+				<li class="timeline wow bounceInUp">
+				 <div class="timeline-badge warning"><i class="fa fa-bullseye"></i></div>
+				 <div class="date-info" style="font-size:120%; width:130px;">
+					<strong>{{sh.date|date:'Y-m-d H:i'}}</strong>
+				</div>
+				<div class="timeline-panel" style="width:150px; height:150px; margin-right:400px; background-color:#FBF4FC;">
+					<div class="timeline-body">
+					 <p>
+						<a href="{{sh.of_movie.get_absolute_url}}"><img src="{{sh.of_movie.move_img.url}}" class="card-img-top" style="width:130px;height:130px;"></a>
+						{{sh.shop}}
+					</p>
+				</div>
+				<div class="timeline-heading">
+				 <h6 class="timeline-title">{{sh.movie_name}}</h6>
+			 </div>
+		 </div>
+	 </li>
+	 <!--'''''''''''''-->
+ </ul>
+</div>
+{% endfor %}
+</div>
+</div>
+</div>
+</section>
+</body>
 </html>

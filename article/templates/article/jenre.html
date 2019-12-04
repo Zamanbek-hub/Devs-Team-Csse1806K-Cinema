@@ -1,17 +1,17 @@
 {% extends 'article/base.html' %}
 {% block content %}
 <div class="container-fluid">
-<div class="row">
-{% for movie in  movie_by_jenres %}
-<div class="col-lg-3 col-sm-6 col-md-4 portfolio-item" id="card">
-  <div class="card">
-    <a href="{{movie.get_absolute_url}}"><img src="{{movie.move_img.url}}" class="card-img-top"></a>
-  </div>
-  <div class="card-vody">
-    <h4 class="card-title danger">{{movie.movie_name}} <span class = "glyphicon glyphicon-star" style="color:yellow; font-size:50px" aria-hidden="true"></span></h4>
-  </div>
-</div>
-{% endfor %}
-</div>
+	<div class="row">
+		{% for movie in  movie_by_jenres %}
+		<div class="col-lg-3 col-sm-6 col-md-4 portfolio-item" id="card">
+			<div class="card">
+				<a href="{{movie.get_absolute_url}}"><img src="{{movie.move_img.url}}" class="card-img-top"></a>
+			</div>
+			<div class="card-vody">
+				<h4 class="card-title danger">{{movie.movie_name}} <span class = "glyphicon glyphicon-star" style="color:yellow; font-size:50px" aria-hidden="true"></span></h4>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
 </div>
 {% endblock %}

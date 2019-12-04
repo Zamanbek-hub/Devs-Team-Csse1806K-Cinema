@@ -1,27 +1,5 @@
 from django import forms
-from django.forms import ModelForm
 from django.contrib.auth.models import User
-# from article.models import Comment
-
-
-# class OrderForm(forms.Form):
-#     name = forms.CharField()
-#     last_name = forms.CharField(required=False)
-#     phone = forms.CharField()
-#     buyin_type=forms.ChoiceField(widget=forms.Select(),choices=([("self", "Cfvdsad"),("delivert", "Ljcnfdrf")]))
-#     date = forms.DateField(widget=forms.SelectDateWidget(), initial=timezone.now())
-#     address = forms.CharField(required=False)
-#     comments = forms.CharField(widget=forms.Textarea, required=False)
-#
-#     def __init__(self,*args,**kwargs):
-#         super(OrderForm, self).__init__(*args, **kwargs)
-#         self.fields['username'].label = "Login"
-#         self.fields['password'].label = "Password"
-#         self.fields['password'].help_text = "Create a password"
-#         self.fields['first_name'].label = "Name"
-#         self.fields['last_name'].label = "Last_name"
-#         self.fields['email'].label = "Your Gmail"
-#         self.fields['username'].help_text = "Please, input a real address"
 
 class RegistrationForm(forms.ModelForm):
     password_check=forms.CharField(widget=forms.PasswordInput)
@@ -74,17 +52,3 @@ class LoginForm(forms.Form):
         user = User.objects.get(username = username)
         if user and not user.check_password(password):
             raise forms.ValidationError("Invalid Password")
-
-# class CommentForm(forms.ModelForm):
-#     class Meta:
-#         model = Comment
-#         fields = ['comment_text']
-
-    # def clean(self):
-    #     сomment_text = self.cleaned_data['comment_text']
-    #     if not Comment.objects.filter(comment_text = comment_text).exists():
-    #         raise forms.ValidationError("User with that name is not registered in the system")
-    #
-    #     user = User.objects.get(username = username)
-    #     if user and not user.check_password(password):
-    #         raise forms.ValidationError("Invalid Password")

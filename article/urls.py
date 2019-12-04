@@ -1,9 +1,7 @@
 from django.urls import path
 from . import views
-from article.models import *
-from django.views.generic import ListView, DetailView
 from django.contrib.auth.views import LogoutView
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse_lazy
 
 # app_name = 'article'
 urlpatterns = [

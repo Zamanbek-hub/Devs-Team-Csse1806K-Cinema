@@ -1,12 +1,6 @@
 import datetime
-from django.db import models
-from django.conf import settings
 from django.utils import timezone
-from django.db.models.signals import pre_save
-from django.utils.text import slugify
-from transliterate import translit
 from django.urls import reverse
-from django import forms
 from django.contrib.auth.models import User
 from datetime import datetime, timedelta
 from django.db import models
@@ -39,11 +33,8 @@ class Cinema(models.Model):
     cinema_name = models.CharField('Name_of_cinema', max_length = 30,)
     area = models.PositiveIntegerField()
     cinema_address = models.CharField('cinema_address', max_length = 30,default='71')
-    # cinema_address = models.CharField('Name_of_cinema', max_length = 30)
     cinema_poster = models.CharField(max_length=100,default="http://thumbs.dfs.ivi.ru/storage4/contents/8/5/25df26b4ff265c284df18453f62ac7.jpg")
-
-    # new
-    cinema_movie_discouns = models.PositiveIntegerField()
+    cinema_movie_discouns = models.FloatField()
 
     def __str__(self):
         return self.cinema_name
@@ -53,12 +44,6 @@ class Cinema(models.Model):
 
     def get_absolute_url_to_book(self):
         return reverse('booking', kwargs={'cinema_name':self.cinema_name})
-
-
-
-     # places = JSONField(default=dict())
-
-
 
 class Block(models.Model):
 
@@ -71,7 +56,6 @@ class Block(models.Model):
     movie_trailer_url = models.CharField("movie_trailer",max_length = 100,default="https://www.youtube.com/embed/L0ttxMz-tyo")
     movie_available = models.BooleanField(default=True)
     movie_genre = models.ManyToManyField(Jenre)
-    # ?new
     movie_cinema = models.ManyToManyField(Cinema)
     movie_price = models.PositiveIntegerField()
     movie_duration = models.DurationField(default=timedelta())
