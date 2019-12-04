@@ -129,11 +129,11 @@ def index(request):
             recent += l.movie_name + " "
 
         if x is not None:
-            return render(request, 'article/list.html', dict(latest_movies=latest_movies, jenres=jenres, cinema=cinema, special_movies=x, special_movie_jenre=jenre, recent = recent))
+            return render(request, 'article/main.html', dict(latest_movies=latest_movies, jenres=jenres, cinema=cinema, special_movies=x, special_movie_jenre=jenre, recent = recent))
         else:
-            return render(request, 'article/list.html', dict(latest_movies=latest_movies, jenres=jenres, cinema=cinema))
+            return render(request, 'article/main.html', dict(latest_movies=latest_movies, jenres=jenres, cinema=cinema))
     except:
-        return render(request, 'article/list.html', dict(latest_movies=latest_movies, jenres=jenres, cinema=cinema))
+        return render(request, 'article/main.html', dict(latest_movies=latest_movies, jenres=jenres, cinema=cinema))
 
 
 
@@ -141,12 +141,16 @@ def index(request):
 
 def movie_view(request,movie_name):
     try:
+        latest_movies = Block.objects.order_by('-movie_numberOfClicks')[0:8:1]
+        jenres = Jenre.objects.order_by('-jenre')
+        cinema = Cinema.objects.order_by('-cinema_name')
+
         movie = Block.objects.get(movie_name = movie_name)
         movie.movie_numberOfClicks +=1
         movie.save()
         user = User.objects.get(id = request.user.id)
         rating = Rating.objects.get(of_movie = movie, of_user = user)
-        return render(request, "article/movie_view.html", {"movie":movie, "rating" : rating})
+        return render(request, "article/movie_view.html", dict(movie=movie, rating=rating, latest_movies=latest_movies, jenres=jenres, cinema=cinema, special_movies=x,))
     except:
         return render(request, "article/movie_view.html", {"movie":movie})
 

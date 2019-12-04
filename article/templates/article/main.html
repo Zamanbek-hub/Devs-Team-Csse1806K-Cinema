@@ -115,26 +115,7 @@ Since you watched before - {{recent}} </p>
   </div>
 </div>
 {% endfor %}
-<!-- {% for movie in latest_movies %}
-<div class="col-lg-3 col-sm-6 col-md-4 portfolio-item">
-  <div class="card">
-    <a href="{{movie.get_absolute_url}}"><img src="{{movie.move_img.url}}" class="card-img-top"></a>
-  </div>
-  <div class="card-vody">
-    <h4 class="card-title danger">{{movie.movie_rating}} <span class = "glyphicon glyphicon-star" style="color:yellow; font-size:50px" aria-hidden="true"></span></h4>
-  </div>
-</div>
-{% endfor %}
-{% for movie in latest_movies %}
-<div class="col-lg-3 col-sm-6 col-md-4 portfolio-item">
-  <div class="card">
-    <a href="{{movie.get_absolute_url}}"><img src="{{movie.move_img.url}}" class="card-img-top"></a>
-  </div>
-  <div class="card-vody">
-    <h4 class="card-title danger">{{movie.movie_rating}} <span class = "glyphicon glyphicon-star" style="color:yellow; font-size:50px" aria-hidden="true"></span></h4>
-  </div>
-</div>
-{% endfor %} -->
+
 
 {% else %}
       <p> "No available articles" </p>
@@ -142,25 +123,4 @@ Since you watched before - {{recent}} </p>
 </div>
 </div>
 
-
-<!-- <script type="text/javascript">
-$('#slides').carousel({
-  interval: 10000
-})
-
-$('.carousel .carousel-item').each(function(){
-    var next = $(this).next();
-    if (!next.length) {
-    next = $(this).siblings(':first');
-    }
-    next.children(':first-child').clone().appendTo($(this));
-
-    if (next.next().length>0) {
-    next.next().children(':first-child').clone().appendTo($(this));
-    }
-    else {
-      $(this).siblings(':first').children(':first-child').clone().appendTo($(this));
-    }
-});
-</script> -->
 {% endblock %}
