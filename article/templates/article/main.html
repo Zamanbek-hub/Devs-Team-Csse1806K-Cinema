@@ -1,5 +1,5 @@
 {% extends 'article/base.html' %}
-
+{% load staticfiles %}
 {% block tytle %}Title of site{% endblock %}
 {% block content %}
 <span class = "glyphicon glyphicon-eye-close" style="color:red" aria-hidden="true"></span>
@@ -71,7 +71,7 @@
 		{% for movie in special_movies %}
 		<div class="col-lg-3 col-sm-6 col-md-4 portfolio-item" id="card">
 			<div class="card">
-				<a href="{{movie.get_absolute_url}}"><img src="{{movie.move_img.url}}" class="card-img-top"></a>
+				<a href="{{movie.get_absolute_url}}"><img src="{% static  movie.movie_poster_img_url  %}" class="card-img-top"></a>
 			</div>
 			<div class="card-vody">
 				<h4 class="card-title danger">
@@ -108,7 +108,7 @@
 			{% for movie in latest_movies %}
 			<div class="col-lg-3 col-sm-6 col-md-4 portfolio-item" id="hovereffect">
 				<div class="card">
-					<a href="{{movie.get_absolute_url}}"><img src="{{movie.move_img.url}}" class="card-img-top"></a>
+					<a href="{{movie.get_absolute_url}}"><img src="{% static  movie.movie_poster_img_url  %}" class="card-img-top"></a>
 				</div>
 				<div class="card-vody">
 					<h4 class="card-title danger">{{movie.movie_name}} <span class = "glyphicon glyphicon-star" style="color:yellow; font-size:50px" aria-hidden="true"></span></h4>

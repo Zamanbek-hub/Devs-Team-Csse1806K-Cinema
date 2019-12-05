@@ -7,27 +7,27 @@
 <h2 class="font-weight-bold" style="font-family:Comic Sans MS; margin-bottom:30px; margin-left:30px; color:#26344D; border-radius:5px; width:450px;">{{ movie.movie_name }}</h2>
 <div class="row">
   <div class="col-sm-6 col-lg-4">
-    <img src="{{movie.move_img.url}}" class="card-img-top">
+    <img src="{% static  movie.movie_poster_img_url  %}" class="card-img-top">
   </div>
   <div class="col-sm-1 col-lg-1"></div>
   <div class="col-sm-5 col-lg-6" style="font-size:20px; font-family:Candara;font-weight:bold;">
     <h3 style="font-weight:bolder;">Story</h3>
     <p> {{movie.movie_explain|safe|linebreaks}} </p>
     <p>
-      <strong id = "text">Название: </strong>{{ movie.movie_name }}<br>
-      <strong>Год выпуска: </strong>{{movie.movie_article_date}}<br>
+      <strong id = "text">Name: </strong>{{ movie.movie_name }}<br>
+      <strong>Year of issue: </strong>{{movie.movie_article_date}}<br>
       <br>
-      <strong>Жанр: </strong>
+      <strong> Genre: </strong>
 
       {% for genre in movie.movie_genre.all %}
       {{genre}}
       {% endfor %}
       <br>
-      <strong>Продолжительность: </strong>{{movie.movie_duration}} мин.<br>
+      <strong>Duration: </strong>{{movie.movie_duration}}<br>
     </p>
     <p>
-      <strong>Режиссер: </strong>Turukabeyev Zamanbek<br>
-      <strong>В ролях: </strong>Oyazbaev Temirlan, Kakibay Nurdan, Kurmanbeyeva Talshyn<br>
+      <strong>Producer: </strong>Turukabeyev Zamanbek<br>
+      <strong>Cast: </strong>Oyazbaev Temirlan, Kakibay Nurdan, Kurmanbeyeva Talshyn<br>
     </p>
     <!-- {% url 'buyticket' movie.movie_name %} -->
     {%if not request.user.is_authenticated %}

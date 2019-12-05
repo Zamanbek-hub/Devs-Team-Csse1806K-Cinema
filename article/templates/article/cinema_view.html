@@ -54,40 +54,40 @@
          <td>Count of halls:  </td>
          <td>{{cinema.room_set.count}}</td>
        </tr>
-        <tr>
-           <th scope="row"></th>
-           <td>Rating :  </td>
-           <td>
-            <form>
-               <fieldset class="rating">
-                 <!--  <input id="demo-1" type="radio" name="demo" value="1">
-                  <input id="demo-2" type="radio" name="demo" value="2">
-                  <input id="demo-3" type="radio" name="demo" value="3">
-                  <input id="demo-4" type="radio" name="demo" value="4">
-                  <input id="demo-5" type="radio" name="demo" value="5">    -->
-                  <div class="stars">
-                     <label for="demo-1" aria-label="1 star" title="1 star"><i class="far fa-star"></i> </label>
-                     <label for="demo-2" aria-label="2 stars" title="2 stars"><i class="far fa-star"></i> </label>
-                     <label for="demo-3" aria-label="3 stars" title="3 stars"><i class="far fa-star"></i> </label>
-                     <label for="demo-4" aria-label="4 stars" title="4 stars"><i class="far fa-star"></i> </label>
-                     <label for="demo-5" aria-label="5 stars" title="5 stars"><i class="far fa-star"></i> </label>
-                  </div>
-
-               </fieldset>
-
-               <script>
-                 (function(){
-                     var rating = document.querySelector('.rating');
-
-                     handle.onchange = function(event) {
-                         rating.classList.toggle('rating', handle.checked);
-                     };
-                 }());
-               </script>
-            </form>
-         </td>
-
-      </tr>
+{#        <tr>#}
+{#           <th scope="row"></th>#}
+{#           <td>Rating :  </td>#}
+{#           <td>#}
+{#            <form>#}
+{#               <fieldset class="rating">#}
+{#                 <!--  <input id="demo-1" type="radio" name="demo" value="1">#}
+{#                  <input id="demo-2" type="radio" name="demo" value="2">#}
+{#                  <input id="demo-3" type="radio" name="demo" value="3">#}
+{#                  <input id="demo-4" type="radio" name="demo" value="4">#}
+{#                  <input id="demo-5" type="radio" name="demo" value="5">    -->#}
+{#                  <div class="stars">#}
+{#                     <label for="demo-1" aria-label="1 star" title="1 star"><i class="far fa-star"></i> </label>#}
+{#                     <label for="demo-2" aria-label="2 stars" title="2 stars"><i class="far fa-star"></i> </label>#}
+{#                     <label for="demo-3" aria-label="3 stars" title="3 stars"><i class="far fa-star"></i> </label>#}
+{#                     <label for="demo-4" aria-label="4 stars" title="4 stars"><i class="far fa-star"></i> </label>#}
+{#                     <label for="demo-5" aria-label="5 stars" title="5 stars"><i class="far fa-star"></i> </label>#}
+{#                  </div>#}
+{##}
+{#               </fieldset>#}
+{##}
+{#               <script>#}
+{#                 (function(){#}
+{#                     var rating = document.querySelector('.rating');#}
+{##}
+{#                     handle.onchange = function(event) {#}
+{#                         rating.classList.toggle('rating', handle.checked);#}
+{#                     };#}
+{#                 }());#}
+{#               </script>#}
+{#            </form>#}
+{#         </td>#}
+{##}
+{#      </tr>#}
        <tr>
          <th scope="row"></th>
          <td>Tel:  </td>
@@ -145,17 +145,16 @@
 								</div>
 								<div id="demo{{movie.id}}" class="collapse" class="btn-group" >
 									<table class="table table-borderless table-hover">
-										<p><i class="fab fa-linux"></i> More info  about this cinema</p>
 					 				<tbody><tr>
 									<th scope="row"></th>
 									<td>Rooms:</td>
-                  {% for room in movie.room_set.all %}
-                  <form  action="{% url 'booking' cinema.cinema_name %}"  style = "width:50px; heigth:50px;"method="post">
-                    {% csrf_token %}
-                    <input type="hidden" name="username" value="{{user.username}}">
-                    <input type="hidden" name="movie_name" value="{{movie.movie_name}}">
-                    {% if room.of_cinema == cinema %}
-                    <input type="hidden" name="room" value="{{room.id}}">
+                                         {% for room in movie.room_set.all %}
+                                          <form  action="{% url 'booking' cinema.cinema_name %}"  style = "width:50px; heigth:50px;"method="post">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="username" value="{{user.username}}">
+                                            <input type="hidden" name="movie_name" value="{{movie.movie_name}}">
+                                            {% if room.of_cinema == cinema %}
+                                            <input type="hidden" name="room" value="{{room.id}}">
 									<td>
 									   <button type="submit" class="btn btn-light btn-sm" style="color:black">{{room.name}}</button>
 									</td>
