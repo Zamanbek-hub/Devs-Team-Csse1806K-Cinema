@@ -74,7 +74,7 @@ class Room(models.Model):
      name = models.PositiveIntegerField()
 
      def __str__(self):
-         return "Room: " + str(self.name) + '\n' +"Cinema: " + str(self.of_cinema.cinema_name)
+         return "Room: " + str(self.name) + '\n' +"Cinema: " + str(self.of_cinema.cinema_name) + " moviw: " +str(self.of_movie.movie_name)
 
 class Place(models.Model):
      of_room = models.ForeignKey(Room, on_delete=models.CASCADE)
