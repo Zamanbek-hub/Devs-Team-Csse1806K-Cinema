@@ -23,4 +23,9 @@ six                      1.13.0 // i dont know what is this
 sqlparse                 0.3.0 // i dont know what is this
 urllib3                  1.25.7 // i dont know what is this
 
+
+
+
+
+or change {% load staticfiles %} to {% load static %} in templates
 In a critical case, contact me
