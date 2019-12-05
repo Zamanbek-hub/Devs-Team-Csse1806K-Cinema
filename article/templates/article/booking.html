@@ -2,265 +2,265 @@
 
 <!DOCTYPE html>
 <html>
-    <head>
-         {% load staticfiles %}
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>{% block title %} Flicks {% endblock %}</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-        <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-        <link rel="stylesheet" href="{% static 'ticket.css' %}">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-    </head>
-    <body>
-    <div class="container">
-    </div>
-        </div>
+	<head>
+		 {% load staticfiles %}
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    <title>{% block title %} Flicks {% endblock %}</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+	    <link rel="stylesheet" href="{% static 'ticket.css' %}">
+	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+	</head>
+	<body>
+	<div class="container">
+	</div>
+		</div>
 
-    <h4 class = "display">Hall {{room.name}}</h4>
+	<h4 class = "display">Hall {{room.name}}</h4>
 
-        <div>
-            <form method="post" id="ismForm" action="{% url 'buy_place' cinema.cinema_name %}">
-                {% csrf_token %}
-            <table>
-                <hr class="style18"  data-toggle="tooltip" data-placement="top" title="Screen">
-                <tbody>
+		<div>
+			<form method="post" id="ismForm" action="{% url 'buy_place' cinema.cinema_name %}">
+				{% csrf_token %}
+			<table>
+				<hr class="style18"  data-toggle="tooltip" data-placement="top" title="Screen">
+				<tbody>
 
-                    <tr>
-                        <td>1 ðÿä</td>
-                        <td></td>
-                        <td></td>
-                        <td>Ï</td>
-                        {% if places_1 %}
-                            {% for place in places_1 %}
-                            {% if place.status == True %}
-                            <td><button type="reset"  class="btn btn-danger" ><input type="hidden"  name="buy_place" value="False">{{place.cor_y}}</input></button></td>
-                                {% else %}
-                                <td><button type="reset" id="{{place.cor_x}}-{{place.cor_y}}" class="btn btn" onclick="display('{{place.cor_x}} {{place.cor_y}} True')"><input type="hidden" id="{{place.cor_x}} {{place.cor_y}} True" name="buy_place" value="False">{{place.cor_y}}</input></button></td>
-                                {% endif %}
-                            {% endfor %}
-                        {% else %}
-                            {% for num in numbers %}
-                                <td><button type="reset" id="1-{{num}}" class="btn btn" onclick="display('1 {{num}} True')"><input type="hidden" id="1 {{num}} True" name="buy_place" value="False">{{num}}</input></button></td>
-                            {% endfor %}
-                        {% endif %}
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>2 ðÿä</td>
-                        <td></td>
-                        <td></td>
-                        <td>Ð</td>
-                        {% if places_2 %}
-                            {% for place in places_2 %}
-                            {% if place.status == True %}
-                            <td><button type="reset" class="btn btn-danger" ><input type="hidden" name="buy_place" value="False">{{place.cor_y}}</input></button></td>
-                                {% else %}
-                                <td><button type="reset" id="{{place.cor_x}}-{{place.cor_y}}" class="btn btn" onclick="display('{{place.cor_x}} {{place.cor_y}} True')"><input type="hidden" id="{{place.cor_x}} {{place.cor_y}} True" name="buy_place" value="False">{{place.cor_y}}</input></button></td>
-                                {% endif %}
-                            {% endfor %}
-                        {% else %}
-                            {% for num in numbers %}
-                                <td><button type="reset" id="1-{{num}}" class="btn btn" onclick="display('1 {{num}} True')"><input type="hidden" id="1 {{num}} True" name="buy_place" value="False">{{num}}</input></button></td>
-                            {% endfor %}
-                        {% endif %}
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>3 ðÿä</td>
-                        <td></td>
-                        <td></td>
-                        <td>Î</td>
-                        {% if places_3 %}
-                            {% for place in places_3 %}
-                            {% if place.status == True %}
-                            <td><button type="reset" class="btn btn-danger" ><input type="hidden"  name="buy_place" value="False">{{place.cor_y}}</input></button></td>
-                                {% else %}
-                                <td><button type="reset" id="{{place.cor_x}}-{{place.cor_y}}" class="btn btn" onclick="display('{{place.cor_x}} {{place.cor_y}} True')"><input type="hidden" id="{{place.cor_x}} {{place.cor_y}} True" name="buy_place" value="False">{{place.cor_y}}</input></button></td>
-                                {% endif %}
-                            {% endfor %}
-                        {% else %}
-                            {% for num in numbers %}
-                                <td><button type="reset" id="1-{{num}}" class="btn btn" onclick="display('1 {{num}} True')"><input type="hidden" id="1 {{num}} True" name="buy_place" value="False">{{num}}</input></button></td>
-                            {% endfor %}
-                        {% endif %}
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>4 ðÿä</td>
-                        <td></td>
-                        <td></td>
-                        <td>Õ</td>
-                        {% if places_4 %}
-                            {% for place in places_4 %}
-                                {% if place.status == True %}
-                            <td><button type="reset" class="btn btn-danger"><input type="hidden"  name="buy_place" value="False">{{place.cor_y}}</input></button></td>
-                                {% else %}
-                                <td><button type="reset" id="{{place.cor_x}}-{{place.cor_y}}" class="btn btn" onclick="display('{{place.cor_x}} {{place.cor_y}} True')"><input type="hidden" id="{{place.cor_x}} {{place.cor_y}} True" name="buy_place" value="False">{{place.cor_y}}</input></button></td>
-                                {% endif %}
-                            {% endfor %}
-                        {% else %}
-                            {% for num in numbers %}
-                                <td><button type="reset" id="1-{{num}}" class="btn btn" onclick="display('1 {{num}} True')"><input type="hidden" id="1 {{num}} True" name="buy_place" value="False">{{num}}</input></button></td>
-                            {% endfor %}
-                        {% endif %}
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>5 ðÿä</td>
-                        <td></td>
-                        <td></td>
-                        <td>Î</td>
-                        {% if places_5 %}
-                            {% for place in places_5 %}
-                                {% if place.status == True %}
-                                <td><button type="reset" class="btn btn-danger"><input type="hidden"  name="buy_place" value="False">{{place.cor_y}}</input></button></td>                              {% else %}
-                                <td><button type="reset" id="{{place.cor_x}}-{{place.cor_y}}" class="btn btn" onclick="display('{{place.cor_x}} {{place.cor_y}} True')"><input type="hidden" id="{{place.cor_x}} {{place.cor_y}} True" name="buy_place" value="False">{{place.cor_y}}</input></button></td>
-                                {% endif %}
-                            {% endfor %}
-                        {% else %}
-                            {% for num in numbers %}
-                                <td><button type="reset" id="1-{{num}}" class="btn btn" onclick="display('1 {{num}} True')"><input type="hidden" id="1 {{num}} True" name="buy_place" value="False">{{num}}</input></button></td>
-                            {% endfor %}
-                        {% endif %}
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>6 ðÿä</td>
-                        <td></td>
-                        <td></td>
-                        <td>Ä</td>
-                        {% if places_6 %}
-                            {% for place in places_6 %}
-                                {% if place.status == True %}
-                                <td><button type="reset" class="btn btn-danger"><input type="hidden"  name="buy_place" value="False">{{place.cor_y}}</input></button></td>
-                                    {% else %}
-                                <td><button type="reset" id="{{place.cor_x}}-{{place.cor_y}}" class="btn btn" onclick="display('{{place.cor_x}} {{place.cor_y}} True')"><input type="hidden" id="{{place.cor_x}} {{place.cor_y}} True" name="buy_place" value="False">{{place.cor_y}}</input></button></td>
-                                {% endif %}
-                            {% endfor %}
-                        {% else %}
-                            {% for num in numbers %}
-                                <td><button type="reset" id="1-{{num}}" class="btn btn" onclick="display('1 {{num}} True')"><input type="hidden" id="1 {{num}} True" name="buy_place" value="False">{{num}}</input></button></td>
-                            {% endfor %}
-                        {% endif %}
-                        <td></td>
-                        <td></td>
-                    </tr>
+					<tr>
+						<td>1 ðÿä</td>
+						<td></td>
+						<td></td>
+						<td>Ï</td>
+						{% if places_1 %}
+							{% for place in places_1 %}
+					    	{% if place.status == True %}
+							<td><button type="reset"  class="btn btn-danger" ><input type="hidden"  name="buy_place" value="False">{{place.cor_y}}</input></button></td>
+								{% else %}
+								<td><button type="reset" id="{{place.cor_x}}-{{place.cor_y}}" class="btn btn" onclick="display('{{place.cor_x}} {{place.cor_y}} True')"><input type="hidden" id="{{place.cor_x}} {{place.cor_y}} True" name="buy_place" value="False">{{place.cor_y}}</input></button></td>
+								{% endif %}
+							{% endfor %}
+						{% else %}
+							{% for num in numbers %}
+								<td><button type="reset" id="1-{{num}}" class="btn btn" onclick="display('1 {{num}} True')"><input type="hidden" id="1 {{num}} True" name="buy_place" value="False">{{num}}</input></button></td>
+							{% endfor %}
+						{% endif %}
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2 ðÿä</td>
+						<td></td>
+						<td></td>
+						<td>Ð</td>
+						{% if places_2 %}
+							{% for place in places_2 %}
+					    	{% if place.status == True %}
+							<td><button type="reset" class="btn btn-danger" ><input type="hidden" name="buy_place" value="False">{{place.cor_y}}</input></button></td>
+								{% else %}
+								<td><button type="reset" id="{{place.cor_x}}-{{place.cor_y}}" class="btn btn" onclick="display('{{place.cor_x}} {{place.cor_y}} True')"><input type="hidden" id="{{place.cor_x}} {{place.cor_y}} True" name="buy_place" value="False">{{place.cor_y}}</input></button></td>
+								{% endif %}
+							{% endfor %}
+						{% else %}
+							{% for num in numbers %}
+								<td><button type="reset" id="1-{{num}}" class="btn btn" onclick="display('1 {{num}} True')"><input type="hidden" id="1 {{num}} True" name="buy_place" value="False">{{num}}</input></button></td>
+							{% endfor %}
+						{% endif %}
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>3 ðÿä</td>
+						<td></td>
+						<td></td>
+						<td>Î</td>
+						{% if places_3 %}
+							{% for place in places_3 %}
+					    	{% if place.status == True %}
+							<td><button type="reset" class="btn btn-danger" ><input type="hidden"  name="buy_place" value="False">{{place.cor_y}}</input></button></td>
+								{% else %}
+								<td><button type="reset" id="{{place.cor_x}}-{{place.cor_y}}" class="btn btn" onclick="display('{{place.cor_x}} {{place.cor_y}} True')"><input type="hidden" id="{{place.cor_x}} {{place.cor_y}} True" name="buy_place" value="False">{{place.cor_y}}</input></button></td>
+								{% endif %}
+							{% endfor %}
+						{% else %}
+							{% for num in numbers %}
+								<td><button type="reset" id="1-{{num}}" class="btn btn" onclick="display('1 {{num}} True')"><input type="hidden" id="1 {{num}} True" name="buy_place" value="False">{{num}}</input></button></td>
+							{% endfor %}
+						{% endif %}
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>4 ðÿä</td>
+						<td></td>
+						<td></td>
+						<td>Õ</td>
+						{% if places_4 %}
+							{% for place in places_4 %}
+								{% if place.status == True %}
+							<td><button type="reset" class="btn btn-danger"><input type="hidden"  name="buy_place" value="False">{{place.cor_y}}</input></button></td>
+								{% else %}
+								<td><button type="reset" id="{{place.cor_x}}-{{place.cor_y}}" class="btn btn" onclick="display('{{place.cor_x}} {{place.cor_y}} True')"><input type="hidden" id="{{place.cor_x}} {{place.cor_y}} True" name="buy_place" value="False">{{place.cor_y}}</input></button></td>
+								{% endif %}
+							{% endfor %}
+						{% else %}
+							{% for num in numbers %}
+								<td><button type="reset" id="1-{{num}}" class="btn btn" onclick="display('1 {{num}} True')"><input type="hidden" id="1 {{num}} True" name="buy_place" value="False">{{num}}</input></button></td>
+							{% endfor %}
+						{% endif %}
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>5 ðÿä</td>
+						<td></td>
+						<td></td>
+						<td>Î</td>
+						{% if places_5 %}
+							{% for place in places_5 %}
+								{% if place.status == True %}
+								<td><button type="reset" class="btn btn-danger"><input type="hidden"  name="buy_place" value="False">{{place.cor_y}}</input></button></td>								{% else %}
+								<td><button type="reset" id="{{place.cor_x}}-{{place.cor_y}}" class="btn btn" onclick="display('{{place.cor_x}} {{place.cor_y}} True')"><input type="hidden" id="{{place.cor_x}} {{place.cor_y}} True" name="buy_place" value="False">{{place.cor_y}}</input></button></td>
+								{% endif %}
+							{% endfor %}
+						{% else %}
+							{% for num in numbers %}
+								<td><button type="reset" id="1-{{num}}" class="btn btn" onclick="display('1 {{num}} True')"><input type="hidden" id="1 {{num}} True" name="buy_place" value="False">{{num}}</input></button></td>
+							{% endfor %}
+						{% endif %}
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>6 ðÿä</td>
+						<td></td>
+						<td></td>
+						<td>Ä</td>
+						{% if places_6 %}
+							{% for place in places_6 %}
+								{% if place.status == True %}
+								<td><button type="reset" class="btn btn-danger"><input type="hidden"  name="buy_place" value="False">{{place.cor_y}}</input></button></td>
+									{% else %}
+								<td><button type="reset" id="{{place.cor_x}}-{{place.cor_y}}" class="btn btn" onclick="display('{{place.cor_x}} {{place.cor_y}} True')"><input type="hidden" id="{{place.cor_x}} {{place.cor_y}} True" name="buy_place" value="False">{{place.cor_y}}</input></button></td>
+								{% endif %}
+							{% endfor %}
+						{% else %}
+							{% for num in numbers %}
+								<td><button type="reset" id="1-{{num}}" class="btn btn" onclick="display('1 {{num}} True')"><input type="hidden" id="1 {{num}} True" name="buy_place" value="False">{{num}}</input></button></td>
+							{% endfor %}
+						{% endif %}
+						<td></td>
+						<td></td>
+					</tr>
 
-                    <tr>
-                        <td>7 ðÿä</td>
-                        <td></td>
-                        {% if places_7 %}
-                            {% for place in places_7 %}
-                                {% if place.status == True %}
-                                <td><button type="reset" class="btn btn-danger"><input type="hidden"  name="buy_place" value="False">{{place.cor_y}}</input></button></td>
-                                    {% else %}
-                                <td><button type="reset" id="{{place.cor_x}}-{{place.cor_y}}" class="btn btn" onclick="display('{{place.cor_x}} {{place.cor_y}} True')"><input type="hidden" id="{{place.cor_x}} {{place.cor_y}} True" name="buy_place" value="False">{{place.cor_y}}</input></button></td>
-                                {% endif %}
-                            {% endfor %}
-                        {% else %}
-                            {% for num in numbers %}
-                                <td><button type="reset" id="1-{{num}}" class="btn btn" onclick="display('1 {{num}} True')"><input type="hidden" id="1 {{num}} True" name="buy_place" value="False">{{num}}</input></button></td>
-                            {% endfor %}
-                        {% endif %}
-                    </tr>
-                    <tr>
-                        <td>8 ðÿä</td>
-                        <td></td>
-                        {% if places_8 %}
-                            {% for place in places_8 %}
-                                {% if place.status == True %}
-                            <td><button type="reset" class="btn btn-danger" ><input type="hidden"  name="buy_place" value="False">{{place.cor_y}}</input></button></td>
-                                {% else %}
-                                <td><button type="reset" id="{{place.cor_x}}-{{place.cor_y}}" class="btn btn" onclick="display('{{place.cor_x}} {{place.cor_y}} True')"><input type="hidden" id="{{place.cor_x}} {{place.cor_y}} True" name="buy_place" value="False">{{place.cor_y}}</input></button></td>
-                                {% endif %}
-                            {% endfor %}
-                        {% else %}
-                            {% for num in numbers %}
-                                <td><button type="reset" id="1-{{num}}" class="btn btn" onclick="display('1 {{num}} True')"><input type="hidden" id="1 {{num}} True" name="buy_place" value="False">{{num}}</input></button></td>
-                            {% endfor %}
-                        {% endif %}
-                    </tr>
-                    <td>
-                </tbody>
-            </table>
-            <div class="container" style = "margin-left:500px; margin-top:50px;">
-                <input type="button" class="btn btn-danger"  value="Buy" href="#demo3" data-toggle="collapse"><td>
-                <input type="hidden" name="room.id" value="{{room.id}}">
-                <input type="hidden" name="movie_name" value="{{movie.movie_name}}">
-            </div>
-            <div id="demo3" class="collapse container" class="btn-group" >
-                                <div class="form-group">
-                                    <label>Email address (Your ticket and instruction will be sent to it )
-                                    </label>
-                                    <input type="text" class="form-control" name="email" >
-                                </div>
-                                <div class="form-group">
-                                    <label>Choose a form of payment: </label>
-                                    <div class="main-checkbox">
-                                        <input id="checkbox1" name="check" type="radio" value="Kaspi Gold">
-                                            <label for="checkbox1"><span class="text">Kaspi Gold </span></label>
-                                    </div>
+					<tr>
+						<td>7 ðÿä</td>
+						<td></td>
+						{% if places_7 %}
+							{% for place in places_7 %}
+								{% if place.status == True %}
+								<td><button type="reset" class="btn btn-danger"><input type="hidden"  name="buy_place" value="False">{{place.cor_y}}</input></button></td>
+									{% else %}
+								<td><button type="reset" id="{{place.cor_x}}-{{place.cor_y}}" class="btn btn" onclick="display('{{place.cor_x}} {{place.cor_y}} True')"><input type="hidden" id="{{place.cor_x}} {{place.cor_y}} True" name="buy_place" value="False">{{place.cor_y}}</input></button></td>
+								{% endif %}
+							{% endfor %}
+						{% else %}
+							{% for num in numbers %}
+								<td><button type="reset" id="1-{{num}}" class="btn btn" onclick="display('1 {{num}} True')"><input type="hidden" id="1 {{num}} True" name="buy_place" value="False">{{num}}</input></button></td>
+							{% endfor %}
+						{% endif %}
+					</tr>
+					<tr>
+						<td>8 ðÿä</td>
+						<td></td>
+						{% if places_8 %}
+							{% for place in places_8 %}
+								{% if place.status == True %}
+							<td><button type="reset" class="btn btn-danger"	><input type="hidden"  name="buy_place" value="False">{{place.cor_y}}</input></button></td>
+								{% else %}
+								<td><button type="reset" id="{{place.cor_x}}-{{place.cor_y}}" class="btn btn" onclick="display('{{place.cor_x}} {{place.cor_y}} True')"><input type="hidden" id="{{place.cor_x}} {{place.cor_y}} True" name="buy_place" value="False">{{place.cor_y}}</input></button></td>
+								{% endif %}
+							{% endfor %}
+						{% else %}
+							{% for num in numbers %}
+								<td><button type="reset" id="1-{{num}}" class="btn btn" onclick="display('1 {{num}} True')"><input type="hidden" id="1 {{num}} True" name="buy_place" value="False">{{num}}</input></button></td>
+							{% endfor %}
+						{% endif %}
+					</tr>
+					<td>
+				</tbody>
+			</table>
+			<div class="container" style = "margin-left:500px; margin-top:50px;">
+				<input type="button" class="btn btn-danger"  value="Buy" href="#demo3" data-toggle="collapse"><td>
+				<input type="hidden" name="room.id" value="{{room.id}}">
+				<input type="hidden" name="movie_name" value="{{movie.movie_name}}">
+			</div>
+			<div id="demo3" class="collapse container" class="btn-group" >
+ 		 						<div class="form-group">
+ 		 							<label>Email address (Your ticket and instruction will be sent to it )
+ 		 							</label>
+ 		 							<input type="text" class="form-control" name="email" >
+ 		 						</div>
+ 		 						<div class="form-group">
+ 		 							<label>Choose a form of payment: </label>
+ 		 							<div class="main-checkbox">
+ 		 								<input id="checkbox1" name="check" type="radio" value="Kaspi Gold">
+ 		 									<label for="checkbox1"><span class="text">Kaspi Gold </span></label>
+ 		 							</div>
 
-                                    <div class="main-checkbox">
-                                        <input id="checkbox2" name="check" type="radio" value="Visa">
-                                            <label for="checkbox1"><span class="text">Visa</span></label>
-                                    </div>
+ 		 							<div class="main-checkbox">
+ 		 								<input id="checkbox2" name="check" type="radio" value="Visa">
+ 		 									<label for="checkbox1"><span class="text">Visa</span></label>
+ 		 							</div>
 
-                                    <div class="main-checkbox">
-                                        <input  id="checkbox3" name="check" type="radio" value="Halyk Bank">
-                                            <label for="checkbox1"> <span class="text">Halyk Bank </span></label>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Choose a type of ticket: </label>
-                                    <div class="main-checkbox">
-                                        <input value="Adult" id="ticket1" name="type" type="radio" >
-                                            <label for="ticket1"><span class="text">Adult </span></label>
-                                    </div>
+ 		 							<div class="main-checkbox">
+ 		 								<input  id="checkbox3" name="check" type="radio" value="Halyk Bank">
+ 		 									<label for="checkbox1"> <span class="text">Halyk Bank </span></label>
+ 		 							</div>
+ 								</div>
+ 								<div class="form-group">
+ 		 							<label>Choose a type of ticket: </label>
+ 		 							<div class="main-checkbox">
+ 		 								<input value="Adult" id="ticket1" name="type" type="radio" >
+ 		 									<label for="ticket1"><span class="text">Adult </span></label>
+ 		 							</div>
 
-                                    <div class="main-checkbox">
-                                        <input value="Student" id="ticket2" name="type" type="radio">
-                                            <label for="ticket1"><span class="text">Student</span></label>
-                                    </div>
+ 		 							<div class="main-checkbox">
+ 		 								<input value="Student" id="ticket2" name="type" type="radio">
+ 		 									<label for="ticket1"><span class="text">Student</span></label>
+ 		 							</div>
 
-                                    <div class="main-checkbox">
-                                        <input value="Child" id="ticket3" name="type" type="radio">
-                                            <label for="ticket1"> <span class="text">Child </span></label>
-                                    </div>
-                                </div>
+ 		 							<div class="main-checkbox">
+ 		 								<input value="Child" id="ticket3" name="type" type="radio">
+ 		 									<label for="ticket1"> <span class="text">Child </span></label>
+ 		 							</div>
+ 								</div>
 
-                                <div class="form-group">
-                                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#pay" autocomplete="off">Pay </button>
-                                </div>
+ 		 						<div class="form-group">
+ 			 							<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#pay" autocomplete="off">Pay </button>
+ 		 						</div>
 
-                        </div>
-        </form>
-        </div><div class="container" >
+ 		 				</div>
+		</form>
+		</div><div class="container" >
 
-     <!-- <div class="row" >
-        <div class="col-md-offset-4 col-md-5">
-                    <div class="tab" role="tabpanel"> -->
-             <!-- Nav tabs -->
-                    <!-- <ul class="nav nav-tabs" role="tablist">
-                        <li href="#demo3" data-toggle="collapse">Buy</li>
-                    </ul> -->
+	 <!-- <div class="row" >
+	 	<div class="col-md-offset-4 col-md-5">
+			 		<div class="tab" role="tabpanel"> -->
+			 <!-- Nav tabs -->
+		 			<!-- <ul class="nav nav-tabs" role="tablist">
+		 				<li href="#demo3" data-toggle="collapse">Buy</li>
+		 			</ul> -->
 
 
-                   <!-- </div> -->
+		           <!-- </div> -->
 
-                </div>
-         </div>
-        </div><!-- /.col-md-offset-3 col-md-6 -->
-    </div><!-- /.row -->
+		 		</div>
+		 </div>
+		</div><!-- /.col-md-offset-3 col-md-6 -->
+	</div><!-- /.row -->
 </div><!-- /.container -->
 
 <div class="modal fade" id="pay" tabindex="-1" role="dialog" aria-labelledby="Title" aria-hidden="true">
@@ -273,11 +273,11 @@
         </button>
       </div>
       <div class="modal-body">
-                <h4><small>Сheck sheet will come to the specified mail</small></h4>
-           <h6> Please , check the information by phone. </h6>
-             <br> <br>
-             <p >200 tg was withdrawn from you</p>
-             <p >We wish you a pleasant viewing !  </p>
+				<h4><small>Сheck sheet will come to the specified mail</small></h4>
+	       <h6> Please , check the information by phone. </h6>
+			 <br> <br>
+	         <p >200 tg was withdrawn from you</p>
+	         <p >We wish you a pleasant viewing !  </p>
       </div>
       <div class="modal-footer">
         <button type="submit"  id="submit" class="btn btn-warning" data-dismiss="modal">Close </button>
@@ -287,257 +287,257 @@
   </div>
 </div>
 <script type="text/javascript">
-            // $('.btn').click(function(){
-        //       $(".block_with_text").fadeToggle(100);
-            //  });
+			// $('.btn').click(function(){
+ 		// 		 $(".block_with_text").fadeToggle(100);
+			// 	});
 
            // function viewDiv(){
            //     document.getElementById("div1").style.display = "block";
            // };
-            // $("button").click(function(){
-         //    $("button").removeClass("active");
-         //    $(this).addClass("active");
-            // });
+			// $("button").click(function(){
+		 //    $("button").removeClass("active");
+		 //    $(this).addClass("active");
+			// });
    //          $('.checkbox').change(function(){
-            //     $('input[name="' + $(this).attr('name') +'"]').removeAttr('checked');
-            //     $(this).prop('checked', true);
-            // });
-            $( "button#8-12" ).click(function() {
-              $(this).toggleClass( "danger" );
-            });
-            $( "button#8-11" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#8-10" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#8-9" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#8-8" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#8-7" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#8-6" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#8-5" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#8-4" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#8-3" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#8-2" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#8-1" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#7-12" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#7-11" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#7-10" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#7-9" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#7-8" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#7-7" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#7-6" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#7-5" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#7-4" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#7-3" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#7-2" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#7-1" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#6-8" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#6-7" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#6-6" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#6-5" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#6-4" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#6-3" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#6-2" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#6-1" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#5-8" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#5-7" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#5-6" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#5-5" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#5-4" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#5-3" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#5-2" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#5-1" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#4-8" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#4-7" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#4-6" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#4-5" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#4-4" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#4-3" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#4-2" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#4-1" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#3-8" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#3-7" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#3-6" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#3-5" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#3-4" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#3-3" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#3-2" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#3-1" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#2-8" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#2-7" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#2-6" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#2-5" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#2-4" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#2-3" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#2-2" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#2-1" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#1-8" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#1-7" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#1-6" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#1-5" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#1-4" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#1-3" ).click(function() {
-              $(this).toggleClass( "selected" );
-            });
-            $( "button#1-2" ).click(function() {
-              $(this).toggleClass( "selected" );
-                document.getElementById("1-2-in").value="Chert";
-            });
-            $( "button#1-1" ).click(function() {
-              $(this).toggleClass( "selected" );
-                 document.getElementById("1-1-in").value="Chert";
-            });
-        </script>
-        <script>
-            function display(name) {
-                document.getElementById(name).value=name;
-            }
-        </script>
+			//     $('input[name="' + $(this).attr('name') +'"]').removeAttr('checked');
+			//     $(this).prop('checked', true);
+			// });
+			$( "button#8-12" ).click(function() {
+			  $(this).toggleClass( "danger" );
+			});
+			$( "button#8-11" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#8-10" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#8-9" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#8-8" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#8-7" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#8-6" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#8-5" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#8-4" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#8-3" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#8-2" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#8-1" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#7-12" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#7-11" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#7-10" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#7-9" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#7-8" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#7-7" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#7-6" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#7-5" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#7-4" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#7-3" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#7-2" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#7-1" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#6-8" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#6-7" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#6-6" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#6-5" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#6-4" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#6-3" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#6-2" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#6-1" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#5-8" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#5-7" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#5-6" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#5-5" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#5-4" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#5-3" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#5-2" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#5-1" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#4-8" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#4-7" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#4-6" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#4-5" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#4-4" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#4-3" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#4-2" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#4-1" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#3-8" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#3-7" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#3-6" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#3-5" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#3-4" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#3-3" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#3-2" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#3-1" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#2-8" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#2-7" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#2-6" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#2-5" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#2-4" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#2-3" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#2-2" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#2-1" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#1-8" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#1-7" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#1-6" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#1-5" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#1-4" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#1-3" ).click(function() {
+			  $(this).toggleClass( "selected" );
+			});
+			$( "button#1-2" ).click(function() {
+			  $(this).toggleClass( "selected" );
+				document.getElementById("1-2-in").value="Chert";
+			});
+			$( "button#1-1" ).click(function() {
+			  $(this).toggleClass( "selected" );
+				 document.getElementById("1-1-in").value="Chert";
+			});
+		</script>
+		<script>
+			function display(name) {
+				document.getElementById(name).value=name;
+			}
+		</script>
 
-        <script>
-        function submitForm() {
-                    document.getElementById("ismForm").submit()
-            }
+		<script>
+		function submitForm() {
+					document.getElementById("ismForm").submit()
+			}
 
-            document.getElementById('submit').onclick = function() {
-                    setTimeout(submitForm);
-            }
-        </script>
-        <style type="text/css">
-            h6 {
+			document.getElementById('submit').onclick = function() {
+					setTimeout(submitForm);
+			}
+		</script>
+		<style type="text/css">
+			h6 {
     font-family: Verdana, Arial, Helvetica, serif; /* Øðèôò ñ çàñå÷êàìè */
     font-style: oblique ; /* Êóðñèâíîå íà÷åðòàíèå */
     color: #92210B;
@@ -600,7 +600,6 @@ body {
 
 
 
-        </style>
+		</style>
 </body>
 </html>
-

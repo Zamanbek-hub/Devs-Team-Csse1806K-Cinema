@@ -20,16 +20,15 @@
 		 <h4></h4>
 	 </header>
 	 <div class="container-fluid">
-		 <div class="row">
 			{% for sh in shops %}
-			<div class="col-md-12">
+			<div class="container">
 			 <ul class="timeline">
 				<li class="timeline wow bounceInUp">
 				 <div class="timeline-badge warning"><i class="fa fa-bullseye"></i></div>
 				 <div class="date-info" style="font-size:120%; width:130px;">
 					<strong>{{sh.date|date:'Y-m-d H:i'}}</strong>
 				</div>
-				<div class="timeline-panel" style="width:150px; height:150px; margin-right:400px; background-color:#FBF4FC;">
+				<div class="timeline-panel" style="width:150px; height:150px; margin-right:350px; background-color:#FBF4FC;">
 					<div class="timeline-body">
 					 <p>
 						<a href="{{sh.of_movie.get_absolute_url}}"><img src="{{sh.of_movie.move_img.url}}" class="card-img-top" style="width:130px;height:130px;"></a>
@@ -47,7 +46,7 @@
 {% endfor %}
 </div>
 </div>
-</div>
+
 </section>
 </body>
 </html>

@@ -24,18 +24,16 @@
     <form method="post" class="form">
       {% csrf_token %}
       {{ form|crispy }}
-      <div class="row">
-        <div class="col-lg-6">
-          <button type="submit" class="btn btn-primary" style="align:center">Sign in</button>
+
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary" style="margin-top:30px">Sign in</button>
         </div>
-        <div class="col-lg-6">
+        <div class="text-center" style="margin-top:10px">
+            are you first here?
           <a href="{% url "registration"%}">
-            <!-- <button type="submit" class="btn btn-primary" style="align:center">Sign UP</button> -->
-            Sign Up
+            Create account
           </a>
         </div>
-
-      </div>
     </form>
 
   </div>
