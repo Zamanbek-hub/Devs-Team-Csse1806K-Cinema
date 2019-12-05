@@ -60,7 +60,7 @@ def add_3_recomend_film(block_list, shops_list, jenre):
 
 def index(request):
 
-    latest_movies = Block.objects.order_by('-movie_numberOfClicks')[0:8:1]
+    latest_movies = Block.objects.order_by('-movie_numberOfClicks')[0:12:1]
     jenres = Jenre.objects.order_by('-jenre')
     cinema = Cinema.objects.order_by('-cinema_name')
 

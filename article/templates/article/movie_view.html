@@ -31,7 +31,7 @@
     </p>
     <!-- {% url 'buyticket' movie.movie_name %} -->
     {%if not request.user.is_authenticated %}
-    <button type="button" class="btn btn-outline-dark"  data-toggle="modal"  onclick="myFunction()" data-target="#BUY" style="width:200px; height=100px; margin-left:200px;">Buy</button>
+    <button type="button" class="btn btn-outline-dark"  data-toggle="modal"  onclick="myFunction()" data-target="#BUY" id = "buttonBuy" style="width:200px; height=100px; margin-left:200px;">Buy</button>
     {% else %}
     <button type="button" class="btn btn-outline-dark"   style="width:200px; height=100px; margin-left:200px;" data-toggle="collapse" data-target="#collapseExample">Buy</button>
     <div class="collapse" id="collapseExample" style="margin-top:30px;">
@@ -77,7 +77,7 @@
       </div>
       <div class="modal-footer">
         <a href="{% url 'registration'%}"><button class="btn btn-danger" >Sign up</button></a>
-        <button class="btn btn" data-dismiss="modal">Later </button>
+        <button class="btn btn" data-dismiss="modal" id = "Later">Later </button>
       </div>
     </div>
   </div>
@@ -194,6 +194,25 @@ function myFunction() {
   })
 </script>
 
+<script>
+function Turnoff() {
+    document.getElementById("").submit()
+    }
 
+    document.getElementById('Later').onclick = function() {
+            document.getElementById('BUY').id = "NOtBuy"
+    }
+  }
+  function swithto() {
+      document.getElementById("").submit()
+      }
+
+      document.getElementById('butonBuy').onclick = function() {
+              document.getElementById('BUY').id = "NOtBuy"
+      }
+    }
+
+
+</script>
 
 {% endblock jQuery %}

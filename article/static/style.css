@@ -107,14 +107,14 @@ footer{
     height: 450px;
   }
 
-  .card img:hover  {
-    opacity: 1;
-    background-color: #632c65;
-    background: -webkit-linear-gradient(bottom left, #632c65 15%, #56a5e2 100%);
-    background: -o-linear-gradient(bottom left, #632c65 15%, #56a5e2 100%);
-    background: linear-gradient(to top right, #632c65 15%, #56a5e2 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#632c65', endColorstr='#56a5e2',GradientType=1 );
-  }
+  /* .card img:hover  {
+        opacity: 1;
+        background-color: #632c65;
+        background: -webkit-linear-gradient(bottom left, black 15%, #56a5e2 20%);
+        background: -o-linear-gradient(bottom left, black 15%, #56a5e2 20%);
+        background: linear-gradient(to top right, black 15%, #56a5e2 20%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#632c65', endColorstr='#56a5e2',GradientType=1 );
+      } */
 
 /* .card-title{
   margin-bottom: 50px;
@@ -123,7 +123,7 @@ footer{
 
 
   /* Style the button and place it in the middle of the container/image */
-  .card .btn {
+  /* .card .btn {
     position: absolute;
     top: 110%;
     left: 86%;
@@ -139,7 +139,7 @@ footer{
 
   .card .btn:hover {
     background-color: black;
-  }
+  } */
 
 
   #id{
@@ -217,13 +217,94 @@ background: linear-gradient(135deg, #e2a9e5 15%,#2b94e5 100%);
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2a9e5', endColorstr='#2b94e5',GradientType=1 );
 } */
 
-#card:hover{
+/* #card:hover{
   opacity: 1;
   background: #632c65;
-  background: -webkit-linear-gradient(bottom left, #632c65 15%, #56a5e2 100%);
-  background: -o-linear-gradient(bottom left, #632c65 15%, #56a5e2 100%);
-  background: linear-gradient(to top right, #632c65 15%, #56a5e2 100%);
+  background: -webkit-linear-gradient(bottom left, black 15%, #56a5e2 50%);
+  background: -o-linear-gradient(bottom left, #632c65 15%, #56a5e2 500%);
+  background: linear-gradient(to top right, #632c65 15%, #56a5e2 50%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#632c65', endColorstr='#56a5e2',GradientType=1 );
+} */
+
+
+
+#hovereffect  {
+  width: 100%;
+  height: 100%;
+  float: left;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  cursor: default;
+}
+
+#hovereffect  .overlay {
+  position: absolute;
+  overflow: hidden;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  width: 55%;
+  height: 81%;
+  left: 22%;
+  top: 10%;
+  border-radius: 80%;
+  border: 2px solid #FFF;
+  -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+  transition: opacity 0.35s, transform 0.35s;
+  -webkit-transform: translate3d(50%,50%,0);
+  transform: translate3d(50%,50%,0);
+}
+
+.#hovereffect :hover .overlay {
+  background-color: rgba(0,0,0,0.3);
+}
+
+.#hovereffect  img {
+  display: block;
+  position: relative;
+  -webkit-transition: all 0.35s;
+  transition: all 0.35s;
+}
+
+.#hovereffect :hover img {
+  filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="linear" slope="1.4" /><feFuncG type="linear" slope="1.4" /><feFuncB type="linear" slope="1.4" /></feComponentTransfer></filter></svg>#filter');
+  filter: brightness(1.4);
+  -webkit-filter: brightness(1.4);
+}
+
+.#hovereffect  h2 {
+  text-transform: uppercase;
+  text-align: center;
+  position: relative;
+  font-size: 17px;
+  padding: 10px;
+  background-color: transparent;
+  color: #FFF;
+  padding: 1em 0;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+  transition: opacity 0.35s, transform 0.35s;
+  -webkit-transform: translate3d(-150%,-400%,0);
+  transform: translate3d(-150%,-400%,0);
+}
+
+.#hovereffect  a, .#hovereffect  p {
+  color: #FFF;
+  padding: 1em 0;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+  transition: opacity 0.35s, transform 0.35s;
+  -webkit-transform: translate3d(-150%,-400%,0);
+  transform: translate3d(-150%,-400%,0);
+}
+
+.#hovereffect :hover a, .#hovereffect :hover p, .#hovereffect :hover h2, .#hovereffect :hover .overlay {
+  opacity: 1;
+  filter: alpha(opacity=100);
+  -webkit-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
 }
 
 
